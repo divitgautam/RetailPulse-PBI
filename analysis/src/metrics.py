@@ -1,6 +1,6 @@
-"""Shared loading, cleaning and metric definitions for the Inxite-Out analysis.
+"""Shared loading, cleaning and metric definitions for the RetailPulse-PBI analysis.
 
-Definitions match the Power BI model (Inxite-Out.SemanticModel) exactly:
+Definitions match the Power BI model (RetailPulse-PBI.SemanticModel) exactly:
 - Net sales  = unit_price x quantity x (1 - item_discount%) x (1 - order_discount%)   (excl. tax and shipping)
 - COGS       = Products.cost_price x quantity
 - Gross profit = net sales - COGS

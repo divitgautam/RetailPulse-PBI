@@ -1,4 +1,4 @@
-# LinkedIn post: Inxite-Out sales analysis
+# LinkedIn post: RetailPulse-PBI
 
 **Attach, in this order:**
 1. `docs/key_insights.png` (portrait, shows best in the feed)
@@ -54,7 +54,7 @@ My biggest takeaway: the most valuable step was the boring one. Auditing the dat
 
 Built with Power BI (DAX, Power Query, 5 report pages), Python (pandas, statsmodels, scipy, scikit-learn) and a lot of reconciliation.
 
-Full project, notebooks and report: <GitHub link>
+Full project (RetailPulse-PBI), notebooks and report: <GitHub link>
 
 What would you have checked first?
 
@@ -76,6 +76,6 @@ I audited the data before charting it (20 checks, 4 fixes, including a 4.6x reve
 
 Cheapest lever: cap discounts at 10%, no stacking, worth +₹12 L.
 
-Project and notebooks: <GitHub link>
+Project (RetailPulse-PBI): <GitHub link>
 
 #PowerBI #DataAnalytics #Python #Forecasting

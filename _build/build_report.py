@@ -1,8 +1,8 @@
-"""Generate the Inxite-Out dashboard pages as PBIR JSON."""
+"""Generate the RetailPulse-PBI dashboard pages as PBIR JSON."""
 import json, shutil, sys
 from pathlib import Path
 
-REPORT = Path(sys.argv[1])  # ...\Inxite-Out.Report
+REPORT = Path(sys.argv[1])  # ...\RetailPulse-PBI.Report
 DEF = REPORT / "definition"
 PAGES = DEF / "pages"
 VC_SCHEMA = "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json"

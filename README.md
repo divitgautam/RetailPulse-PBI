@@ -1,4 +1,4 @@
-# Inxite-Out: Customer Retention, Profitability and 2026 Forecast
+# RetailPulse-PBI: Customer Retention, Profitability and 2026 Forecast
 
 An end-to-end analysis of an online retail business (1,500 order lines, 405 orders, Jan 2023 to Oct 2025), built in **Power BI** and **Python**.
 It answers three business questions, audits the data, explores it, forecasts 2026 and sizes the profit levers.
@@ -79,9 +79,9 @@ All 48 questions are listed in [analysis_questions.md](analysis_questions.md). B
 ## Repository layout
 
 ```
-Inxite-Out.pbip                 Power BI project (open this in Power BI Desktop)
-Inxite-Out.SemanticModel/       Model as TMDL: tables, DAX measures, Power Query, relationships
-Inxite-Out.Report/              Report as PBIR JSON: pages, visuals, theme
+RetailPulse-PBI.pbip            Power BI project (open this in Power BI Desktop)
+RetailPulse-PBI.SemanticModel/  Model as TMDL: tables, DAX measures, Power Query, relationships
+RetailPulse-PBI.Report/         Report as PBIR JSON: pages, visuals, theme
 analysis/                       Notebooks, reports, shared metrics module, outputs and figures
 _build/                         Scripts that generate the report pages, measures and LinkedIn visuals
 docs/                           Approach diagram, insights card, dashboard images, LinkedIn post
@@ -92,7 +92,7 @@ docs/                           Approach diagram, insights card, dashboard image
 **Data.** The source workbook `Online Sales Data.xlsx` is not committed. Put it in `data/` (or set `INXITE_RAW_XLSX`) for Python.
 
 **Power BI.**
-1. Open `Inxite-Out.pbip` in Power BI Desktop (Developer Mode / PBIP support).
+1. Open `RetailPulse-PBI.pbip` in Power BI Desktop (Developer Mode / PBIP support).
 2. In Power Query, point the `Customers`, `Products` and `Order_Items` sources at your copy of the workbook.
 3. Point `Forecast`, `Forecast 2026` and `Levers` at `analysis/output/`.
 4. Refresh.

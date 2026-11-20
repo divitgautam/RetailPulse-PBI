@@ -22,7 +22,7 @@ xx, yy = np.meshgrid(np.linspace(0, 1, 400), np.linspace(0, 1, 225))
 ax.imshow(grad(np.clip(xx * .75 + (1 - yy) * .35 - .15, 0, 1)), extent=[0, W, 0, H], aspect="auto", zorder=0)
 
 ax.text(.8, 9.95, "From raw sales data to profit decisions", color=WHITE, fontsize=34, weight="bold", va="top")
-ax.text(.8, 9.1, "How the Inxite-Out analysis was built: audit first, model once, answer in Power BI, go deeper in Python",
+ax.text(.8, 9.1, "How RetailPulse-PBI was built: audit first, model once, answer in Power BI, go deeper in Python",
         color="#C8C3F5", fontsize=15, va="top")
 
 stages = [

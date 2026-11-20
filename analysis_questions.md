@@ -1,4 +1,4 @@
-# Inxite-Out: Analysis Question Bank
+# RetailPulse-PBI: Analysis Question Bank
 
 Next-step questions for working in VS Code (Python / notebooks) on `Online Sales Data.xlsx`.
 Sheets: **Customers** (300 after dedupe and stub removal), **Products** (200), **Order_Items** (1,500 lines, 405 orders, Jan 2023 to Oct 2025).
