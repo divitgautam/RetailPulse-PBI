@@ -1,0 +1,300 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "txt_dq",
+  "position": {
+    "x": 646,
+    "y": 80,
+    "z": 2000,
+    "height": 624,
+    "width": 618,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Data and model notes",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "12pt",
+                      "color": "#020618",
+                      "fontFamily": "'Instrument Sans', 'Segoe UI Semibold', sans-serif"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Duplicate customers fixed. ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "11pt",
+                      "color": "#F05100"
+                    }
+                  },
+                  {
+                    "value": "The Customers sheet had 307 rows for 302 IDs (CUST0001 x4, CUST0300 x3, one blank ID). The query keeps the most complete row per ID and drops one stub row (CUST0301, first name only): 300 customers.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "",
+                    "textStyle": {
+                      "fontSize": "6pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Missing order dates filled. ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "11pt",
+                      "color": "#F05100"
+                    }
+                  },
+                  {
+                    "value": "23 cancelled lines had no order_date; each is filled from the other lines of the same order.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "",
+                    "textStyle": {
+                      "fontSize": "6pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Relationship fixed. ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "11pt",
+                      "color": "#F05100"
+                    }
+                  },
+                  {
+                    "value": "Customers to Order_Items was many-to-many and bi-directional. It is now one-to-many, single direction.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "",
+                    "textStyle": {
+                      "fontSize": "6pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Do not sum items_total or total_amount. ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "11pt",
+                      "color": "#F05100"
+                    }
+                  },
+                  {
+                    "value": "They are order-level values repeated on every line; summing them overstates sales about 4.6x. Use the Net Sales and Gross Profit measures.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "",
+                    "textStyle": {
+                      "fontSize": "6pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Profit definition. ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "11pt",
+                      "color": "#F05100"
+                    }
+                  },
+                  {
+                    "value": "Net sales = unit price x qty x (1 - item discount) x (1 - order discount), excluding tax and shipping. COGS = cost price x qty. Cancelled and returned orders are excluded.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "",
+                    "textStyle": {
+                      "fontSize": "6pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "SKU prefixes do not match categories ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "11pt",
+                      "color": "#F05100"
+                    }
+                  },
+                  {
+                    "value": "(for example Fashion products with BE- SKUs). Do not use SKU to infer category.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "",
+                    "textStyle": {
+                      "fontSize": "6pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Date table added ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "11pt",
+                      "color": "#F05100"
+                    }
+                  },
+                  {
+                    "value": "and marked; it ends on the last order date (31 Oct 2025), so 2025 vs 2024 comparisons are like-for-like.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "",
+                    "textStyle": {
+                      "fontSize": "6pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "No cost data for shipping or marketing, ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "11pt",
+                      "color": "#F05100"
+                    }
+                  },
+                  {
+                    "value": "so profit here is gross profit, not net profit.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "",
+                    "textStyle": {
+                      "fontSize": "6pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

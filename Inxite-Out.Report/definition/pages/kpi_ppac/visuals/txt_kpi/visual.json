@@ -1,0 +1,147 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "txt_kpi",
+  "position": {
+    "x": 728,
+    "y": 458,
+    "z": 11000,
+    "height": 246,
+    "width": 536,
+    "tabOrder": 11000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Why this KPI",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "12pt",
+                      "color": "#020618",
+                      "fontFamily": "'Instrument Sans', 'Segoe UI Semibold', sans-serif"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "It joins customer behaviour (how often people buy) with profitability (what each order earns) in one number.",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "2025 YTD: ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "10pt",
+                      "color": "#682EFF"
+                    }
+                  },
+                  {
+                    "value": "₹92,868 per customer, 1.3% below last year and 6% below target.",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Driver: ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "10pt",
+                      "color": "#682EFF"
+                    }
+                  },
+                  {
+                    "value": "vs Jan to Oct 2024, orders per customer fell 1.32 to 1.27 and avg order value fell ₹2.86 L to ₹2.73 L. Margin improved 24.9% to 26.8% but could not offset it.",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Levers: ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "10pt",
+                      "color": "#682EFF"
+                    }
+                  },
+                  {
+                    "value": "repeat-purchase programmes (frequency), bundles (order value), discount guardrails (margin).",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Edit the measure [KPI Target Growth %] to change the target.",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

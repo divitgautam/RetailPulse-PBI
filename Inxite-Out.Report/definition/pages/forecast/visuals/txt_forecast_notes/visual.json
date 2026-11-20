@@ -1,0 +1,163 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "txt_forecast_notes",
+  "position": {
+    "x": 708,
+    "y": 458,
+    "z": 11000,
+    "height": 246,
+    "width": 556,
+    "tabOrder": 11000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "How to read this page",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "12pt",
+                      "color": "#020618",
+                      "fontFamily": "'Instrument Sans', 'Segoe UI Semibold', sans-serif"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Plan on about ₹1 crore ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "10pt",
+                      "color": "#682EFF"
+                    }
+                  },
+                  {
+                    "value": "of 2026 gross profit, with ₹80 L as the downside, under any acquisition scenario.",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "PPAC target is unlikely ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "10pt",
+                      "color": "#682EFF"
+                    }
+                  },
+                  {
+                    "value": "(about 20-24% chance). It only moves with orders per customer, order value and margin.",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Levers stack: ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "10pt",
+                      "color": "#682EFF"
+                    }
+                  },
+                  {
+                    "value": "a 10% discount cap with no stacking is the safest (re-pricing only); activating the 80 never-ordered is the largest.",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "All buyers behave alike ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "10pt",
+                      "color": "#682EFF"
+                    }
+                  },
+                  {
+                    "value": "(one ~3.6%/month rate), so treat them equally: no propensity targeting.",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "To update: ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "10pt",
+                      "color": "#682EFF"
+                    }
+                  },
+                  {
+                    "value": "re-run analysis notebooks 03 and 04, then refresh this report.",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

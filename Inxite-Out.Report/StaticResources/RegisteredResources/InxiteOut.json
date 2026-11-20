@@ -1,0 +1,154 @@
+{
+  "name": "InXiteOut",
+  "dataColors": [
+    "#682EFF",
+    "#CD83FF",
+    "#030734",
+    "#F05100",
+    "#62748E",
+    "#009588",
+    "#AC24FF",
+    "#FCBB00"
+  ],
+  "foreground": "#020618",
+  "foregroundNeutralSecondary": "#62748E",
+  "background": "#FFFFFF",
+  "backgroundLight": "#F1F5F9",
+  "tableAccent": "#682EFF",
+  "good": "#009588",
+  "neutral": "#CD83FF",
+  "bad": "#F05100",
+  "textClasses": {
+    "title": {
+      "fontFace": "'Instrument Sans', 'Segoe UI Semibold', sans-serif",
+      "fontSize": 11,
+      "color": "#020618"
+    },
+    "label": {
+      "fontFace": "'Instrument Sans', 'Segoe UI', sans-serif",
+      "fontSize": 10,
+      "color": "#62748E"
+    },
+    "callout": {
+      "fontFace": "'Instrument Sans', 'Segoe UI Semibold', sans-serif",
+      "fontSize": 24,
+      "color": "#030734"
+    },
+    "header": {
+      "fontFace": "'Instrument Sans', 'Segoe UI Semibold', sans-serif",
+      "fontSize": 11,
+      "color": "#020618"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#E2E8F0"
+              }
+            },
+            "radius": 8,
+            "width": 1
+          }
+        ],
+        "dropShadow": [
+          {
+            "show": false
+          }
+        ],
+        "title": [
+          {
+            "show": true,
+            "fontColor": {
+              "solid": {
+                "color": "#020618"
+              }
+            },
+            "fontSize": 11,
+            "fontFamily": "'Instrument Sans', 'Segoe UI Semibold', sans-serif"
+          }
+        ],
+        "padding": [
+          {
+            "top": 8,
+            "bottom": 8,
+            "left": 12,
+            "right": 12
+          }
+        ]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#F1F5F9"
+              }
+            },
+            "transparency": 0
+          }
+        ]
+      }
+    },
+    "pivotTable": {
+      "*": {
+        "columnHeaders": [
+          {
+            "backColor": {
+              "solid": {
+                "color": "#030734"
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "fontSize": 10
+          }
+        ],
+        "values": [
+          {
+            "fontSize": 10,
+            "backColorSecondary": {
+              "solid": {
+                "color": "#F6F3FF"
+              }
+            }
+          }
+        ],
+        "subTotals": [
+          {
+            "rowSubtotals": true
+          }
+        ],
+        "total": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#030734"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

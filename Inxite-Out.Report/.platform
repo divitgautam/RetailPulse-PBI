@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Inxite-Out"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "0a51b299-261e-4847-b281-ee8633a657b5"
+  }
+}

@@ -1,0 +1,211 @@
+scenario,month,metric,p10,p50,p90
+A · No new sign-ups,2025-11-01,orders,7.0,11.0,16.0
+A · No new sign-ups,2025-12-01,orders,7.0,11.0,16.0
+A · No new sign-ups,2026-01-01,orders,7.0,11.0,16.0
+A · No new sign-ups,2026-02-01,orders,7.0,11.0,16.0
+A · No new sign-ups,2026-03-01,orders,7.0,11.0,16.0
+A · No new sign-ups,2026-04-01,orders,7.0,11.0,16.0
+A · No new sign-ups,2026-05-01,orders,7.0,11.0,16.0
+A · No new sign-ups,2026-06-01,orders,7.0,12.0,16.0
+A · No new sign-ups,2026-07-01,orders,7.0,11.0,16.0
+A · No new sign-ups,2026-08-01,orders,7.0,12.0,16.0
+A · No new sign-ups,2026-09-01,orders,7.0,12.0,17.0
+A · No new sign-ups,2026-10-01,orders,7.0,11.0,17.0
+A · No new sign-ups,2026-11-01,orders,7.0,11.0,16.0
+A · No new sign-ups,2026-12-01,orders,7.0,11.0,16.0
+A · No new sign-ups,2025-11-01,rev_orders,7.0,11.0,15.0
+A · No new sign-ups,2025-12-01,rev_orders,7.0,11.0,15.0
+A · No new sign-ups,2026-01-01,rev_orders,7.0,11.0,16.0
+A · No new sign-ups,2026-02-01,rev_orders,7.0,11.0,16.0
+A · No new sign-ups,2026-03-01,rev_orders,7.0,11.0,16.0
+A · No new sign-ups,2026-04-01,rev_orders,7.0,11.0,15.100000000000136
+A · No new sign-ups,2026-05-01,rev_orders,7.0,11.0,16.0
+A · No new sign-ups,2026-06-01,rev_orders,7.0,11.0,16.0
+A · No new sign-ups,2026-07-01,rev_orders,7.0,11.0,16.0
+A · No new sign-ups,2026-08-01,rev_orders,7.0,11.0,16.0
+A · No new sign-ups,2026-09-01,rev_orders,7.0,11.0,16.0
+A · No new sign-ups,2026-10-01,rev_orders,7.0,11.0,16.0
+A · No new sign-ups,2026-11-01,rev_orders,7.0,11.0,16.0
+A · No new sign-ups,2026-12-01,rev_orders,7.0,11.0,16.0
+A · No new sign-ups,2025-11-01,net_sales,1621171.496475,2872963.8737625,4420729.6657925
+A · No new sign-ups,2025-12-01,net_sales,1673596.096015,2874650.8729375005,4345137.887732499
+A · No new sign-ups,2026-01-01,net_sales,1617645.195065,2919190.2580875,4533274.6848675
+A · No new sign-ups,2026-02-01,net_sales,1640041.472535,2897870.1852249997,4355409.10673
+A · No new sign-ups,2026-03-01,net_sales,1656944.7849624997,2924811.8814625,4540981.359104999
+A · No new sign-ups,2026-04-01,net_sales,1629434.3089850002,2910121.9695625002,4378652.5095425
+A · No new sign-ups,2026-05-01,net_sales,1550838.0445725,2860592.0860874997,4486185.98807
+A · No new sign-ups,2026-06-01,net_sales,1676181.9513175,2898779.247075,4585226.366160001
+A · No new sign-ups,2026-07-01,net_sales,1573159.666665,2864963.2817875,4471236.99581
+A · No new sign-ups,2026-08-01,net_sales,1711059.2933774998,2966398.1342499997,4538664.073857502
+A · No new sign-ups,2026-09-01,net_sales,1710537.271045,2958966.166225,4498225.787297499
+A · No new sign-ups,2026-10-01,net_sales,1646601.7124725,2940175.168075,4575091.9926575
+A · No new sign-ups,2026-11-01,net_sales,1677292.1104075,2925643.6831874996,4550508.527167501
+A · No new sign-ups,2026-12-01,net_sales,1634892.6389249999,2901548.6406125,4434776.8000425
+A · No new sign-ups,2025-11-01,gross_profit,401733.9189949999,767636.0793875,1236830.2413350001
+A · No new sign-ups,2025-12-01,gross_profit,418662.2101624999,774649.3950749999,1209313.0734625002
+A · No new sign-ups,2026-01-01,gross_profit,418919.35391,782741.979,1254408.4575399999
+A · No new sign-ups,2026-02-01,gross_profit,423315.38979,775356.8640749999,1225765.93704
+A · No new sign-ups,2026-03-01,gross_profit,418132.39004499995,784588.862875,1245397.3965300003
+A · No new sign-ups,2026-04-01,gross_profit,409556.53068499995,773160.30475,1199542.8904825
+A · No new sign-ups,2026-05-01,gross_profit,394728.0877025,762476.8444,1233323.7573200003
+A · No new sign-ups,2026-06-01,gross_profit,427951.5404425,780156.4109374998,1290693.0868799998
+A · No new sign-ups,2026-07-01,gross_profit,392775.39263499994,772576.087725,1233452.5021275003
+A · No new sign-ups,2026-08-01,gross_profit,439817.06729,792666.7957375,1248350.6644875002
+A · No new sign-ups,2026-09-01,gross_profit,434928.63787,790582.5001000001,1239368.8063425
+A · No new sign-ups,2026-10-01,gross_profit,423940.06346,780656.8871124997,1266126.2747024999
+A · No new sign-ups,2026-11-01,gross_profit,424757.84167999995,795794.3203874999,1266274.43387
+A · No new sign-ups,2026-12-01,gross_profit,410397.7899125,776323.7858,1222916.9082525002
+A · No new sign-ups,2025-11-01,new_buyers,0.0,2.0,4.0
+A · No new sign-ups,2025-12-01,new_buyers,1.0,2.0,4.0
+A · No new sign-ups,2026-01-01,new_buyers,0.0,2.0,4.0
+A · No new sign-ups,2026-02-01,new_buyers,0.0,2.0,4.0
+A · No new sign-ups,2026-03-01,new_buyers,0.0,2.0,4.0
+A · No new sign-ups,2026-04-01,new_buyers,0.0,2.0,4.0
+A · No new sign-ups,2026-05-01,new_buyers,0.0,2.0,4.0
+A · No new sign-ups,2026-06-01,new_buyers,0.0,2.0,4.0
+A · No new sign-ups,2026-07-01,new_buyers,0.0,2.0,4.0
+A · No new sign-ups,2026-08-01,new_buyers,0.0,2.0,4.0
+A · No new sign-ups,2026-09-01,new_buyers,0.0,2.0,3.0
+A · No new sign-ups,2026-10-01,new_buyers,0.0,2.0,3.0
+A · No new sign-ups,2026-11-01,new_buyers,0.0,1.0,3.0
+A · No new sign-ups,2026-12-01,new_buyers,0.0,1.0,3.0
+B · Sign-ups resume (~7/mo),2025-11-01,orders,7.0,11.0,16.0
+B · Sign-ups resume (~7/mo),2025-12-01,orders,7.0,11.0,16.0
+B · Sign-ups resume (~7/mo),2026-01-01,orders,7.0,12.0,16.0
+B · Sign-ups resume (~7/mo),2026-02-01,orders,7.0,12.0,17.0
+B · Sign-ups resume (~7/mo),2026-03-01,orders,8.0,12.0,17.0
+B · Sign-ups resume (~7/mo),2026-04-01,orders,8.0,12.0,17.0
+B · Sign-ups resume (~7/mo),2026-05-01,orders,8.0,12.0,18.0
+B · Sign-ups resume (~7/mo),2026-06-01,orders,8.0,13.0,18.0
+B · Sign-ups resume (~7/mo),2026-07-01,orders,9.0,13.0,18.0
+B · Sign-ups resume (~7/mo),2026-08-01,orders,8.0,13.0,18.0
+B · Sign-ups resume (~7/mo),2026-09-01,orders,9.0,13.0,19.0
+B · Sign-ups resume (~7/mo),2026-10-01,orders,9.0,14.0,19.0
+B · Sign-ups resume (~7/mo),2026-11-01,orders,9.0,14.0,19.0
+B · Sign-ups resume (~7/mo),2026-12-01,orders,9.0,14.0,19.0
+B · Sign-ups resume (~7/mo),2025-11-01,rev_orders,7.0,11.0,15.0
+B · Sign-ups resume (~7/mo),2025-12-01,rev_orders,7.0,11.0,15.0
+B · Sign-ups resume (~7/mo),2026-01-01,rev_orders,7.0,11.0,16.0
+B · Sign-ups resume (~7/mo),2026-02-01,rev_orders,7.0,11.0,16.0
+B · Sign-ups resume (~7/mo),2026-03-01,rev_orders,7.0,11.0,16.0
+B · Sign-ups resume (~7/mo),2026-04-01,rev_orders,8.0,12.0,17.0
+B · Sign-ups resume (~7/mo),2026-05-01,rev_orders,8.0,12.0,17.0
+B · Sign-ups resume (~7/mo),2026-06-01,rev_orders,8.0,12.0,17.0
+B · Sign-ups resume (~7/mo),2026-07-01,rev_orders,8.0,12.0,18.0
+B · Sign-ups resume (~7/mo),2026-08-01,rev_orders,8.0,12.0,18.0
+B · Sign-ups resume (~7/mo),2026-09-01,rev_orders,8.0,13.0,18.0
+B · Sign-ups resume (~7/mo),2026-10-01,rev_orders,8.0,13.0,18.0
+B · Sign-ups resume (~7/mo),2026-11-01,rev_orders,8.0,13.0,18.0
+B · Sign-ups resume (~7/mo),2026-12-01,rev_orders,9.0,13.0,19.0
+B · Sign-ups resume (~7/mo),2025-11-01,net_sales,1621171.496475,2872963.8737625,4420729.6657925
+B · Sign-ups resume (~7/mo),2025-12-01,net_sales,1673596.096015,2874650.8729375005,4345137.887732499
+B · Sign-ups resume (~7/mo),2026-01-01,net_sales,1621293.6873225,2924057.8787125004,4492689.8213075
+B · Sign-ups resume (~7/mo),2026-02-01,net_sales,1708334.278585,2931741.2808874995,4498325.9909475
+B · Sign-ups resume (~7/mo),2026-03-01,net_sales,1769239.7251825,3053759.4982749997,4685988.8474425
+B · Sign-ups resume (~7/mo),2026-04-01,net_sales,1770369.58477,3072728.9175500004,4795514.071997502
+B · Sign-ups resume (~7/mo),2026-05-01,net_sales,1856108.8904325,3224219.9621375,4803110.30008
+B · Sign-ups resume (~7/mo),2026-06-01,net_sales,1877595.089725,3239767.7354999995,4871075.4787024995
+B · Sign-ups resume (~7/mo),2026-07-01,net_sales,1953013.2409525,3258605.0787875,4992137.2319275
+B · Sign-ups resume (~7/mo),2026-08-01,net_sales,1972336.2644949998,3315457.1416124995,4972823.46285
+B · Sign-ups resume (~7/mo),2026-09-01,net_sales,1995796.095515,3381672.1871625,5224210.198880001
+B · Sign-ups resume (~7/mo),2026-10-01,net_sales,2055358.156215,3495734.2601999994,5183172.584395
+B · Sign-ups resume (~7/mo),2026-11-01,net_sales,2072347.952185,3522199.23145,5289750.850342502
+B · Sign-ups resume (~7/mo),2026-12-01,net_sales,2151091.7864825,3597861.9125624998,5318490.4109525
+B · Sign-ups resume (~7/mo),2025-11-01,gross_profit,401733.9189949999,767636.0793875,1236830.2413350001
+B · Sign-ups resume (~7/mo),2025-12-01,gross_profit,418662.2101624999,774649.3950749999,1209313.0734625002
+B · Sign-ups resume (~7/mo),2026-01-01,gross_profit,410458.12282,791621.0078624999,1246611.2522724997
+B · Sign-ups resume (~7/mo),2026-02-01,gross_profit,437020.04269249993,781611.7623375,1261353.592215
+B · Sign-ups resume (~7/mo),2026-03-01,gross_profit,440720.7790199999,814482.58525,1306062.9930450001
+B · Sign-ups resume (~7/mo),2026-04-01,gross_profit,457284.410685,822609.1525374998,1320471.3602949998
+B · Sign-ups resume (~7/mo),2026-05-01,gross_profit,491963.19023999997,863361.3339625,1331079.8327325003
+B · Sign-ups resume (~7/mo),2026-06-01,gross_profit,484591.4598025,867105.0907874998,1362121.1169174998
+B · Sign-ups resume (~7/mo),2026-07-01,gross_profit,498304.734035,883827.924725,1407704.5955475003
+B · Sign-ups resume (~7/mo),2026-08-01,gross_profit,509464.08411999996,885561.2895124999,1383219.2048924998
+B · Sign-ups resume (~7/mo),2026-09-01,gross_profit,513515.4585774999,901866.1048999999,1427950.2234949998
+B · Sign-ups resume (~7/mo),2026-10-01,gross_profit,513949.47941749997,935473.1812874998,1436073.0326475
+B · Sign-ups resume (~7/mo),2026-11-01,gross_profit,528158.5698849999,943495.7252749999,1468800.586655
+B · Sign-ups resume (~7/mo),2026-12-01,gross_profit,554320.1211449999,962332.594425,1477166.7561875
+B · Sign-ups resume (~7/mo),2025-11-01,new_buyers,0.0,2.0,4.0
+B · Sign-ups resume (~7/mo),2025-12-01,new_buyers,1.0,2.0,4.0
+B · Sign-ups resume (~7/mo),2026-01-01,new_buyers,1.0,2.0,4.0
+B · Sign-ups resume (~7/mo),2026-02-01,new_buyers,1.0,2.0,5.0
+B · Sign-ups resume (~7/mo),2026-03-01,new_buyers,1.0,3.0,5.0
+B · Sign-ups resume (~7/mo),2026-04-01,new_buyers,1.0,3.0,5.0
+B · Sign-ups resume (~7/mo),2026-05-01,new_buyers,1.0,3.0,5.0
+B · Sign-ups resume (~7/mo),2026-06-01,new_buyers,1.0,3.0,5.0
+B · Sign-ups resume (~7/mo),2026-07-01,new_buyers,1.0,3.0,6.0
+B · Sign-ups resume (~7/mo),2026-08-01,new_buyers,1.0,3.0,6.0
+B · Sign-ups resume (~7/mo),2026-09-01,new_buyers,1.0,3.0,6.0
+B · Sign-ups resume (~7/mo),2026-10-01,new_buyers,1.0,3.0,6.0
+B · Sign-ups resume (~7/mo),2026-11-01,new_buyers,1.0,3.0,6.0
+B · Sign-ups resume (~7/mo),2026-12-01,new_buyers,1.0,4.0,6.0
+C · Activation push (2x conversion),2025-11-01,orders,7.0,11.0,16.0
+C · Activation push (2x conversion),2025-12-01,orders,7.0,11.0,16.0
+C · Activation push (2x conversion),2026-01-01,orders,9.0,14.0,19.0
+C · Activation push (2x conversion),2026-02-01,orders,9.0,13.0,19.0
+C · Activation push (2x conversion),2026-03-01,orders,9.0,13.0,19.0
+C · Activation push (2x conversion),2026-04-01,orders,9.0,13.0,18.0
+C · Activation push (2x conversion),2026-05-01,orders,9.0,13.0,18.0
+C · Activation push (2x conversion),2026-06-01,orders,8.0,13.0,18.0
+C · Activation push (2x conversion),2026-07-01,orders,9.0,13.0,18.0
+C · Activation push (2x conversion),2026-08-01,orders,9.0,13.0,18.0
+C · Activation push (2x conversion),2026-09-01,orders,9.0,13.0,18.0
+C · Activation push (2x conversion),2026-10-01,orders,9.0,13.0,18.0
+C · Activation push (2x conversion),2026-11-01,orders,8.0,13.0,18.0
+C · Activation push (2x conversion),2026-12-01,orders,9.0,13.0,18.0
+C · Activation push (2x conversion),2025-11-01,rev_orders,7.0,11.0,15.0
+C · Activation push (2x conversion),2025-12-01,rev_orders,7.0,11.0,15.0
+C · Activation push (2x conversion),2026-01-01,rev_orders,8.0,13.0,18.0
+C · Activation push (2x conversion),2026-02-01,rev_orders,8.0,13.0,18.0
+C · Activation push (2x conversion),2026-03-01,rev_orders,8.0,13.0,18.0
+C · Activation push (2x conversion),2026-04-01,rev_orders,8.0,13.0,18.0
+C · Activation push (2x conversion),2026-05-01,rev_orders,8.0,13.0,18.0
+C · Activation push (2x conversion),2026-06-01,rev_orders,8.0,12.0,17.0
+C · Activation push (2x conversion),2026-07-01,rev_orders,8.0,12.0,17.0
+C · Activation push (2x conversion),2026-08-01,rev_orders,8.0,12.0,17.0
+C · Activation push (2x conversion),2026-09-01,rev_orders,8.0,13.0,18.0
+C · Activation push (2x conversion),2026-10-01,rev_orders,8.0,12.0,17.0
+C · Activation push (2x conversion),2026-11-01,rev_orders,8.0,12.0,17.0
+C · Activation push (2x conversion),2026-12-01,rev_orders,8.0,12.0,17.0
+C · Activation push (2x conversion),2025-11-01,net_sales,1621171.496475,2872963.8737625,4420729.6657925
+C · Activation push (2x conversion),2025-12-01,net_sales,1673596.096015,2874650.8729375005,4345137.887732499
+C · Activation push (2x conversion),2026-01-01,net_sales,2076406.51311,3474634.58945,5209625.47695
+C · Activation push (2x conversion),2026-02-01,net_sales,2051269.2490400001,3427847.2155125,5064125.231467501
+C · Activation push (2x conversion),2026-03-01,net_sales,1987729.34408,3369516.9485875,5161555.837382499
+C · Activation push (2x conversion),2026-04-01,net_sales,1971345.9556475,3341250.0762249995,5010347.292185
+C · Activation push (2x conversion),2026-05-01,net_sales,1959085.3214549997,3373539.8047124995,5003238.8018975
+C · Activation push (2x conversion),2026-06-01,net_sales,1921839.4213899998,3334334.0841624998,5030498.732687501
+C · Activation push (2x conversion),2026-07-01,net_sales,1936113.394535,3252810.4986374998,5021547.70901
+C · Activation push (2x conversion),2026-08-01,net_sales,1952148.7211499996,3329617.7119875,4997993.3412500005
+C · Activation push (2x conversion),2026-09-01,net_sales,1980216.6211699997,3344175.7120124996,5116111.600679999
+C · Activation push (2x conversion),2026-10-01,net_sales,1985011.48345,3320854.1601250004,4996781.855369999
+C · Activation push (2x conversion),2026-11-01,net_sales,1883007.105835,3317261.6381749995,4975117.403835001
+C · Activation push (2x conversion),2026-12-01,net_sales,1990412.0358000002,3259497.099975,4875275.868385
+C · Activation push (2x conversion),2025-11-01,gross_profit,401733.9189949999,767636.0793875,1236830.2413350001
+C · Activation push (2x conversion),2025-12-01,gross_profit,418662.2101624999,774649.3950749999,1209313.0734625002
+C · Activation push (2x conversion),2026-01-01,gross_profit,535640.8017025,940237.010175,1420977.0063275
+C · Activation push (2x conversion),2026-02-01,gross_profit,525818.8958749998,928674.4030249999,1414004.2160075002
+C · Activation push (2x conversion),2026-03-01,gross_profit,511920.1309324999,900394.1219249999,1412163.3077625001
+C · Activation push (2x conversion),2026-04-01,gross_profit,499233.91050249996,897571.8888,1379403.2520275004
+C · Activation push (2x conversion),2026-05-01,gross_profit,514887.66440749995,914080.8334124999,1409173.0094075
+C · Activation push (2x conversion),2026-06-01,gross_profit,500817.39916999993,891211.4541249999,1401479.1018025004
+C · Activation push (2x conversion),2026-07-01,gross_profit,498317.21056249994,874230.565225,1381325.0877725005
+C · Activation push (2x conversion),2026-08-01,gross_profit,508218.12073250004,888004.0350749998,1401463.813185
+C · Activation push (2x conversion),2026-09-01,gross_profit,502475.44363999995,892515.0779999997,1408062.7235000003
+C · Activation push (2x conversion),2026-10-01,gross_profit,506034.7193449999,898950.8155499999,1387244.44209
+C · Activation push (2x conversion),2026-11-01,gross_profit,476608.18509999994,889507.40705,1367544.1331475
+C · Activation push (2x conversion),2026-12-01,gross_profit,510727.33459249994,879496.6065625,1368144.667585
+C · Activation push (2x conversion),2025-11-01,new_buyers,0.0,2.0,4.0
+C · Activation push (2x conversion),2025-12-01,new_buyers,1.0,2.0,4.0
+C · Activation push (2x conversion),2026-01-01,new_buyers,2.0,4.0,7.0
+C · Activation push (2x conversion),2026-02-01,new_buyers,2.0,4.0,7.0
+C · Activation push (2x conversion),2026-03-01,new_buyers,1.0,4.0,7.0
+C · Activation push (2x conversion),2026-04-01,new_buyers,1.0,4.0,6.0
+C · Activation push (2x conversion),2026-05-01,new_buyers,1.0,3.0,6.0
+C · Activation push (2x conversion),2026-06-01,new_buyers,1.0,3.0,5.0
+C · Activation push (2x conversion),2026-07-01,new_buyers,1.0,3.0,5.0
+C · Activation push (2x conversion),2026-08-01,new_buyers,1.0,3.0,5.0
+C · Activation push (2x conversion),2026-09-01,new_buyers,1.0,3.0,5.0
+C · Activation push (2x conversion),2026-10-01,new_buyers,1.0,2.0,5.0
+C · Activation push (2x conversion),2026-11-01,new_buyers,1.0,2.0,4.0
+C · Activation push (2x conversion),2026-12-01,new_buyers,0.0,2.0,4.0

@@ -1,0 +1,300 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "txt_findings",
+  "position": {
+    "x": 16,
+    "y": 80,
+    "z": 1000,
+    "height": 624,
+    "width": 618,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Business findings",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "12pt",
+                      "color": "#020618",
+                      "fontFamily": "'Instrument Sans', 'Segoe UI Semibold', sans-serif"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "1. Sign-ups stopped on 25 Sep 2024. ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "11pt",
+                      "color": "#682EFF"
+                    }
+                  },
+                  {
+                    "value": "With no new registrations since, new buyers fell 128 (2023) to 64 (2024) to 28 (2025 YTD) and repeat orders are now 75% of orders. Confirm this is not an extract cut-off.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "",
+                    "textStyle": {
+                      "fontSize": "6pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "2. Profit is flat, not collapsing. ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "11pt",
+                      "color": "#682EFF"
+                    }
+                  },
+                  {
+                    "value": "Like-for-like (Jan to Oct), gross profit fell 21% in 2024 and rose 6% in 2025. Active customers: 108, 84, 90.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "",
+                    "textStyle": {
+                      "fontSize": "6pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "3. Retention carries the business. ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "11pt",
+                      "color": "#682EFF"
+                    }
+                  },
+                  {
+                    "value": "Recurring customers are 53% of buyers but 76% of gross profit (2.8x a one-time buyer). Second orders are slow: median 254 days.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "",
+                    "textStyle": {
+                      "fontSize": "6pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "4. 80 registered customers never ordered. ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "11pt",
+                      "color": "#682EFF"
+                    }
+                  },
+                  {
+                    "value": "27% of the base. They look like buyers (same age and segment mix), so a first-order offer is cheap growth.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "",
+                    "textStyle": {
+                      "fontSize": "6pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "5. Discounts cost margin and do not buy loyalty. ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "11pt",
+                      "color": "#682EFF"
+                    }
+                  },
+                  {
+                    "value": "Margin is 30.4% with no item discount but 17.1% at 15%; 29 lines sold below cost. A discounted first order brings no extra repeat buying.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "",
+                    "textStyle": {
+                      "fontSize": "6pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "6. Beauty leads, Home & Kitchen trails. ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "11pt",
+                      "color": "#682EFF"
+                    }
+                  },
+                  {
+                    "value": "Beauty earns ₹76.5 L (27% of profit), Home & Kitchen ₹48.1 L. Serum is the top subcategory (₹22.3 L).",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "",
+                    "textStyle": {
+                      "fontSize": "6pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "7. Revenue leakage. ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "11pt",
+                      "color": "#682EFF"
+                    }
+                  },
+                  {
+                    "value": "19 cancelled or returned orders lost ₹52.3 L in sales and ₹12.0 L in profit (4.7% of orders), with no significant pattern by payment method.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "",
+                    "textStyle": {
+                      "fontSize": "6pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "8. Maharashtra and Gujarat ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "11pt",
+                      "color": "#682EFF"
+                    }
+                  },
+                  {
+                    "value": "deliver 40% of gross profit, but repeat behaviour does not differ by state: volume is concentrated, behaviour is not.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "",
+                    "textStyle": {
+                      "fontSize": "6pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

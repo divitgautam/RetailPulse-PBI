@@ -1,0 +1,14 @@
+/// Shared scenario list so one slicer filters both forecast tables.
+table Scenario
+	lineageTag: d9b9a77a-2974-434c-b6de-dce400d16d51
+
+	column Scenario
+		lineageTag: 6a0e6333-3ac0-4f45-ab00-9302cbd1e14d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Scenario]
+
+	partition Scenario = calculated
+		mode: import
+		source = DISTINCT ( SELECTCOLUMNS ( 'Forecast 2026', "Scenario", 'Forecast 2026'[scenario] ) )
+

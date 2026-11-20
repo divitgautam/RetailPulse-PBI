@@ -1,0 +1,25 @@
+scenario,metric,p10,p50,p90
+A · No new sign-ups,Orders placed,118.0,139.0,163.0
+A · No new sign-ups,Revenue orders,112.0,132.0,155.0
+A · No new sign-ups,Net sales,29741931.607347503,35877019.393374994,42299888.7544275
+A · No new sign-ups,Gross profit,7986020.101979999,9688850.6,11535048.343247497
+A · No new sign-ups,New buyers,16.0,23.0,29.0
+B · Sign-ups resume (~7/mo),Orders placed,132.9,155.0,181.0
+B · Sign-ups resume (~7/mo),Revenue orders,126.0,148.0,172.0
+B · Sign-ups resume (~7/mo),Net sales,33618622.5397875,40005996.6844375,47386076.14917251
+B · Sign-ups resume (~7/mo),Gross profit,8996680.1631725,10780615.561137497,12841735.337615
+B · Sign-ups resume (~7/mo),New buyers,27.0,36.0,47.0
+C · Activation push (2x conversion),Orders placed,137.0,160.0,184.0
+C · Activation push (2x conversion),Revenue orders,130.0,152.0,175.0
+C · Activation push (2x conversion),Net sales,34687792.88190499,41159938.0410375,48186338.532685004
+C · Activation push (2x conversion),Gross profit,9264205.720369998,11095686.7482125,13108319.496825
+C · Activation push (2x conversion),New buyers,30.0,39.0,46.0
+A · No new sign-ups,PPAC,74501.14107071787,92246.66199647676,113821.03605519423
+A · No new sign-ups,PPAC target,104317.00006591255,104317.00006591255,104317.00006591255
+A · No new sign-ups,P(PPAC hits target),0.2395,0.2395,0.2395
+B · Sign-ups resume (~7/mo),PPAC,75690.72256553432,92019.07088589013,111747.71199492402
+B · Sign-ups resume (~7/mo),PPAC target,104317.00006591255,104317.00006591255,104317.00006591255
+B · Sign-ups resume (~7/mo),P(PPAC hits target),0.2025,0.2025,0.2025
+C · Activation push (2x conversion),PPAC,75950.08553913509,92737.05309959086,112091.17758253567
+C · Activation push (2x conversion),PPAC target,104317.00006591255,104317.00006591255,104317.00006591255
+C · Activation push (2x conversion),P(PPAC hits target),0.2165,0.2165,0.2165

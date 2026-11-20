@@ -1,0 +1,390 @@
+/// Central home for report measures
+table _Measures
+	lineageTag: dc7a0378-faab-45c1-8a86-7fabfbfa04f5
+
+	/// Revenue excluding tax and shipping, after item and order discounts. Excludes cancelled and returned orders.
+	measure 'Net Sales' = CALCULATE ( SUM ( Order_Items[Net Sales] ), Order_Items[Is Revenue Order] = TRUE () )
+		formatString: ₹#,##0
+		displayFolder: 1 Sales & Profit
+		lineageTag: 120f34bc-ae3a-4182-a035-e9d478648d10
+
+	/// Unit price x quantity before any discount. Excludes cancelled and returned orders.
+	measure 'Gross Sales (List Price)' = CALCULATE ( SUM ( Order_Items[Gross Amount] ), Order_Items[Is Revenue Order] = TRUE () )
+		formatString: ₹#,##0
+		displayFolder: 1 Sales & Profit
+		lineageTag: c152ee95-9cd9-442f-9cc6-32253828a495
+
+	/// Product cost price x quantity for revenue orders.
+	measure COGS = CALCULATE ( SUM ( Order_Items[COGS] ), Order_Items[Is Revenue Order] = TRUE () )
+		formatString: ₹#,##0
+		displayFolder: 1 Sales & Profit
+		lineageTag: ae4b830c-89ed-4873-b664-ac872bf777b6
+
+	/// Net Sales minus COGS for revenue orders.
+	measure 'Gross Profit' = CALCULATE ( SUM ( Order_Items[Gross Profit] ), Order_Items[Is Revenue Order] = TRUE () )
+		formatString: ₹#,##0
+		displayFolder: 1 Sales & Profit
+		lineageTag: 9a7e8fc3-290b-4b5a-939c-70a9d85c23b8
+
+	/// Gross Profit / Net Sales.
+	measure 'Gross Margin %' = DIVIDE ( [Gross Profit], [Net Sales] )
+		formatString: 0.0%
+		displayFolder: 1 Sales & Profit
+		lineageTag: e5d51009-a620-4d85-a4d4-7a283d5a3c3b
+
+	/// Value given away through item and order discounts.
+	measure 'Discount Amount' = [Gross Sales (List Price)] - [Net Sales]
+		formatString: ₹#,##0
+		displayFolder: 1 Sales & Profit
+		lineageTag: a91fb0e3-deaf-4a2a-8ec6-e5aa970ffe5a
+
+	/// Discount Amount / Gross Sales at list price.
+	measure 'Discount Rate %' = DIVIDE ( [Discount Amount], [Gross Sales (List Price)] )
+		formatString: 0.0%
+		displayFolder: 1 Sales & Profit
+		lineageTag: ff49c565-8682-46ef-b7ef-6bc265c9035d
+
+	/// Units on revenue orders.
+	measure 'Units Sold' = CALCULATE ( SUM ( Order_Items[quantity] ), Order_Items[Is Revenue Order] = TRUE () )
+		formatString: #,##0
+		displayFolder: 1 Sales & Profit
+		lineageTag: 596ad40b-665f-4603-908e-70a3df21f274
+
+	/// Orders that are not cancelled or returned.
+	measure 'Revenue Orders' = CALCULATE ( DISTINCTCOUNT ( Order_Items[order_id] ), Order_Items[Is Revenue Order] = TRUE () )
+		formatString: #,##0
+		displayFolder: 1 Sales & Profit
+		lineageTag: 10da3163-64e7-4e8c-8f07-7f75e09fe4c2
+
+	/// Net Sales per revenue order.
+	measure 'Avg Order Value' = DIVIDE ( [Net Sales], [Revenue Orders] )
+		formatString: ₹#,##0
+		displayFolder: 1 Sales & Profit
+		lineageTag: d955cae5-9dcd-4e4c-bc6f-1ae3b21bd51c
+
+	/// Gross Profit per revenue order.
+	measure 'Profit per Order' = DIVIDE ( [Gross Profit], [Revenue Orders] )
+		formatString: ₹#,##0
+		displayFolder: 1 Sales & Profit
+		lineageTag: deea0ba0-51e4-4958-a6ea-bf460d384b3d
+
+	/// Net Sales on cancelled or returned orders.
+	measure 'Lost Net Sales' = CALCULATE ( SUM ( Order_Items[Net Sales] ), Order_Items[Is Revenue Order] = FALSE () )
+		formatString: ₹#,##0
+		displayFolder: 1 Sales & Profit
+		lineageTag: 0aab6793-75bf-4c38-8bb6-9af23c01a810
+
+	/// Gross Profit forgone on cancelled or returned orders.
+	measure 'Lost Gross Profit' = CALCULATE ( SUM ( Order_Items[Gross Profit] ), Order_Items[Is Revenue Order] = FALSE () )
+		formatString: ₹#,##0
+		displayFolder: 1 Sales & Profit
+		lineageTag: bf98a11b-b9aa-4c81-ba98-309247dee8ce
+
+	/// Share of placed orders that were cancelled or returned.
+	measure 'Cancel & Return Rate %' = DIVIDE ( CALCULATE ( DISTINCTCOUNT ( Order_Items[order_id] ), Order_Items[Is Revenue Order] = FALSE () ), [Total Orders] )
+		formatString: 0.0%
+		displayFolder: 1 Sales & Profit
+		lineageTag: e666027a-4f55-4276-8852-971c5ec18485
+
+	/// Order lines sold below cost after discounts.
+	measure 'Loss-Making Lines' = COALESCE ( CALCULATE ( COUNTROWS ( Order_Items ), Order_Items[Is Revenue Order] = TRUE (), Order_Items[Gross Profit] < 0 ), 0 )
+		formatString: #,##0
+		displayFolder: 1 Sales & Profit
+		lineageTag: 9874daf8-64f2-41bf-9a55-5c7083263416
+
+	/// Total negative profit on lines sold below cost.
+	measure 'Profit Lost on Loss-Making Lines' = CALCULATE ( SUM ( Order_Items[Gross Profit] ), Order_Items[Is Revenue Order] = TRUE (), Order_Items[Gross Profit] < 0 )
+		formatString: ₹#,##0
+		displayFolder: 1 Sales & Profit
+		lineageTag: b3b7100b-8abf-460c-af87-48a5995072bf
+
+	/// Gross Profit for the same period last year.
+	measure 'Gross Profit PY' = CALCULATE ( [Gross Profit], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+		formatString: ₹#,##0
+		displayFolder: 1 Sales & Profit
+		lineageTag: fdc36a66-d7da-4f46-9315-e18938857002
+
+	/// Year-over-year change in Gross Profit.
+	measure 'Gross Profit YoY %' = IF ( HASONEVALUE ( 'Date'[Year] ), DIVIDE ( [Gross Profit] - [Gross Profit PY], [Gross Profit PY] ) )
+		formatString: 0.0%
+		displayFolder: 1 Sales & Profit
+		lineageTag: 71b1b720-0726-4407-896f-ee7d7a1337e0
+
+	/// Share of total Gross Profit for the current selection (category or subcategory).
+	measure 'Category Profit Share %' = DIVIDE ( [Gross Profit], CALCULATE ( [Gross Profit], ALLSELECTED ( Products ) ) )
+		formatString: 0.0%
+		displayFolder: 2 Category
+		lineageTag: ec92cf82-cba8-4a3d-9342-1e2cb207b64b
+
+	/// Rank of the category by Gross Profit.
+	measure 'Category Profit Rank' = IF ( NOT ISBLANK ( [Gross Profit] ), RANKX ( ALLSELECTED ( Products[category] ), [Gross Profit], , DESC, DENSE ) )
+		formatString: 0
+		displayFolder: 2 Category
+		lineageTag: a0428480-181c-45de-9c0f-7b2c3d0477ca
+
+	/// Category margin minus the overall margin, in percentage points.
+	measure 'Margin vs Avg (pp)' =
+			VAR m = [Gross Margin %]
+			VAR avgm = CALCULATE ( [Gross Margin %], ALLSELECTED ( Products[category] ) )
+			RETURN IF ( NOT ISBLANK ( m ), ( m - avgm ) * 100 )
+		formatString: +0.0;-0.0;0.0
+		displayFolder: 2 Category
+		lineageTag: 3ca55a13-5642-4125-a04e-a2a548672ed7
+
+	/// Category with the highest Gross Profit.
+	measure 'Top Profit Category' =
+			VAR t = TOPN ( 1, ALLSELECTED ( Products[category] ), [Gross Profit], DESC )
+			RETURN CONCATENATEX ( t, Products[category], ", " )
+		displayFolder: 2 Category
+		lineageTag: ae240219-97ef-480c-b3d6-3e7daba14937
+
+	/// Category with the lowest Gross Profit.
+	measure 'Lowest Profit Category' =
+			VAR t = TOPN ( 1, FILTER ( ALLSELECTED ( Products[category] ), NOT ISBLANK ( [Gross Profit] ) ), [Gross Profit], ASC )
+			RETURN CONCATENATEX ( t, Products[category], ", " )
+		displayFolder: 2 Category
+		lineageTag: e916aa50-7119-4115-8031-66615d62ee63
+
+	/// All customers in the customer master.
+	measure 'Registered Customers' = COUNTROWS ( Customers )
+		formatString: #,##0
+		displayFolder: 3 Customers
+		lineageTag: dde427ea-7d01-4366-8c19-5795fe9079b4
+
+	/// Registered customers with no order ever.
+	measure 'Never-Purchased Customers' = COALESCE ( CALCULATE ( COUNTROWS ( Customers ), Customers[Lifetime Orders] = 0 ), 0 )
+		formatString: #,##0
+		displayFolder: 3 Customers
+		lineageTag: f436041f-7c8f-4421-b1fc-95f4fd6f93f1
+
+	/// Share of registered customers who have placed at least one order.
+	measure 'Customer Activation Rate %' = DIVIDE ( CALCULATE ( COUNTROWS ( Customers ), Customers[Lifetime Orders] > 0 ), [Registered Customers] )
+		formatString: 0.0%
+		displayFolder: 3 Customers
+		lineageTag: c24d8139-a252-47d2-abdb-d7ab53957e53
+
+	/// Orders placed per purchasing customer.
+	measure 'Avg Orders per Customer' = DIVIDE ( [Total Orders], [Purchasing Customers] )
+		formatString: 0.00
+		displayFolder: 3 Customers
+		lineageTag: 218eedc7-7970-4d10-b485-98c10d69615a
+
+	/// Gross Profit from customers with 2+ lifetime orders.
+	measure 'Recurring Customer Profit' = CALCULATE ( [Gross Profit], Customers[Customer Type] = "Recurring" )
+		formatString: ₹#,##0
+		displayFolder: 3 Customers
+		lineageTag: 9af5098d-cad9-48c9-ae42-a6356135446c
+
+	/// Gross Profit from customers with exactly one lifetime order.
+	measure 'One-Time Customer Profit' = CALCULATE ( [Gross Profit], Customers[Customer Type] = "One-Time" )
+		formatString: ₹#,##0
+		displayFolder: 3 Customers
+		lineageTag: a8572218-6106-4d59-bf41-b4a86f5bf5da
+
+	/// Share of Gross Profit generated by recurring customers.
+	measure 'Recurring Profit Share %' = DIVIDE ( [Recurring Customer Profit], [Gross Profit] )
+		formatString: 0.0%
+		displayFolder: 3 Customers
+		lineageTag: eb9c8a61-2c51-4e89-b91d-94713726f060
+
+	/// Gross Profit per recurring customer.
+	measure 'Profit per Recurring Customer' = DIVIDE ( [Recurring Customer Profit], CALCULATE ( [Active Customers], Customers[Customer Type] = "Recurring" ) )
+		formatString: ₹#,##0
+		displayFolder: 3 Customers
+		lineageTag: 60499147-2cf6-4eb6-bc34-640e6defc467
+
+	/// Gross Profit per one-time customer.
+	measure 'Profit per One-Time Customer' = DIVIDE ( [One-Time Customer Profit], CALCULATE ( [Active Customers], Customers[Customer Type] = "One-Time" ) )
+		formatString: ₹#,##0
+		displayFolder: 3 Customers
+		lineageTag: f159102f-75bb-49da-92f2-0c22de344deb
+
+	/// How many times more profit a recurring customer brings than a one-time customer.
+	measure 'Recurring Value Multiplier' = DIVIDE ( [Profit per Recurring Customer], [Profit per One-Time Customer] )
+		formatString: 0.0"x"
+		displayFolder: 3 Customers
+		lineageTag: 9f72700f-6e96-4dec-87bd-3986c4d83850
+
+	/// Customers with at least one revenue order in the period.
+	measure 'Active Customers' = CALCULATE ( DISTINCTCOUNT ( Order_Items[customer_id] ), Order_Items[Is Revenue Order] = TRUE () )
+		formatString: #,##0
+		displayFolder: 4 KPI
+		lineageTag: 8f18ecd5-e746-4ab0-8ff5-16126cac0ea7
+
+	/// Purchase frequency: revenue orders per active customer.
+	measure 'Orders per Active Customer' = DIVIDE ( [Revenue Orders], [Active Customers] )
+		formatString: 0.00
+		displayFolder: 4 KPI
+		lineageTag: b2c2013d-ff9d-4411-8333-5f4366006168
+
+	/// HEADLINE KPI. Gross Profit per active customer = Orders per Customer x Avg Order Value x Gross Margin %.
+	measure 'Profit per Active Customer' = DIVIDE ( [Gross Profit], [Active Customers] )
+		formatString: ₹#,##0
+		displayFolder: 4 KPI
+		lineageTag: 195d5869-efcb-443f-87a9-dc1c86414d33
+
+	/// Same KPI for the same period last year.
+	measure 'Profit per Active Customer PY' = CALCULATE ( [Profit per Active Customer], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+		formatString: ₹#,##0
+		displayFolder: 4 KPI
+		lineageTag: 1da01aed-96a6-4661-b094-8e31ef921841
+
+	/// Assumed growth target over last year. Edit this value to change the target.
+	measure 'KPI Target Growth %' = 0.05
+		formatString: 0.0%
+		displayFolder: 4 KPI
+		lineageTag: a4fcf7e6-4095-490f-9efe-75519ce01591
+
+	/// Last year's value plus the target growth.
+	measure 'Profit per Active Customer Target' = [Profit per Active Customer PY] * ( 1 + [KPI Target Growth %] )
+		formatString: ₹#,##0
+		displayFolder: 4 KPI
+		lineageTag: e93054ee-a56b-49a7-a3ec-c3f8831b2263
+
+	/// Year-over-year change in the headline KPI.
+	measure 'Profit per Active Customer YoY %' = IF ( HASONEVALUE ( 'Date'[Year] ), DIVIDE ( [Profit per Active Customer] - [Profit per Active Customer PY], [Profit per Active Customer PY] ) )
+		formatString: 0.0%
+		displayFolder: 4 KPI
+		lineageTag: beed52b9-551b-4f0d-a00b-aa97be6f47eb
+
+	/// Headline KPI versus target.
+	measure 'KPI vs Target %' = DIVIDE ( [Profit per Active Customer] - [Profit per Active Customer Target], [Profit per Active Customer Target] )
+		formatString: 0.0%
+		displayFolder: 4 KPI
+		lineageTag: 7e30c240-c955-484b-abff-1365bc287da2
+
+	/// Traffic-light status of the headline KPI.
+	measure 'KPI Status' = VAR v = [Profit per Active Customer] VAR t = [Profit per Active Customer Target] RETURN SWITCH ( TRUE (), NOT HASONEVALUE ( 'Date'[Year] ), "Pick a year", ISBLANK ( t ), "No target", v >= t, "On target", v >= t * 0.95, "Watch", "Below" )
+		displayFolder: 4 KPI
+		lineageTag: ea043d67-9ebc-4089-b0eb-39b569d2f8a1
+
+	/// Colour for the KPI status.
+	measure 'KPI Status Color' =
+			VAR v = [Profit per Active Customer]
+			VAR t = [Profit per Active Customer Target]
+			RETURN SWITCH ( TRUE (), ISBLANK ( t ), "#8A8886", v >= t, "#107C10", v >= t * 0.95, "#C19C00", "#D13438" )
+		displayFolder: 4 KPI
+		lineageTag: 502af394-8a4d-4f32-9bb5-0f8b0334b4ff
+
+	/// Share of active customers with 2+ revenue orders in the period.
+	measure 'Repeat Purchase Rate %' = DIVIDE ( COUNTROWS ( FILTER ( VALUES ( Order_Items[customer_id] ), CALCULATE ( DISTINCTCOUNT ( Order_Items[order_id] ), Order_Items[Is Revenue Order] = TRUE () ) >= 2 ) ), [Active Customers] )
+		formatString: 0.0%
+		displayFolder: 4 KPI
+		lineageTag: b5da8441-9750-43f2-ab26-c26fcd119553
+
+	measure 'Orders per Active Customer PY' = CALCULATE ( [Orders per Active Customer], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+		formatString: 0.00
+		displayFolder: 4 KPI
+		lineageTag: 3c7809ee-933e-4497-a5e2-a3e2f2ade85b
+
+	measure 'Avg Order Value PY' = CALCULATE ( [Avg Order Value], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+		formatString: ₹#,##0
+		displayFolder: 4 KPI
+		lineageTag: 16a605ee-28f6-4ef5-a304-3b89c4f37ec8
+
+	measure 'Gross Margin % PY' = CALCULATE ( [Gross Margin %], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+		formatString: 0.0%
+		displayFolder: 4 KPI
+		lineageTag: 218cdd62-c6b7-4ca4-a5ac-187219a0b9ae
+
+	measure 'Active Customers PY' = CALCULATE ( [Active Customers], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+		formatString: #,##0
+		displayFolder: 4 KPI
+		lineageTag: 84e2780a-adc8-4292-a4b8-d71c4ef999e3
+
+	/// Actual value (history rows of the Forecast table)
+	measure 'Fcst Actual' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) VAR mt = SELECTEDVALUE ( Forecast[metric], "Gross profit" ) RETURN CALCULATE ( SUM ( Forecast[actual] ), TREATAS ( { sc }, Scenario[Scenario] ), TREATAS ( { mt }, Forecast[metric] ) )
+		formatString: #,##0
+		displayFolder: 5 Forecast
+		lineageTag: 13e4394a-2b9e-4ee0-958d-4a0610e344bc
+
+	/// Forecast median
+	measure 'Fcst P50' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) VAR mt = SELECTEDVALUE ( Forecast[metric], "Gross profit" ) RETURN CALCULATE ( SUM ( Forecast[p50] ), TREATAS ( { sc }, Scenario[Scenario] ), TREATAS ( { mt }, Forecast[metric] ) )
+		formatString: #,##0
+		displayFolder: 5 Forecast
+		lineageTag: e1171f90-753d-4b92-a03a-21b5b2a9b928
+
+	/// Forecast 10th percentile (low case)
+	measure 'Fcst P10' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) VAR mt = SELECTEDVALUE ( Forecast[metric], "Gross profit" ) RETURN CALCULATE ( SUM ( Forecast[p10] ), TREATAS ( { sc }, Scenario[Scenario] ), TREATAS ( { mt }, Forecast[metric] ) )
+		formatString: #,##0
+		displayFolder: 5 Forecast
+		lineageTag: 56e548fa-a1be-445a-8d08-f09f0db3df78
+
+	/// Forecast 90th percentile (high case)
+	measure 'Fcst P90' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) VAR mt = SELECTEDVALUE ( Forecast[metric], "Gross profit" ) RETURN CALCULATE ( SUM ( Forecast[p90] ), TREATAS ( { sc }, Scenario[Scenario] ), TREATAS ( { mt }, Forecast[metric] ) )
+		formatString: #,##0
+		displayFolder: 5 Forecast
+		lineageTag: 77ac35e6-3d91-4592-9b67-31f8c0ba7aee
+
+	/// 2026 gross profit, median, selected scenario
+	measure 'F26 Gross Profit' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) RETURN CALCULATE ( SUM ( 'Forecast 2026'[p50] ), 'Forecast 2026'[metric] = "Gross profit", TREATAS ( { sc }, Scenario[Scenario] ) )
+		formatString: ₹#,##0
+		displayFolder: 5 Forecast
+		lineageTag: 619a999e-788c-432a-b030-e44d81dddfed
+
+	/// 2026 gross profit 80% range (P10 to P90)
+	measure 'F26 Gross Profit Range' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) VAR lo = CALCULATE ( SUM ( 'Forecast 2026'[p10] ), 'Forecast 2026'[metric] = "Gross profit", TREATAS ( { sc }, Scenario[Scenario] ) ) VAR hi = CALCULATE ( SUM ( 'Forecast 2026'[p90] ), 'Forecast 2026'[metric] = "Gross profit", TREATAS ( { sc }, Scenario[Scenario] ) ) RETURN "₹" & FORMAT ( lo / 100000, "0" ) & "–" & FORMAT ( hi / 100000, "0" ) & " L"
+		displayFolder: 5 Forecast
+		lineageTag: 844416b8-0169-4df4-a270-cc4ed4fd1b78
+
+	/// 2026 revenue orders, median
+	measure 'F26 Revenue Orders' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) RETURN CALCULATE ( SUM ( 'Forecast 2026'[p50] ), 'Forecast 2026'[metric] = "Revenue orders", TREATAS ( { sc }, Scenario[Scenario] ) )
+		formatString: #,##0
+		displayFolder: 5 Forecast
+		lineageTag: a414e41e-d12c-4403-a217-262510a87475
+
+	/// 2026 new buyers, median
+	measure 'F26 New Buyers' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) RETURN CALCULATE ( SUM ( 'Forecast 2026'[p50] ), 'Forecast 2026'[metric] = "New buyers", TREATAS ( { sc }, Scenario[Scenario] ) )
+		formatString: #,##0
+		displayFolder: 5 Forecast
+		lineageTag: c537846e-f107-4b13-b5a8-c40776e1b0b2
+
+	/// 2026 profit per active customer, median
+	measure 'F26 PPAC' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) RETURN CALCULATE ( SUM ( 'Forecast 2026'[p50] ), 'Forecast 2026'[metric] = "PPAC", TREATAS ( { sc }, Scenario[Scenario] ) )
+		formatString: ₹#,##0
+		displayFolder: 5 Forecast
+		lineageTag: a485334b-1592-4596-b1e0-92c4bb6cecc3
+
+	/// 2026 PPAC target: expected 2025 full-year PPAC + 5%
+	measure 'F26 PPAC Target' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) RETURN CALCULATE ( SUM ( 'Forecast 2026'[p50] ), 'Forecast 2026'[metric] = "PPAC target", TREATAS ( { sc }, Scenario[Scenario] ) )
+		formatString: ₹#,##0
+		displayFolder: 5 Forecast
+		lineageTag: e7afc7d2-37cf-45df-9d7b-e10fd0802c1b
+
+	/// Share of simulations where 2026 PPAC reaches the target
+	measure 'F26 P(PPAC hits target)' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) RETURN CALCULATE ( SUM ( 'Forecast 2026'[p50] ), 'Forecast 2026'[metric] = "P(PPAC hits target)", TREATAS ( { sc }, Scenario[Scenario] ) )
+		formatString: 0%
+		displayFolder: 5 Forecast
+		lineageTag: 640a5749-16db-4bf2-ade7-01e49e729740
+
+	/// Mid estimate of 2026 gross-profit uplift
+	measure 'Lever Uplift' = SUM ( Levers[uplift_mid] )
+		formatString: ₹#,##0
+		displayFolder: 5 Forecast
+		lineageTag: 09c5edfa-595b-4cd5-a529-d0cbfded0c94
+
+	measure 'Lever Uplift Low' = SUM ( Levers[uplift_low] )
+		formatString: ₹#,##0
+		displayFolder: 5 Forecast
+		lineageTag: c6e9db65-b70d-4ba5-bdbc-9630eee9f733
+
+	measure 'Lever Uplift High' = SUM ( Levers[uplift_high] )
+		formatString: ₹#,##0
+		displayFolder: 5 Forecast
+		lineageTag: 9aeb0583-df53-423e-833c-1e694a5a6b09
+
+	/// 2026 gross profit median, in lakh, selected scenario
+	measure 'F26 Gross Profit (L)' = "₹" & FORMAT ( [F26 Gross Profit] / 100000, "0.0" ) & " L"
+		displayFolder: 5 Forecast
+		lineageTag: e2ebe4c2-98b4-4e9c-aed5-5540d2a5ab9c
+
+	column Hidden
+		isHidden
+		lineageTag: 9f674c7d-0931-4ef7-923f-f97cf7a15890
+		isNameInferred
+		sourceColumn: [Hidden]
+
+	partition _Measures = calculated
+		mode: import
+		source = ROW("Hidden", BLANK())
+

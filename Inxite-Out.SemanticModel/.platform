@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Inxite-Out"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "16b02c99-3bc3-4e67-8e08-dcd84f907172"
+  }
+}

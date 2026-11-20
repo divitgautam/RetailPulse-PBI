@@ -1,0 +1,217 @@
+table Order_Items
+	lineageTag: 74b08876-8bcd-48c1-b4a3-1e67f74f4ba0
+
+	measure 'Total Orders' =
+			
+			DISTINCTCOUNTNOBLANK ( 'Order_Items'[order_id] )
+		formatString: #,##0
+		displayFolder: 1 Sales & Profit
+		lineageTag: d895c98c-5e1b-4cf7-8ac4-42d06f734f82
+
+	column order_item_id
+		dataType: string
+		lineageTag: 7d56eb44-27b4-46cb-8378-b427322bb44b
+		summarizeBy: none
+		sourceColumn: order_item_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: string
+		lineageTag: afedfc97-08fe-4314-9321-4c507b89f8c6
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: be2baf30-920c-4190-be0c-eb2e01b23d90
+		summarizeBy: none
+		sourceColumn: order_date
+
+		variation Variation
+			isDefault
+			relationship: ee8531ef-d424-4a00-bb71-96183d414ea4
+			defaultHierarchy: LocalDateTable_71b26abe-9af3-4f73-ba29-1e974f4bcec3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column customer_id
+		dataType: string
+		lineageTag: ad8e1d98-3afa-40a6-9992-db14dd2afdaf
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_status
+		dataType: string
+		lineageTag: ea1f1240-2cc5-435e-b4d0-b02c2ed0c450
+		summarizeBy: none
+		sourceColumn: order_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_method
+		dataType: string
+		lineageTag: e485af5c-6cac-4dac-aaa4-172d23efcd30
+		summarizeBy: none
+		sourceColumn: payment_method
+
+		annotation SummarizationSetBy = Automatic
+
+	column discount_percent
+		dataType: int64
+		formatString: 0
+		lineageTag: b733c258-c1d3-4173-a175-e086efe08ddf
+		summarizeBy: sum
+		sourceColumn: discount_percent
+
+		annotation SummarizationSetBy = Automatic
+
+	column items_total
+		dataType: double
+		isHidden
+		lineageTag: 997097f5-0d99-4565-892c-23d3f83870e5
+		summarizeBy: sum
+		sourceColumn: items_total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_amount
+		dataType: double
+		isHidden
+		lineageTag: f7a4e530-dc66-4ae4-9604-f3705084cec1
+		summarizeBy: sum
+		sourceColumn: total_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column product_id
+		dataType: string
+		lineageTag: 24de6072-daca-4e16-b495-5b9a5e9b7865
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 4c55e5f4-f5a6-48c5-9407-e795611e9996
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_price
+		dataType: double
+		lineageTag: 0aa54bca-c888-4eb6-98b0-8636facfc830
+		summarizeBy: sum
+		sourceColumn: unit_price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column item_discount_percent
+		dataType: int64
+		formatString: 0
+		lineageTag: ff2ba4d5-ab07-43d3-b873-c43939e5a309
+		summarizeBy: sum
+		sourceColumn: item_discount_percent
+
+		annotation SummarizationSetBy = Automatic
+
+	column tax_percent
+		dataType: int64
+		formatString: 0
+		lineageTag: a365481f-876c-4184-aa6c-97e656ba73a6
+		summarizeBy: sum
+		sourceColumn: tax_percent
+
+		annotation SummarizationSetBy = Automatic
+
+	column line_total
+		dataType: double
+		lineageTag: 370ea382-cd0d-4a89-a1f5-8637a28ab6d7
+		summarizeBy: sum
+		sourceColumn: line_total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Gross Amount' = Order_Items[unit_price] * Order_Items[quantity]
+		dataType: double
+		formatString: #,##0.00
+		displayFolder: Calculated
+		lineageTag: 2a61376b-c2a6-45bb-a606-694661cea238
+
+	column 'Net Sales' = Order_Items[unit_price] * Order_Items[quantity] * ( 1 - Order_Items[item_discount_percent] / 100 ) * ( 1 - Order_Items[discount_percent] / 100 )
+		dataType: double
+		formatString: #,##0.00
+		displayFolder: Calculated
+		lineageTag: 17408f37-40fb-4474-8ac1-b2a69c627123
+
+	column COGS = RELATED ( Products[cost_price] ) * Order_Items[quantity]
+		dataType: double
+		formatString: #,##0.00
+		displayFolder: Calculated
+		lineageTag: b760a82e-1044-464f-a651-b96d52b1ae9d
+
+	column 'Gross Profit' = Order_Items[Net Sales] - Order_Items[COGS]
+		dataType: double
+		formatString: #,##0.00
+		displayFolder: Calculated
+		lineageTag: 8c64f8a4-38fe-4318-abcc-f95df1d62491
+
+	column 'Is Revenue Order' = NOT ( Order_Items[order_status] IN { "Cancelled", "Returned" } )
+		dataType: boolean
+		displayFolder: Calculated
+		lineageTag: bc16877e-9a4b-4874-9daf-c841d1553539
+
+	column 'Order Status Group' = IF ( Order_Items[Is Revenue Order], "Fulfilled / In Progress", "Cancelled / Returned" )
+		dataType: string
+		displayFolder: Calculated
+		lineageTag: 3acc7381-eb30-4d9c-89b4-69a5c78d088d
+
+	column 'Item Discount Band' = FORMAT ( Order_Items[item_discount_percent], "0" ) & "% item disc."
+		dataType: string
+		displayFolder: Calculated
+		lineageTag: 884987b1-fb8f-4454-99b1-8d3f067e9824
+		sortByColumn: item_discount_percent
+
+	column 'Order Discount Band' = FORMAT ( Order_Items[discount_percent], "0" ) & "% order disc."
+		dataType: string
+		displayFolder: Calculated
+		lineageTag: 920bae71-df31-4aea-b4b2-e3dd36e5474d
+		sortByColumn: discount_percent
+
+	partition Order_Items = m
+		mode: import
+		source =
+				let
+				  Source = Excel.Workbook(File.Contents("C:\Users\hp\Downloads\Online Sales Data.xlsx"), null, true),
+				  #"Navigation 1" = Source{[Item = "Order_Items", Kind = "Sheet"]}[Data],
+				  #"Promoted headers" = Table.PromoteHeaders(#"Navigation 1", [PromoteAllScalars = true]),
+				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"order_item_id", type text}, {"order_id", type text}, {"order_date", type date}, {"customer_id", type text}, {"order_status", type text}, {"payment_method", type text}, {"discount_percent", Int64.Type}, {"items_total", type number}, {"total_amount", type number}, {"product_id", type text}, {"quantity", Int64.Type}, {"unit_price", type number}, {"item_discount_percent", Int64.Type}, {"tax_percent", Int64.Type}, {"line_total", type number}}, "en-US"),
+				  #"Order dates" = Table.Buffer(Table.Group(#"Changed column type", {"order_id"}, {{"__order_date", each List.Max([order_date]), type nullable date}})),
+				  #"Merged order dates" = Table.NestedJoin(#"Changed column type", {"order_id"}, #"Order dates", {"order_id"}, "__od", JoinKind.LeftOuter),
+				  #"Expanded order dates" = Table.ExpandTableColumn(#"Merged order dates", "__od", {"__order_date"}),
+				  #"Filled missing order_date" = Table.ReplaceValue(#"Expanded order dates", each [order_date], each if [order_date] = null then [__order_date] else [order_date], Replacer.ReplaceValue, {"order_date"}),
+				  #"Restored type" = Table.TransformColumnTypes(#"Filled missing order_date", {{"order_date", type date}}),
+				  #"Removed helper" = Table.RemoveColumns(#"Restored type", {"__order_date"})
+				in
+				  #"Removed helper"
+
+	annotation PBI_ResultType = Table
+

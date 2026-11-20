@@ -1,0 +1,21 @@
+q,area,check,status,count,detail
+1,Completeness,Duplicate customer IDs,FAIL,2,"307 rows, 301 IDs; 2 IDs duplicated (7 rows); 1 blank ID row(s). Copies are subsets of the full row: {'CUST0001': np.True_, 'CUST0300': np.False_}. Keep-most-complete loses nothing only where True."
+10,Validity,SKU prefix vs category,FAIL,165,165 of 200 SKUs have a prefix that does not match their category (looks randomly assigned); SKU number matches product_id for 100% of products
+11,Validity,Tax follows product (GST),FAIL,25,"Discounts only 0/5/10/15 and tax only 0/5/12/18 (valid sets), but 25 of 25 subcategories carry more than one tax rate; the same product type is taxed at 0% and 18% in different orders"
+12,Validity,Dates plausible,FAIL,73,73 orders placed before the customer's join_date; 0 customers aged <18 or >100; 0 future-dated orders
+2,Completeness,Missing values,WARN,23,Nulls after dedupe: Order_Items.order_date=23
+2,Completeness,Missing order dates,WARN,23,"23 lines in 13 orders have no order_date (statuses: {'Cancelled': 23}). 13 of 13 orders have the date on another line with one distinct value, so it is filled from the order (flag: lines.order_date_imputed). Power BI's Order_Items query applies the same fill."
+2,Completeness,Stub customer rows,WARN,1,"1 customer(s) with only an ID and first name and no orders: ['CUST0301'] (now dropped in Power BI and Python). Raw CUST0300 copies carry different first names (Roni, Ritesh vs Rhea): possibly different people sharing an ID."
+15,Validity,Stock vs sales,WARN,163,Stock 0-997 units/product vs avg 9.7 units sold in 34 months; median cover 158 years. stock_quantity is a static snapshot unrelated to sales; not usable for inventory analysis
+16,Business rule,Sold below cost,WARN,29,"29 revenue lines below cost, total -107,236; 29 of them stack an item and an order discount; 17 carry the 15% item discount"
+17,Business rule,Cancel/return clustering,WARN,19,19 of 405 orders cancelled/returned (4.7%). Highest by payment: Credit Card (6.4%). Small counts; differences are not statistically strong.
+18,Business rule,Segment matches behaviour,WARN,0,Wholesale orders average 4.8 units vs Retail 5.1 (0.96x). Wholesale buyers do not buy in bulk; segment label is not reflected in behaviour
+3,Uniqueness,Keys and SKUs unique,PASS,0,Duplicates: none
+4,Integrity,Orphan keys,PASS,0,"0 lines with unknown customer, 0 with unknown product. (Info: 0 products never sold, 80 customers never ordered.)"
+5,Integrity,Order header consistent,PASS,0,0 of 405 orders have conflicting header fields across lines
+6,Consistency,Order totals reconcile,PASS,0,0 orders where items_total != sum(line_total); 0 lines where line_total != formula. Summing items_total across lines would overstate by 4.64x.
+7,Consistency,Implied shipping tiers,PASS,0,"10 distinct shipping values, 0 outside known tiers; correlation with order value 0.07 (no clear rule; shipping is not a column, so it cannot be audited against a rate card)"
+8,Consistency,Order price = list price,PASS,0,0 lines priced differently from Products.unit_price (prices appear static over 2023-2025: no price history to audit)
+9,Validity,Cost below price,PASS,0,0 products with cost >= price; list margin ranges 15%-54%
+13,Validity,Phone and email,PASS,0,"0 invalid phones, 0 invalid emails, 0 duplicate emails; emails match the customer name for 100%. All domains are example.com (synthetic/test data)."
+14,Validity,City-state consistency,PASS,0,0 cities mapped to more than one state; countries: ['India']

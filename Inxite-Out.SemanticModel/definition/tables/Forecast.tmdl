@@ -1,0 +1,93 @@
+/// Exported from analysis notebooks (03_forecast / 04_customer_models). Refresh after re-running them.
+table Forecast
+	lineageTag: f8fa2211-2907-4c36-92d8-d6defc514dae
+
+	column scenario
+		dataType: string
+		lineageTag: 5f1887e2-e744-4dbc-ba81-02ee19a999ce
+		summarizeBy: none
+		sourceColumn: scenario
+
+		annotation SummarizationSetBy = User
+
+	column month
+		dataType: dateTime
+		formatString: mmm yyyy
+		lineageTag: c26af1dd-084f-4e25-9044-0a28a56d6e01
+		summarizeBy: none
+		sourceColumn: month
+
+		variation Variation
+			isDefault
+			relationship: 1dbcac52-a802-44e6-92bb-81f41d16227b
+			defaultHierarchy: LocalDateTable_704f3c3f-32d3-4a85-8be5-a39d541faf89.'Date Hierarchy'
+
+		annotation SummarizationSetBy = User
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column metric
+		dataType: string
+		lineageTag: 64549ff3-0b0f-4671-a949-2e4d64b5a7b8
+		summarizeBy: none
+		sourceColumn: metric
+
+		annotation SummarizationSetBy = User
+
+	column kind
+		dataType: string
+		lineageTag: 404bbbb5-f376-4603-88b2-ee47cc61d2ef
+		summarizeBy: none
+		sourceColumn: kind
+
+		annotation SummarizationSetBy = User
+
+	column actual
+		dataType: double
+		formatString: #,##0
+		lineageTag: 881e6b16-2ac1-49ad-96ea-80527313204e
+		summarizeBy: none
+		sourceColumn: actual
+
+		annotation SummarizationSetBy = User
+
+	column p10
+		dataType: double
+		formatString: #,##0
+		lineageTag: 4ce9ef13-749d-491f-abb6-b650d1732798
+		summarizeBy: none
+		sourceColumn: p10
+
+		annotation SummarizationSetBy = User
+
+	column p50
+		dataType: double
+		formatString: #,##0
+		lineageTag: 9e2b1792-8078-4212-b27a-b4c208e8fe3f
+		summarizeBy: none
+		sourceColumn: p50
+
+		annotation SummarizationSetBy = User
+
+	column p90
+		dataType: double
+		formatString: #,##0
+		lineageTag: 9e0a0f41-2639-4366-a872-a4de1f2fe903
+		summarizeBy: none
+		sourceColumn: p90
+
+		annotation SummarizationSetBy = User
+
+	partition Forecast = m
+		mode: import
+		source =
+				let
+				  Source = Csv.Document(File.Contents("D:\Wolf\PBI\analysis\output\pbi_forecast.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				  #"Promoted headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				  #"Blanks to null" = Table.ReplaceValue(#"Promoted headers", "", null, Replacer.ReplaceValue, {"actual", "p10", "p50", "p90"}),
+				  #"Changed column type" = Table.TransformColumnTypes(#"Blanks to null", {{"scenario", type text}, {"month", type date}, {"metric", type text}, {"kind", type text}, {"actual", type number}, {"p10", type number}, {"p50", type number}, {"p90", type number}}, "en-US")
+				in
+				  #"Changed column type"
+
+	annotation PBI_ResultType = Table
+

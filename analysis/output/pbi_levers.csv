@@ -1,0 +1,5 @@
+lever,uplift_low,uplift_high,confidence,cost,basis,uplift_mid
+"Discount cap (10%, no stacking)",875110.9493000014,1215946.8511000015,High,None,Last 12 months re-priced; low = affected orders fall 10%,1045528.9002000014
+Activate 20% of never-ordered,1084346.2620629629,1600346.8296724819,Medium,Low,"16 first orders, plus their repeat orders within 12 months",1342346.5458677225
+Repeat rate 53% to 60%,1166780.5790646153,1166780.5790646153,Medium,Low to medium,16 one-time buyers order once more; note PPAC falls,1166780.5790646153
+Restart sign-ups (2024 pace),1091764.961137496,1091764.961137496,Unknown cause,Marketing spend,"Forecast scenario B minus A, 2026",1091764.961137496

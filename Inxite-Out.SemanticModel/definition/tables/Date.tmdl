@@ -1,0 +1,53 @@
+table Date
+	lineageTag: 18fc42b7-5f97-4a80-a88a-e0166b321e27
+	dataCategory: Time
+
+	column Date
+		isKey
+		lineageTag: a18c0929-616e-4764-9f60-9f9141faa778
+		isNameInferred
+		sourceColumn: [Date]
+
+	column Year
+		lineageTag: 275ba5e8-fa7a-4399-b648-5e4fde5d9414
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Year]
+
+	column Quarter
+		lineageTag: af3969f0-23e6-499b-a88c-6e5e6fcc2da4
+		isNameInferred
+		sourceColumn: [Quarter]
+
+	column 'Year Quarter'
+		lineageTag: 84e74965-11b1-4eba-85e9-6577806db5d9
+		isNameInferred
+		sourceColumn: [Year Quarter]
+
+	column 'Month No'
+		lineageTag: db00a0b6-3826-4f42-8c57-060e7e3616a8
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month No]
+
+	column Month
+		lineageTag: 35e8ca35-026c-4895-81f6-1ca91cd18dd2
+		isNameInferred
+		sourceColumn: [Month]
+		sortByColumn: 'Month No'
+
+	column 'Month Start'
+		lineageTag: 9cc9004e-12ac-44dc-b24b-4adaeb7cd619
+		isNameInferred
+		sourceColumn: [Month Start]
+
+	column 'Year Month Key'
+		lineageTag: 60c29909-607c-447b-97ee-f751863b5ff5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Year Month Key]
+
+	partition Date = calculated
+		mode: import
+		source = ADDCOLUMNS(CALENDAR(DATE(YEAR(MIN(Order_Items[order_date])),1,1), MAX(Order_Items[order_date])), "Year", YEAR([Date]), "Quarter", "Q" & QUARTER([Date]), "Year Quarter", YEAR([Date]) & " Q" & QUARTER([Date]), "Month No", MONTH([Date]), "Month", FORMAT([Date], "MMM"), "Month Start", DATE(YEAR([Date]), MONTH([Date]), 1), "Year Month Key", YEAR([Date]) * 100 + MONTH([Date]))
+

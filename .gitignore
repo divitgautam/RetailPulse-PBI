@@ -1,0 +1,21 @@
+# Power BI Desktop local state
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+
+# Binary report copies and unrelated samples (the .pbip project is the source of truth)
+*.pbix
+
+# Local backups
+_backup_*/
+
+# Source data and customer-level files with personal details (kept local only)
+*.xlsx
+analysis/data/
+analysis/output/customer_scores.csv
+analysis/output/churn_risk_customers.csv
+
+# Python
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+.venv/

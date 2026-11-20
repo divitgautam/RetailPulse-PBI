@@ -1,0 +1,32 @@
+model Model
+	culture: en-IN
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-IN
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Customers","Products","Order_Items","Forecast","Forecast 2026","Levers"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Customers
+ref table DateTableTemplate_a28af21b-f537-4a64-97db-fa0ad9613391
+ref table LocalDateTable_2d8e2f19-8b65-481a-a868-aba2d4b5981c
+ref table LocalDateTable_954601de-fa31-464c-9a36-32d2e869b837
+ref table Products
+ref table Order_Items
+ref table LocalDateTable_71b26abe-9af3-4f73-ba29-1e974f4bcec3
+ref table Date
+ref table _Measures
+ref table Forecast
+ref table 'Forecast 2026'
+ref table Levers
+ref table Scenario
+ref table LocalDateTable_704f3c3f-32d3-4a85-8be5-a39d541faf89
+
+ref cultureInfo en-IN
+
