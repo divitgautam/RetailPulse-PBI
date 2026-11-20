@@ -9,7 +9,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["Customers","Products","Order_Items","Forecast","Forecast 2026","Levers"]
+annotation PBI_QueryOrder = ["ProjectFolder","SourceWorkbook","Customers","Products","Order_Items","Forecast","Forecast 2026","Levers"]
 
 annotation PBI_ProTooling = ["DevMode"]
 

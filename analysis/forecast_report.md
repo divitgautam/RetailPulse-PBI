@@ -101,7 +101,7 @@ Quarterly splits are in the notebook. Checking these against stock is **not poss
 ## Re-run
 
 ```powershell
-cd D:\Wolf\PBI\analysis
+cd D:\Wolf\PBI\RetailPulse-PBI\analysis
 python _make_forecast_notebook.py
 jupyter nbconvert --to notebook --execute --inplace 03_forecast.ipynb
 ```

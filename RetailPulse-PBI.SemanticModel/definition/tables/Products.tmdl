@@ -82,7 +82,7 @@ table Products
 		mode: import
 		source =
 				let
-				  Source = Excel.Workbook(File.Contents("C:\Users\hp\Downloads\Online Sales Data.xlsx"), null, true),
+				  Source = Excel.Workbook(File.Contents(SourceWorkbook), null, true),
 				  #"Navigation 1" = Source{[Item = "Products", Kind = "Sheet"]}[Data],
 				  #"Promoted headers" = Table.PromoteHeaders(#"Navigation 1", [PromoteAllScalars = true]),
 				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"product_id", type text}, {"sku", type text}, {"product_name", type text}, {"category", type text}, {"subcategory", type text}, {"unit_price", type number}, {"cost_price", type number}, {"supplier", type text}, {"stock_quantity", Int64.Type}}, "en-US")

@@ -93,9 +93,8 @@ docs/                           Approach diagram, insights card, dashboard image
 
 **Power BI.**
 1. Open `RetailPulse-PBI.pbip` in Power BI Desktop (Developer Mode / PBIP support).
-2. In Power Query, point the `Customers`, `Products` and `Order_Items` sources at your copy of the workbook.
-3. Point `Forecast`, `Forecast 2026` and `Levers` at `analysis/output/`.
-4. Refresh.
+2. In **Transform data → Manage Parameters**, set `ProjectFolder` to the folder you cloned this repo into, and `SourceWorkbook` to the full path of your copy of the workbook. Every query reads its path from these two parameters.
+3. Refresh.
 
 **Python.**
 

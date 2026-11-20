@@ -57,7 +57,7 @@ Unique keys (order items, products, SKUs, emails) · no orphan customers or prod
 ## Reproduce
 
 ```powershell
-cd D:\Wolf\PBI\analysis
+cd D:\Wolf\PBI\RetailPulse-PBI\analysis
 python _make_notebooks.py
 jupyter nbconvert --to notebook --execute --inplace 00_load_clean.ipynb 01_audit.ipynb
 ```

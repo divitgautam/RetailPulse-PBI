@@ -1,0 +1,14 @@
+expression ProjectFolder = "D:\Wolf\PBI\RetailPulse-PBI" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]
+	lineageTag: c8ba971a-c4e6-43c0-b373-5af3fe912ee2
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression SourceWorkbook = "C:\Users\hp\Downloads\Online Sales Data.xlsx" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]
+	lineageTag: ed86456f-7b53-4635-9cd0-4885b63c96b6
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+

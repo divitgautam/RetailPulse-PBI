@@ -73,7 +73,7 @@ These levers stack, and most of their effect is additive.
 ## Re-run
 
 ```powershell
-cd D:\Wolf\PBI\analysis
+cd D:\Wolf\PBI\RetailPulse-PBI\analysis
 python _make_customer_notebook.py
 jupyter nbconvert --to notebook --execute --inplace 04_customer_models.ipynb
 ```
