@@ -11,7 +11,6 @@
   },
   "visual": {
     "visualType": "columnChart",
-    "drillFilterOtherVisuals": true,
     "query": {
       "queryState": {
         "Category": {
@@ -29,6 +28,25 @@
               },
               "queryRef": "Date.Year",
               "nativeQueryRef": "Year",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Customers"
+                    }
+                  },
+                  "Property": "Customer Type"
+                }
+              },
+              "queryRef": "Customers.Customer Type",
+              "nativeQueryRef": "Customer Type",
               "active": true
             }
           ]
@@ -51,25 +69,6 @@
               "displayName": "Gross Profit"
             }
           ]
-        },
-        "Series": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Customers"
-                    }
-                  },
-                  "Property": "Customer Type"
-                }
-              },
-              "queryRef": "Customers.Customer Type",
-              "nativeQueryRef": "Customer Type",
-              "active": true
-            }
-          ]
         }
       },
       "sortDefinition": {
@@ -87,8 +86,7 @@
             },
             "direction": "Ascending"
           }
-        ],
-        "isDefaultSort": false
+        ]
       }
     },
     "objects": {
@@ -321,7 +319,8 @@
           }
         }
       ]
-    }
+    },
+    "drillFilterOtherVisuals": true
   },
   "filterConfig": {
     "filters": [
@@ -338,7 +337,6 @@
           }
         },
         "type": "Categorical",
-        "howCreated": "User",
         "filter": {
           "Version": 2,
           "From": [
@@ -381,7 +379,8 @@
               }
             }
           ]
-        }
+        },
+        "howCreated": "User"
       }
     ]
   }

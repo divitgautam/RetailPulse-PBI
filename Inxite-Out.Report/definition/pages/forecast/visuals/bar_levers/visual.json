@@ -11,7 +11,6 @@
   },
   "visual": {
     "visualType": "clusteredBarChart",
-    "drillFilterOtherVisuals": true,
     "query": {
       "queryState": {
         "Category": {
@@ -30,25 +29,6 @@
               "queryRef": "Levers.lever",
               "nativeQueryRef": "lever",
               "active": true
-            }
-          ]
-        },
-        "Y": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Measures"
-                    }
-                  },
-                  "Property": "Lever Uplift"
-                }
-              },
-              "queryRef": "_Measures.Lever Uplift",
-              "nativeQueryRef": "Lever Uplift",
-              "displayName": "2026 profit uplift (mid)"
             }
           ]
         },
@@ -85,6 +65,25 @@
               "displayName": "High"
             }
           ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Lever Uplift"
+                }
+              },
+              "queryRef": "_Measures.Lever Uplift",
+              "nativeQueryRef": "Lever Uplift",
+              "displayName": "2026 profit uplift (mid)"
+            }
+          ]
         }
       },
       "sortDefinition": {
@@ -102,8 +101,7 @@
             },
             "direction": "Descending"
           }
-        ],
-        "isDefaultSort": false
+        ]
       }
     },
     "objects": {
@@ -255,6 +253,7 @@
           }
         }
       ]
-    }
+    },
+    "drillFilterOtherVisuals": true
   }
 }

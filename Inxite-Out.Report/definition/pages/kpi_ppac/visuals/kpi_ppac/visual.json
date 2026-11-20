@@ -11,28 +11,8 @@
   },
   "visual": {
     "visualType": "kpi",
-    "drillFilterOtherVisuals": true,
     "query": {
       "queryState": {
-        "Indicator": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Measures"
-                    }
-                  },
-                  "Property": "Profit per Active Customer"
-                }
-              },
-              "queryRef": "_Measures.Profit per Active Customer",
-              "nativeQueryRef": "Profit per Active Customer",
-              "displayName": "PPAC"
-            }
-          ]
-        },
         "Goal": {
           "projections": [
             {
@@ -49,6 +29,25 @@
               "queryRef": "_Measures.Profit per Active Customer Target",
               "nativeQueryRef": "Profit per Active Customer Target",
               "displayName": "Target"
+            }
+          ]
+        },
+        "Indicator": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Profit per Active Customer"
+                }
+              },
+              "queryRef": "_Measures.Profit per Active Customer",
+              "nativeQueryRef": "Profit per Active Customer",
+              "displayName": "PPAC"
             }
           ]
         },
@@ -87,8 +86,7 @@
             },
             "direction": "Ascending"
           }
-        ],
-        "isDefaultSort": false
+        ]
       }
     },
     "objects": {
@@ -210,6 +208,7 @@
           }
         }
       ]
-    }
+    },
+    "drillFilterOtherVisuals": true
   }
 }
