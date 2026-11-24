@@ -3,11 +3,11 @@
   "name": "col_frequency",
   "position": {
     "x": 436,
-    "y": 184,
-    "z": 10000,
-    "height": 262,
+    "y": 178,
+    "z": 17000,
+    "height": 240,
     "width": 408,
-    "tabOrder": 10000
+    "tabOrder": 17000
   },
   "visual": {
     "visualType": "clusteredColumnChart",
@@ -87,17 +87,10 @@
       "valueAxis": [
         {
           "properties": {
-            "showAxisTitle": {
+            "show": {
               "expr": {
                 "Literal": {
                   "Value": "false"
-                }
-              }
-            },
-            "gridlineShow": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
                 }
               }
             }
@@ -155,8 +148,13 @@
             },
             "text": {
               "expr": {
-                "Literal": {
-                  "Value": "'How many orders do customers place?'"
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Title Order Frequency"
                 }
               }
             },
@@ -201,7 +199,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Customers by lifetime order count'"
+                  "Value": "'Buying customers by lifetime order count'"
                 }
               }
             },
@@ -220,6 +218,19 @@
                       "Value": "'#62748E'"
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Column chart of buying customers by lifetime order count, from 1 to 4+ orders.'"
                 }
               }
             }

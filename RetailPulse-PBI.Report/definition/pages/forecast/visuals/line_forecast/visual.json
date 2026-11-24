@@ -3,11 +3,11 @@
   "name": "line_forecast",
   "position": {
     "x": 16,
-    "y": 184,
-    "z": 9000,
-    "height": 262,
+    "y": 178,
+    "z": 16000,
+    "height": 240,
     "width": 1248,
-    "tabOrder": 9000
+    "tabOrder": 16000
   },
   "visual": {
     "visualType": "lineChart",
@@ -23,11 +23,11 @@
                       "Entity": "Forecast"
                     }
                   },
-                  "Property": "month"
+                  "Property": "Month"
                 }
               },
-              "queryRef": "Forecast.month",
-              "nativeQueryRef": "month",
+              "queryRef": "Forecast.Month",
+              "nativeQueryRef": "Month",
               "active": true
             }
           ]
@@ -107,7 +107,7 @@
                     "Entity": "Forecast"
                   }
                 },
-                "Property": "month"
+                "Property": "Month"
               }
             },
             "direction": "Ascending"
@@ -129,7 +129,7 @@
             "axisType": {
               "expr": {
                 "Literal": {
-                  "Value": "'Continuous'"
+                  "Value": "'Scalar'"
                 }
               }
             }
@@ -220,7 +220,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#D9CCFF'"
+                      "Value": "'#9A86E8'"
                     }
                   }
                 }
@@ -238,7 +238,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#D9CCFF'"
+                      "Value": "'#9A86E8'"
                     }
                   }
                 }
@@ -259,6 +259,13 @@
                   "Value": "2D"
                 }
               }
+            },
+            "showMarker": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
             }
           },
           "selector": {
@@ -273,6 +280,13 @@
                   "Value": "3D"
                 }
               }
+            },
+            "showMarker": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
             }
           },
           "selector": {
@@ -285,6 +299,13 @@
               "expr": {
                 "Literal": {
                   "Value": "1D"
+                }
+              }
+            },
+            "showMarker": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             },
@@ -306,6 +327,13 @@
               "expr": {
                 "Literal": {
                   "Value": "1D"
+                }
+              }
+            },
+            "showMarker": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             },
@@ -337,7 +365,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Monthly history and forecast'"
+                  "Value": "'Monthly history and forecast: single months swing, so plan on quarterly totals'"
                 }
               }
             },
@@ -382,7 +410,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Single months are noisy (about 41% swing); plan on quarterly or annual totals'"
+                  "Value": "'₹ L for gross profit and net sales, counts for orders and buyers  |  Backtest on 6 held-out months: orders -1.4%, gross profit -10.2%, both inside the 80% range'"
                 }
               }
             },
@@ -401,6 +429,19 @@
                       "Value": "'#62748E'"
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Line chart of monthly history (navy) and the 2026 forecast median (violet) with dashed low and high cases.'"
                 }
               }
             }

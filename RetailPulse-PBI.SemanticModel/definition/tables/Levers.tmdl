@@ -1,63 +1,70 @@
-/// Exported from analysis notebooks (03_forecast / 04_customer_models). Refresh after re-running them.
+/// Four 2026 profit levers with low/mid/high uplift, confidence and cost. From analysis/output/pbi_levers.csv: re-run the notebooks, then refresh.
 table Levers
-	lineageTag: 80442f83-7b1a-4da3-bdd9-92588f7f89c5
+	lineageTag: f8e2e241-eb90-4c97-81f3-409340bd5bdb
 
-	column lever
+	/// Profit lever.
+	column Lever
 		dataType: string
-		lineageTag: e55d8b40-ee9a-49de-a97d-d3d53ba93dda
+		lineageTag: 5143ceb9-6694-44a3-a9a1-ea3c7e15f802
 		summarizeBy: none
-		sourceColumn: lever
+		sourceColumn: Lever
 
 		annotation SummarizationSetBy = User
 
-	column uplift_low
-		dataType: double
-		formatString: #,##0
-		lineageTag: 967433c2-92c6-4bd0-b4e2-d3124cbeffe0
-		summarizeBy: none
-		sourceColumn: uplift_low
-
-		annotation SummarizationSetBy = User
-
-	column uplift_high
-		dataType: double
-		formatString: #,##0
-		lineageTag: 8ab92e9e-30a3-4961-948f-79064872e727
-		summarizeBy: none
-		sourceColumn: uplift_high
-
-		annotation SummarizationSetBy = User
-
-	column confidence
+	/// Confidence in the sizing.
+	column Confidence
 		dataType: string
-		lineageTag: 9c567aa7-e782-4196-a1ae-29b5b036478c
+		lineageTag: e97c0928-972e-4d30-abff-c4e84b811caf
 		summarizeBy: none
-		sourceColumn: confidence
+		sourceColumn: Confidence
 
 		annotation SummarizationSetBy = User
 
-	column cost
+	/// Cost to run the lever.
+	column Cost
 		dataType: string
-		lineageTag: cc8eeb70-5924-4bab-a08b-483266b03a18
+		lineageTag: 0ae45506-1e41-4391-a4be-b2c7e9cae16e
 		summarizeBy: none
-		sourceColumn: cost
+		sourceColumn: Cost
 
 		annotation SummarizationSetBy = User
 
-	column basis
+	/// How the lever was sized.
+	column Basis
 		dataType: string
-		lineageTag: 06525e90-9521-426c-ac6a-a7746f05ffd2
+		lineageTag: e3a4d906-fe22-4b14-bf3b-eb2b7fe4f750
 		summarizeBy: none
-		sourceColumn: basis
+		sourceColumn: Basis
 
 		annotation SummarizationSetBy = User
 
-	column uplift_mid
-		dataType: double
-		formatString: #,##0
-		lineageTag: b6a5e3d5-f75a-417a-ab29-07241214be00
+	/// Low estimate of extra 2026 gross profit, in rupees.
+	column 'Uplift Low'
+		dataType: decimal
+		formatString: ₹#,##0
+		lineageTag: 9e1435d4-2e00-4c5b-a44d-833384b542cc
 		summarizeBy: none
-		sourceColumn: uplift_mid
+		sourceColumn: Uplift Low
+
+		annotation SummarizationSetBy = User
+
+	/// High estimate of extra 2026 gross profit, in rupees.
+	column 'Uplift High'
+		dataType: decimal
+		formatString: ₹#,##0
+		lineageTag: 00fa0f5f-c144-49c7-a2bb-9f51f20e5a81
+		summarizeBy: none
+		sourceColumn: Uplift High
+
+		annotation SummarizationSetBy = User
+
+	/// Mid estimate of extra 2026 gross profit, in rupees.
+	column 'Uplift Mid'
+		dataType: decimal
+		formatString: ₹#,##0
+		lineageTag: 44feb234-5412-4be8-8a23-22c64fa3713f
+		summarizeBy: none
+		sourceColumn: Uplift Mid
 
 		annotation SummarizationSetBy = User
 
@@ -65,12 +72,15 @@ table Levers
 		mode: import
 		source =
 				let
-				  Source = Csv.Document(File.Contents(ProjectFolder & "\analysis\output\pbi_levers.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
-				  #"Promoted headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
-				  #"Blanks to null" = #"Promoted headers",
-				  #"Changed column type" = Table.TransformColumnTypes(#"Blanks to null", {{"lever", type text}, {"uplift_low", type number}, {"uplift_high", type number}, {"confidence", type text}, {"cost", type text}, {"basis", type text}, {"uplift_mid", type number}}, "en-US")
+				    Source = Csv.Document(File.Contents(ProjectFolder & "\analysis\output\pbi_levers.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Blanks = Promoted,
+				    Typed = Table.TransformColumnTypes(Blanks, {{"lever", type text}, {"uplift_low", Currency.Type}, {"uplift_high", Currency.Type}, {"confidence", type text}, {"cost", type text}, {"basis", type text}, {"uplift_mid", Currency.Type}}, "en-US"),
+				    Renamed = Table.RenameColumns(Typed, {{"lever", "Lever"}, {"uplift_low", "Uplift Low"}, {"uplift_high", "Uplift High"}, {"confidence", "Confidence"}, {"cost", "Cost"}, {"basis", "Basis"}, {"uplift_mid", "Uplift Mid"}})
 				in
-				  #"Changed column type"
+				    Renamed
 
 	annotation PBI_ResultType = Table
+
+	annotation BestPracticeAnalyzer_IgnoreRules = {"RuleIDs":["ENSURE_TABLES_HAVE_RELATIONSHIPS"]}
 

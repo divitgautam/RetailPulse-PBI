@@ -1,40 +1,20 @@
-relationship 0e88e18f-aadd-4fec-b823-d01502d44ce4
-	joinOnDateBehavior: datePartOnly
-	fromColumn: Customers.join_date
-	toColumn: LocalDateTable_2d8e2f19-8b65-481a-a868-aba2d4b5981c.Date
+relationship Order_Items_Customers
+	fromColumn: Order_Items.'Customer ID'
+	toColumn: Customers.'Customer ID'
 
-relationship 2af692ea-aa54-4913-85e4-449b3267d7cb
-	joinOnDateBehavior: datePartOnly
-	fromColumn: Customers.birth_date
-	toColumn: LocalDateTable_954601de-fa31-464c-9a36-32d2e869b837.Date
+relationship Order_Items_Products
+	fromColumn: Order_Items.'Product ID'
+	toColumn: Products.'Product ID'
 
-relationship ee8531ef-d424-4a00-bb71-96183d414ea4
-	joinOnDateBehavior: datePartOnly
-	fromColumn: Order_Items.order_date
-	toColumn: LocalDateTable_71b26abe-9af3-4f73-ba29-1e974f4bcec3.Date
-
-relationship AutoDetected_c9efa5e5-3665-4ff5-9263-9e2a6ac621bc
-	fromColumn: Order_Items.product_id
-	toColumn: Products.product_id
-
-relationship Order_Items_customer_to_Customers
-	fromColumn: Order_Items.customer_id
-	toColumn: Customers.customer_id
-
-relationship Order_Items_order_date_to_Date
-	fromColumn: Order_Items.order_date
+relationship Order_Items_Date
+	fromColumn: Order_Items.'Order Date'
 	toColumn: Date.Date
 
-relationship Forecast_scenario_to_Scenario
-	fromColumn: Forecast.scenario
+relationship Forecast_Scenario
+	fromColumn: Forecast.Scenario
 	toColumn: Scenario.Scenario
 
-relationship Forecast2026_scenario_to_Scenario
-	fromColumn: 'Forecast 2026'.scenario
+relationship Forecast2026_Scenario
+	fromColumn: 'Forecast 2026'.Scenario
 	toColumn: Scenario.Scenario
-
-relationship 1dbcac52-a802-44e6-92bb-81f41d16227b
-	joinOnDateBehavior: datePartOnly
-	fromColumn: Forecast.month
-	toColumn: LocalDateTable_704f3c3f-32d3-4a85-8be5-a39d541faf89.Date
 

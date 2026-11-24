@@ -1,80 +1,83 @@
-/// Exported from analysis notebooks (03_forecast / 04_customer_models). Refresh after re-running them.
+/// Monthly history (Jan 2023-Oct 2025) and simulated forecast (Nov 2025-Dec 2026) by scenario and metric. From analysis/output/pbi_forecast.csv: re-run the notebooks, then refresh.
 table Forecast
-	lineageTag: f8fa2211-2907-4c36-92d8-d6defc514dae
+	lineageTag: 14a3344b-f9ec-406f-9e3e-a667949305a4
 
-	column scenario
+	/// Acquisition scenario (relates to Scenario).
+	column Scenario
 		dataType: string
-		lineageTag: 5f1887e2-e744-4dbc-ba81-02ee19a999ce
+		isHidden
+		isAvailableInMdx: false
+		lineageTag: 452b3bb6-8018-48f2-abf2-832822256ce5
 		summarizeBy: none
-		sourceColumn: scenario
+		sourceColumn: Scenario
 
 		annotation SummarizationSetBy = User
 
-	column month
+	/// Month of the history or forecast value.
+	column Month
 		dataType: dateTime
 		formatString: mmm yyyy
-		lineageTag: c26af1dd-084f-4e25-9044-0a28a56d6e01
+		lineageTag: 99a16135-1f40-4bb3-9946-1553ca1a64d4
 		summarizeBy: none
-		sourceColumn: month
-
-		variation Variation
-			isDefault
-			relationship: 1dbcac52-a802-44e6-92bb-81f41d16227b
-			defaultHierarchy: LocalDateTable_704f3c3f-32d3-4a85-8be5-a39d541faf89.'Date Hierarchy'
+		sourceColumn: Month
 
 		annotation SummarizationSetBy = User
 
-		annotation UnderlyingDateTimeDataType = Date
-
-	column metric
+	/// Gross profit, Net sales, Revenue orders or New buyers.
+	column Metric
 		dataType: string
-		lineageTag: 64549ff3-0b0f-4671-a949-2e4d64b5a7b8
+		lineageTag: c0d4d6dd-2798-4e86-9d26-1ce182efa81e
 		summarizeBy: none
-		sourceColumn: metric
+		sourceColumn: Metric
 
 		annotation SummarizationSetBy = User
 
-	column kind
+	/// Actual or Forecast row.
+	column Kind
 		dataType: string
-		lineageTag: 404bbbb5-f376-4603-88b2-ee47cc61d2ef
+		lineageTag: 4be2a84d-de1d-4253-81ef-75d2ef1cbf38
 		summarizeBy: none
-		sourceColumn: kind
+		sourceColumn: Kind
 
 		annotation SummarizationSetBy = User
 
-	column actual
-		dataType: double
+	/// Actual monthly value (history rows).
+	column Actual
+		dataType: decimal
 		formatString: #,##0
-		lineageTag: 881e6b16-2ac1-49ad-96ea-80527313204e
+		lineageTag: 6cc7044c-2046-4b0c-8f42-9d803055e604
 		summarizeBy: none
-		sourceColumn: actual
+		sourceColumn: Actual
 
 		annotation SummarizationSetBy = User
 
-	column p10
-		dataType: double
+	/// Forecast low case (10th percentile of 2,000 runs).
+	column P10
+		dataType: decimal
 		formatString: #,##0
-		lineageTag: 4ce9ef13-749d-491f-abb6-b650d1732798
+		lineageTag: 2b03a608-7d05-42e7-9d39-8f32ac8e2fb8
 		summarizeBy: none
-		sourceColumn: p10
+		sourceColumn: P10
 
 		annotation SummarizationSetBy = User
 
-	column p50
-		dataType: double
+	/// Forecast median.
+	column P50
+		dataType: decimal
 		formatString: #,##0
-		lineageTag: 9e2b1792-8078-4212-b27a-b4c208e8fe3f
+		lineageTag: 5bc8bbeb-d06e-40f4-8440-56f4e89b5fd5
 		summarizeBy: none
-		sourceColumn: p50
+		sourceColumn: P50
 
 		annotation SummarizationSetBy = User
 
-	column p90
-		dataType: double
+	/// Forecast high case (90th percentile).
+	column P90
+		dataType: decimal
 		formatString: #,##0
-		lineageTag: 9e0a0f41-2639-4366-a872-a4de1f2fe903
+		lineageTag: 3e67d246-dbbe-49d7-b8e3-09ebeae6c3ad
 		summarizeBy: none
-		sourceColumn: p90
+		sourceColumn: P90
 
 		annotation SummarizationSetBy = User
 
@@ -82,12 +85,13 @@ table Forecast
 		mode: import
 		source =
 				let
-				  Source = Csv.Document(File.Contents(ProjectFolder & "\analysis\output\pbi_forecast.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
-				  #"Promoted headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
-				  #"Blanks to null" = Table.ReplaceValue(#"Promoted headers", "", null, Replacer.ReplaceValue, {"actual", "p10", "p50", "p90"}),
-				  #"Changed column type" = Table.TransformColumnTypes(#"Blanks to null", {{"scenario", type text}, {"month", type date}, {"metric", type text}, {"kind", type text}, {"actual", type number}, {"p10", type number}, {"p50", type number}, {"p90", type number}}, "en-US")
+				    Source = Csv.Document(File.Contents(ProjectFolder & "\analysis\output\pbi_forecast.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Blanks = Table.ReplaceValue(Promoted, "", null, Replacer.ReplaceValue, {"actual", "p10", "p50", "p90"}),
+				    Typed = Table.TransformColumnTypes(Blanks, {{"scenario", type text}, {"month", type date}, {"metric", type text}, {"kind", type text}, {"actual", Currency.Type}, {"p10", Currency.Type}, {"p50", Currency.Type}, {"p90", Currency.Type}}, "en-US"),
+				    Renamed = Table.RenameColumns(Typed, {{"scenario", "Scenario"}, {"month", "Month"}, {"metric", "Metric"}, {"kind", "Kind"}, {"actual", "Actual"}, {"p10", "P10"}, {"p50", "P50"}, {"p90", "P90"}})
 				in
-				  #"Changed column type"
+				    Renamed
 
 	annotation PBI_ResultType = Table
 

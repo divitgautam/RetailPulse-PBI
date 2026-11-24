@@ -5,7 +5,7 @@
     "x": 16,
     "y": 80,
     "z": 1000,
-    "height": 624,
+    "height": 602,
     "width": 618,
     "tabOrder": 1000
   },
@@ -41,7 +41,7 @@
                     }
                   },
                   {
-                    "value": "With no new registrations since, new buyers fell 128 (2023) to 64 (2024) to 28 (2025 YTD) and repeat orders are now 75% of orders. Confirm this is not an extract cut-off.",
+                    "value": "New buyers fell 128 (2023) to 64 (2024) to 28 (2025 YTD), and repeat orders are now 75% of orders. Confirm this is not an extract cut-off.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#020618"
@@ -99,7 +99,7 @@
                     }
                   },
                   {
-                    "value": "Recurring customers are 53% of buyers but 76% of gross profit (2.8x a one-time buyer). Second orders are slow: median 254 days.",
+                    "value": "Recurring customers are 53% of buyers but earn 76% of gross profit (2.8x a one-time buyer). Second orders are slow: median 254 days.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#020618"
@@ -149,7 +149,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "5. Discounts cost margin and do not buy loyalty. ",
+                    "value": "5. Discounts cost margin and buy no loyalty. ",
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontSize": "11pt",
@@ -215,7 +215,7 @@
                     }
                   },
                   {
-                    "value": "19 cancelled or returned orders lost ₹52.3 L in sales and ₹12.0 L in profit (4.7% of orders), with no significant pattern by payment method.",
+                    "value": "19 cancelled or returned orders lost ₹52.3 L of sales and ₹12.0 L of profit (4.7% of orders), with no pattern by payment method.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#020618"
@@ -289,6 +289,19 @@
               "expr": {
                 "Literal": {
                   "Value": "14D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Business findings'"
                 }
               }
             }

@@ -3,11 +3,11 @@
   "name": "mx_category",
   "position": {
     "x": 16,
-    "y": 458,
-    "z": 11000,
-    "height": 246,
-    "width": 669,
-    "tabOrder": 11000
+    "y": 396,
+    "z": 18000,
+    "height": 286,
+    "width": 640,
+    "tabOrder": 18000
   },
   "visual": {
     "visualType": "pivotTable",
@@ -23,26 +23,11 @@
                       "Entity": "Products"
                     }
                   },
-                  "Property": "category"
+                  "Property": "Category"
                 }
               },
-              "queryRef": "Products.category",
-              "nativeQueryRef": "category",
-              "active": true
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Products"
-                    }
-                  },
-                  "Property": "subcategory"
-                }
-              },
-              "queryRef": "Products.subcategory",
-              "nativeQueryRef": "subcategory",
+              "queryRef": "Products.Category",
+              "nativeQueryRef": "Category",
               "active": true
             }
           ]
@@ -57,12 +42,12 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Net Sales"
+                  "Property": "Net Sales ₹ L"
                 }
               },
-              "queryRef": "_Measures.Net Sales",
-              "nativeQueryRef": "Net Sales",
-              "displayName": "Net Sales"
+              "queryRef": "_Measures.Net Sales ₹ L",
+              "nativeQueryRef": "Net Sales ₹ L",
+              "displayName": "Net sales ₹ L"
             },
             {
               "field": {
@@ -72,12 +57,12 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "COGS"
+                  "Property": "COGS ₹ L"
                 }
               },
-              "queryRef": "_Measures.COGS",
-              "nativeQueryRef": "COGS",
-              "displayName": "COGS"
+              "queryRef": "_Measures.COGS ₹ L",
+              "nativeQueryRef": "COGS ₹ L",
+              "displayName": "COGS ₹ L"
             },
             {
               "field": {
@@ -87,12 +72,12 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Gross Profit"
+                  "Property": "Gross Profit ₹ L"
                 }
               },
-              "queryRef": "_Measures.Gross Profit",
-              "nativeQueryRef": "Gross Profit",
-              "displayName": "Gross Profit"
+              "queryRef": "_Measures.Gross Profit ₹ L",
+              "nativeQueryRef": "Gross Profit ₹ L",
+              "displayName": "Gross profit ₹ L"
             },
             {
               "field": {
@@ -107,7 +92,7 @@
               },
               "queryRef": "_Measures.Gross Margin %",
               "nativeQueryRef": "Gross Margin %",
-              "displayName": "Margin %"
+              "displayName": "Margin"
             },
             {
               "field": {
@@ -122,7 +107,7 @@
               },
               "queryRef": "_Measures.Category Profit Share %",
               "nativeQueryRef": "Category Profit Share %",
-              "displayName": "Profit Share"
+              "displayName": "Share of profit"
             }
           ]
         }
@@ -137,7 +122,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Gross Profit"
+                "Property": "Gross Profit ₹ L"
               }
             },
             "direction": "Descending"
@@ -155,6 +140,13 @@
                   "Value": "true"
                 }
               }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
             }
           }
         }
@@ -165,7 +157,33 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "10D"
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "rowHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
                 }
               }
             }
@@ -186,8 +204,13 @@
             },
             "text": {
               "expr": {
-                "Literal": {
-                  "Value": "'Category and subcategory P&L'"
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Title Subcategory"
                 }
               }
             },
@@ -232,7 +255,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Expand a category to see its subcategories'"
+                  "Value": "'Category P&L, ₹ L  |  Right-click a category for its subcategories'"
                 }
               }
             },
@@ -251,6 +274,19 @@
                       "Value": "'#62748E'"
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Table of net sales, cost, gross profit, margin and profit share by category, expandable to subcategory.'"
                 }
               }
             }

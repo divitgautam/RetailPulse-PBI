@@ -1,390 +1,949 @@
-/// Central home for report measures
+/// Central home for report measures, in display folders 1-7.
 table _Measures
-	lineageTag: dc7a0378-faab-45c1-8a86-7fabfbfa04f5
+	lineageTag: 31417963-eb9b-4f37-91fd-8fc699df0ace
 
 	/// Revenue excluding tax and shipping, after item and order discounts. Excludes cancelled and returned orders.
 	measure 'Net Sales' = CALCULATE ( SUM ( Order_Items[Net Sales] ), Order_Items[Is Revenue Order] = TRUE () )
 		formatString: ₹#,##0
 		displayFolder: 1 Sales & Profit
-		lineageTag: 120f34bc-ae3a-4182-a035-e9d478648d10
+		lineageTag: 0f0b351c-fef5-446a-bddd-6c122a722003
 
 	/// Unit price x quantity before any discount. Excludes cancelled and returned orders.
 	measure 'Gross Sales (List Price)' = CALCULATE ( SUM ( Order_Items[Gross Amount] ), Order_Items[Is Revenue Order] = TRUE () )
 		formatString: ₹#,##0
 		displayFolder: 1 Sales & Profit
-		lineageTag: c152ee95-9cd9-442f-9cc6-32253828a495
+		lineageTag: 5c8c7896-8015-4460-9983-4e23f31bbeb9
 
 	/// Product cost price x quantity for revenue orders.
 	measure COGS = CALCULATE ( SUM ( Order_Items[COGS] ), Order_Items[Is Revenue Order] = TRUE () )
 		formatString: ₹#,##0
 		displayFolder: 1 Sales & Profit
-		lineageTag: ae4b830c-89ed-4873-b664-ac872bf777b6
+		lineageTag: 63056cb6-61da-48cd-b1ec-f1a351352ce6
 
 	/// Net Sales minus COGS for revenue orders.
 	measure 'Gross Profit' = CALCULATE ( SUM ( Order_Items[Gross Profit] ), Order_Items[Is Revenue Order] = TRUE () )
 		formatString: ₹#,##0
 		displayFolder: 1 Sales & Profit
-		lineageTag: 9a7e8fc3-290b-4b5a-939c-70a9d85c23b8
+		lineageTag: 7527575b-3017-427a-b22c-3bee5f023c74
 
 	/// Gross Profit / Net Sales.
 	measure 'Gross Margin %' = DIVIDE ( [Gross Profit], [Net Sales] )
 		formatString: 0.0%
 		displayFolder: 1 Sales & Profit
-		lineageTag: e5d51009-a620-4d85-a4d4-7a283d5a3c3b
+		lineageTag: 26a1936f-3926-4929-adab-1774ba1ae8f4
 
 	/// Value given away through item and order discounts.
 	measure 'Discount Amount' = [Gross Sales (List Price)] - [Net Sales]
 		formatString: ₹#,##0
 		displayFolder: 1 Sales & Profit
-		lineageTag: a91fb0e3-deaf-4a2a-8ec6-e5aa970ffe5a
+		lineageTag: e2843f9b-2ed2-4b53-af0a-a40e312cb126
 
 	/// Discount Amount / Gross Sales at list price.
 	measure 'Discount Rate %' = DIVIDE ( [Discount Amount], [Gross Sales (List Price)] )
 		formatString: 0.0%
 		displayFolder: 1 Sales & Profit
-		lineageTag: ff49c565-8682-46ef-b7ef-6bc265c9035d
+		lineageTag: fe0d3836-c128-454c-98fe-db078f9de9c4
 
 	/// Units on revenue orders.
-	measure 'Units Sold' = CALCULATE ( SUM ( Order_Items[quantity] ), Order_Items[Is Revenue Order] = TRUE () )
+	measure 'Units Sold' = CALCULATE ( SUM ( Order_Items[Quantity] ), Order_Items[Is Revenue Order] = TRUE () )
 		formatString: #,##0
 		displayFolder: 1 Sales & Profit
-		lineageTag: 596ad40b-665f-4603-908e-70a3df21f274
+		lineageTag: 730b479b-358b-4059-bac5-bd57d820dc50
 
 	/// Orders that are not cancelled or returned.
-	measure 'Revenue Orders' = CALCULATE ( DISTINCTCOUNT ( Order_Items[order_id] ), Order_Items[Is Revenue Order] = TRUE () )
+	measure 'Revenue Orders' = CALCULATE ( DISTINCTCOUNT ( Order_Items[Order ID] ), Order_Items[Is Revenue Order] = TRUE () )
 		formatString: #,##0
 		displayFolder: 1 Sales & Profit
-		lineageTag: 10da3163-64e7-4e8c-8f07-7f75e09fe4c2
+		lineageTag: 9a548d07-6849-4c5a-a23d-18049c184069
 
 	/// Net Sales per revenue order.
 	measure 'Avg Order Value' = DIVIDE ( [Net Sales], [Revenue Orders] )
 		formatString: ₹#,##0
 		displayFolder: 1 Sales & Profit
-		lineageTag: d955cae5-9dcd-4e4c-bc6f-1ae3b21bd51c
+		lineageTag: a75c3c83-14ac-47f6-901b-5a1b70f9f735
 
 	/// Gross Profit per revenue order.
 	measure 'Profit per Order' = DIVIDE ( [Gross Profit], [Revenue Orders] )
 		formatString: ₹#,##0
 		displayFolder: 1 Sales & Profit
-		lineageTag: deea0ba0-51e4-4958-a6ea-bf460d384b3d
+		lineageTag: dfd753b0-9542-457f-b6aa-c75a75fdca94
 
 	/// Net Sales on cancelled or returned orders.
 	measure 'Lost Net Sales' = CALCULATE ( SUM ( Order_Items[Net Sales] ), Order_Items[Is Revenue Order] = FALSE () )
 		formatString: ₹#,##0
 		displayFolder: 1 Sales & Profit
-		lineageTag: 0aab6793-75bf-4c38-8bb6-9af23c01a810
+		lineageTag: a0aba7ba-00a6-4500-a776-ea0dff67b39e
 
 	/// Gross Profit forgone on cancelled or returned orders.
 	measure 'Lost Gross Profit' = CALCULATE ( SUM ( Order_Items[Gross Profit] ), Order_Items[Is Revenue Order] = FALSE () )
 		formatString: ₹#,##0
 		displayFolder: 1 Sales & Profit
-		lineageTag: bf98a11b-b9aa-4c81-ba98-309247dee8ce
+		lineageTag: 0568322d-6313-47b5-95fb-7e65fa046ce3
 
 	/// Share of placed orders that were cancelled or returned.
-	measure 'Cancel & Return Rate %' = DIVIDE ( CALCULATE ( DISTINCTCOUNT ( Order_Items[order_id] ), Order_Items[Is Revenue Order] = FALSE () ), [Total Orders] )
+	measure 'Cancel & Return Rate %' = DIVIDE ( CALCULATE ( DISTINCTCOUNT ( Order_Items[Order ID] ), Order_Items[Is Revenue Order] = FALSE () ), [Total Orders] )
 		formatString: 0.0%
 		displayFolder: 1 Sales & Profit
-		lineageTag: e666027a-4f55-4276-8852-971c5ec18485
+		lineageTag: 89cd5cb9-542c-4204-8a94-84a2236e7dec
 
 	/// Order lines sold below cost after discounts.
-	measure 'Loss-Making Lines' = COALESCE ( CALCULATE ( COUNTROWS ( Order_Items ), Order_Items[Is Revenue Order] = TRUE (), Order_Items[Gross Profit] < 0 ), 0 )
+	measure 'Loss-Making Lines' = CALCULATE ( COUNTROWS ( Order_Items ), Order_Items[Is Revenue Order] = TRUE (), Order_Items[Gross Profit] < 0 )
 		formatString: #,##0
 		displayFolder: 1 Sales & Profit
-		lineageTag: 9874daf8-64f2-41bf-9a55-5c7083263416
+		lineageTag: b713b2ef-c6fa-4497-9a71-b4e2c71a44a7
 
 	/// Total negative profit on lines sold below cost.
 	measure 'Profit Lost on Loss-Making Lines' = CALCULATE ( SUM ( Order_Items[Gross Profit] ), Order_Items[Is Revenue Order] = TRUE (), Order_Items[Gross Profit] < 0 )
 		formatString: ₹#,##0
 		displayFolder: 1 Sales & Profit
-		lineageTag: b3b7100b-8abf-460c-af87-48a5995072bf
+		lineageTag: 732a66bb-81d7-4907-b2e8-de28c8700fc8
 
 	/// Gross Profit for the same period last year.
 	measure 'Gross Profit PY' = CALCULATE ( [Gross Profit], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
 		formatString: ₹#,##0
 		displayFolder: 1 Sales & Profit
-		lineageTag: fdc36a66-d7da-4f46-9315-e18938857002
+		lineageTag: d76c7595-aff6-4362-b1b8-d748870002c9
 
-	/// Year-over-year change in Gross Profit.
+	/// Year-over-year change in Gross Profit (one year selected).
 	measure 'Gross Profit YoY %' = IF ( HASONEVALUE ( 'Date'[Year] ), DIVIDE ( [Gross Profit] - [Gross Profit PY], [Gross Profit PY] ) )
 		formatString: 0.0%
 		displayFolder: 1 Sales & Profit
-		lineageTag: 71b1b720-0726-4407-896f-ee7d7a1337e0
+		lineageTag: f20ad672-47d3-4a2b-8e80-cb6d68649596
 
-	/// Share of total Gross Profit for the current selection (category or subcategory).
-	measure 'Category Profit Share %' = DIVIDE ( [Gross Profit], CALCULATE ( [Gross Profit], ALLSELECTED ( Products ) ) )
+	/// Gross Profit as a share of all products (keeps year and segment filters).
+	measure 'Category Profit Share %' = DIVIDE ( [Gross Profit], CALCULATE ( [Gross Profit], REMOVEFILTERS ( Products ) ) )
 		formatString: 0.0%
 		displayFolder: 2 Category
-		lineageTag: ec92cf82-cba8-4a3d-9342-1e2cb207b64b
+		lineageTag: 74c92001-4779-47af-b706-0660db15eca3
 
 	/// Rank of the category by Gross Profit.
-	measure 'Category Profit Rank' = IF ( NOT ISBLANK ( [Gross Profit] ), RANKX ( ALLSELECTED ( Products[category] ), [Gross Profit], , DESC, DENSE ) )
+	measure 'Category Profit Rank' = IF ( NOT ISBLANK ( [Gross Profit] ), RANKX ( ALLSELECTED ( Products[Category] ), [Gross Profit], , DESC, DENSE ) )
 		formatString: 0
 		displayFolder: 2 Category
-		lineageTag: a0428480-181c-45de-9c0f-7b2c3d0477ca
+		lineageTag: 82b8294e-f395-4acc-8e22-210f382e7447
 
-	/// Category margin minus the overall margin, in percentage points.
-	measure 'Margin vs Avg (pp)' =
-			VAR m = [Gross Margin %]
-			VAR avgm = CALCULATE ( [Gross Margin %], ALLSELECTED ( Products[category] ) )
-			RETURN IF ( NOT ISBLANK ( m ), ( m - avgm ) * 100 )
+	/// Margin minus the margin of all products, in percentage points.
+	measure 'Margin vs Avg (pp)' = VAR m = [Gross Margin %] VAR avgm = CALCULATE ( [Gross Margin %], REMOVEFILTERS ( Products ) ) RETURN IF ( NOT ISBLANK ( m ), ( m - avgm ) * 100 )
 		formatString: +0.0;-0.0;0.0
 		displayFolder: 2 Category
-		lineageTag: 3ca55a13-5642-4125-a04e-a2a548672ed7
+		lineageTag: e0275afb-eeef-46f9-8f71-af00ded39cae
 
 	/// Category with the highest Gross Profit.
-	measure 'Top Profit Category' =
-			VAR t = TOPN ( 1, ALLSELECTED ( Products[category] ), [Gross Profit], DESC )
-			RETURN CONCATENATEX ( t, Products[category], ", " )
+	measure 'Top Profit Category' = CONCATENATEX ( TOPN ( 1, ALLSELECTED ( Products[Category] ), [Gross Profit], DESC ), Products[Category], ", " )
 		displayFolder: 2 Category
-		lineageTag: ae240219-97ef-480c-b3d6-3e7daba14937
+		lineageTag: 0b974b32-a1b1-4fdb-8cbc-0b0b525ab06b
 
 	/// Category with the lowest Gross Profit.
-	measure 'Lowest Profit Category' =
-			VAR t = TOPN ( 1, FILTER ( ALLSELECTED ( Products[category] ), NOT ISBLANK ( [Gross Profit] ) ), [Gross Profit], ASC )
-			RETURN CONCATENATEX ( t, Products[category], ", " )
+	measure 'Lowest Profit Category' = CONCATENATEX ( TOPN ( 1, FILTER ( ALLSELECTED ( Products[Category] ), NOT ISBLANK ( [Gross Profit] ) ), [Gross Profit], ASC ), Products[Category], ", " )
 		displayFolder: 2 Category
-		lineageTag: e916aa50-7119-4115-8031-66615d62ee63
+		lineageTag: e4b9023f-4f12-4167-8a13-f4e5c092bf48
 
 	/// All customers in the customer master.
 	measure 'Registered Customers' = COUNTROWS ( Customers )
 		formatString: #,##0
 		displayFolder: 3 Customers
-		lineageTag: dde427ea-7d01-4366-8c19-5795fe9079b4
+		lineageTag: 949c4066-eee2-491c-9b09-60a538f9e76b
 
 	/// Registered customers with no order ever.
-	measure 'Never-Purchased Customers' = COALESCE ( CALCULATE ( COUNTROWS ( Customers ), Customers[Lifetime Orders] = 0 ), 0 )
+	measure 'Never-Purchased Customers' = CALCULATE ( COUNTROWS ( Customers ), Customers[Customer Type] = "No Purchase" )
 		formatString: #,##0
 		displayFolder: 3 Customers
-		lineageTag: f436041f-7c8f-4421-b1fc-95f4fd6f93f1
+		lineageTag: ecec3aa0-c791-4eee-8fa7-fa0f9d4ed394
 
 	/// Share of registered customers who have placed at least one order.
-	measure 'Customer Activation Rate %' = DIVIDE ( CALCULATE ( COUNTROWS ( Customers ), Customers[Lifetime Orders] > 0 ), [Registered Customers] )
+	measure 'Customer Activation Rate %' = DIVIDE ( [Purchasing Customers], [Registered Customers] )
 		formatString: 0.0%
 		displayFolder: 3 Customers
-		lineageTag: c24d8139-a252-47d2-abdb-d7ab53957e53
+		lineageTag: ee30f070-2a9f-4a3f-be60-c6e7dfd4bb8f
 
-	/// Orders placed per purchasing customer.
+	/// Lifetime orders (any status) per buying customer.
 	measure 'Avg Orders per Customer' = DIVIDE ( [Total Orders], [Purchasing Customers] )
 		formatString: 0.00
 		displayFolder: 3 Customers
-		lineageTag: 218eedc7-7970-4d10-b485-98c10d69615a
+		lineageTag: 21c741b0-4545-4049-be2a-2e7009ae3858
 
 	/// Gross Profit from customers with 2+ lifetime orders.
 	measure 'Recurring Customer Profit' = CALCULATE ( [Gross Profit], Customers[Customer Type] = "Recurring" )
 		formatString: ₹#,##0
 		displayFolder: 3 Customers
-		lineageTag: 9af5098d-cad9-48c9-ae42-a6356135446c
+		lineageTag: 679a51a7-a05d-4026-9244-987d4c613f85
 
 	/// Gross Profit from customers with exactly one lifetime order.
 	measure 'One-Time Customer Profit' = CALCULATE ( [Gross Profit], Customers[Customer Type] = "One-Time" )
 		formatString: ₹#,##0
 		displayFolder: 3 Customers
-		lineageTag: a8572218-6106-4d59-bf41-b4a86f5bf5da
+		lineageTag: 4e07dc84-d90a-4af5-9437-2c2f3dfef328
 
 	/// Share of Gross Profit generated by recurring customers.
 	measure 'Recurring Profit Share %' = DIVIDE ( [Recurring Customer Profit], [Gross Profit] )
 		formatString: 0.0%
 		displayFolder: 3 Customers
-		lineageTag: eb9c8a61-2c51-4e89-b91d-94713726f060
+		lineageTag: ab5e6368-090f-403d-a1e2-ebc86517fe29
 
 	/// Gross Profit per recurring customer.
 	measure 'Profit per Recurring Customer' = DIVIDE ( [Recurring Customer Profit], CALCULATE ( [Active Customers], Customers[Customer Type] = "Recurring" ) )
 		formatString: ₹#,##0
 		displayFolder: 3 Customers
-		lineageTag: 60499147-2cf6-4eb6-bc34-640e6defc467
+		lineageTag: beb1f7a9-1447-47b3-bbef-72fb72fca1bb
 
 	/// Gross Profit per one-time customer.
 	measure 'Profit per One-Time Customer' = DIVIDE ( [One-Time Customer Profit], CALCULATE ( [Active Customers], Customers[Customer Type] = "One-Time" ) )
 		formatString: ₹#,##0
 		displayFolder: 3 Customers
-		lineageTag: f159102f-75bb-49da-92f2-0c22de344deb
+		lineageTag: feb361f1-c9fb-4d7b-b540-ab59f53f38ed
 
 	/// How many times more profit a recurring customer brings than a one-time customer.
 	measure 'Recurring Value Multiplier' = DIVIDE ( [Profit per Recurring Customer], [Profit per One-Time Customer] )
 		formatString: 0.0"x"
 		displayFolder: 3 Customers
-		lineageTag: 9f72700f-6e96-4dec-87bd-3986c4d83850
+		lineageTag: 462b308f-0f1a-4cf2-9a39-4eae20b53b2f
 
 	/// Customers with at least one revenue order in the period.
-	measure 'Active Customers' = CALCULATE ( DISTINCTCOUNT ( Order_Items[customer_id] ), Order_Items[Is Revenue Order] = TRUE () )
+	measure 'Active Customers' = CALCULATE ( DISTINCTCOUNT ( Order_Items[Customer ID] ), Order_Items[Is Revenue Order] = TRUE () )
 		formatString: #,##0
 		displayFolder: 4 KPI
-		lineageTag: 8f18ecd5-e746-4ab0-8ff5-16126cac0ea7
+		lineageTag: bf4c5979-72a0-4ff2-b1a4-29b988e99dbd
 
 	/// Purchase frequency: revenue orders per active customer.
 	measure 'Orders per Active Customer' = DIVIDE ( [Revenue Orders], [Active Customers] )
 		formatString: 0.00
 		displayFolder: 4 KPI
-		lineageTag: b2c2013d-ff9d-4411-8333-5f4366006168
+		lineageTag: a55d1bf1-e653-4076-a510-45c0026374e7
 
-	/// HEADLINE KPI. Gross Profit per active customer = Orders per Customer x Avg Order Value x Gross Margin %.
+	/// HEADLINE KPI (PPAC). Gross Profit per active customer = Orders per Customer x Avg Order Value x Gross Margin %.
 	measure 'Profit per Active Customer' = DIVIDE ( [Gross Profit], [Active Customers] )
 		formatString: ₹#,##0
 		displayFolder: 4 KPI
-		lineageTag: 195d5869-efcb-443f-87a9-dc1c86414d33
+		lineageTag: 21fee27c-fabe-452f-9ffd-d39ee5ba5884
 
-	/// Same KPI for the same period last year.
+	/// PPAC for the same period last year.
 	measure 'Profit per Active Customer PY' = CALCULATE ( [Profit per Active Customer], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
 		formatString: ₹#,##0
 		displayFolder: 4 KPI
-		lineageTag: 1da01aed-96a6-4661-b094-8e31ef921841
+		lineageTag: 199733b1-7b40-4e9f-87cf-9a4de8d76d25
 
 	/// Assumed growth target over last year. Edit this value to change the target.
 	measure 'KPI Target Growth %' = 0.05
 		formatString: 0.0%
 		displayFolder: 4 KPI
-		lineageTag: a4fcf7e6-4095-490f-9efe-75519ce01591
+		lineageTag: 7db1c9d6-5be2-424a-819c-baa9dce50a9d
 
-	/// Last year's value plus the target growth.
+	/// Last year's PPAC plus the target growth.
 	measure 'Profit per Active Customer Target' = [Profit per Active Customer PY] * ( 1 + [KPI Target Growth %] )
 		formatString: ₹#,##0
 		displayFolder: 4 KPI
-		lineageTag: e93054ee-a56b-49a7-a3ec-c3f8831b2263
+		lineageTag: b9a4b8a2-2655-4f56-b9a6-3edc87961e99
 
-	/// Year-over-year change in the headline KPI.
+	/// Year-over-year change in PPAC (one year selected).
 	measure 'Profit per Active Customer YoY %' = IF ( HASONEVALUE ( 'Date'[Year] ), DIVIDE ( [Profit per Active Customer] - [Profit per Active Customer PY], [Profit per Active Customer PY] ) )
 		formatString: 0.0%
 		displayFolder: 4 KPI
-		lineageTag: beed52b9-551b-4f0d-a00b-aa97be6f47eb
+		lineageTag: 3ab01690-0b0b-4291-8893-a6c09606ec55
 
-	/// Headline KPI versus target.
+	/// PPAC versus target.
 	measure 'KPI vs Target %' = DIVIDE ( [Profit per Active Customer] - [Profit per Active Customer Target], [Profit per Active Customer Target] )
 		formatString: 0.0%
 		displayFolder: 4 KPI
-		lineageTag: 7e30c240-c955-484b-abff-1365bc287da2
+		lineageTag: d69d2539-a8b0-4508-ae6d-178ea8046648
 
-	/// Traffic-light status of the headline KPI.
+	/// Traffic-light status of PPAC: on target, watch (within 5%), below.
 	measure 'KPI Status' = VAR v = [Profit per Active Customer] VAR t = [Profit per Active Customer Target] RETURN SWITCH ( TRUE (), NOT HASONEVALUE ( 'Date'[Year] ), "Pick a year", ISBLANK ( t ), "No target", v >= t, "On target", v >= t * 0.95, "Watch", "Below" )
 		displayFolder: 4 KPI
-		lineageTag: ea043d67-9ebc-4089-b0eb-39b569d2f8a1
+		lineageTag: 6803a3d8-29a1-479b-b6a4-bb13cdea4f17
 
-	/// Colour for the KPI status.
-	measure 'KPI Status Color' =
-			VAR v = [Profit per Active Customer]
-			VAR t = [Profit per Active Customer Target]
-			RETURN SWITCH ( TRUE (), ISBLANK ( t ), "#8A8886", v >= t, "#107C10", v >= t * 0.95, "#C19C00", "#D13438" )
+	/// Colour for the PPAC status: green on target, amber within 5%, red below (AA contrast).
+	measure 'KPI Status Color' = VAR v = [Profit per Active Customer] VAR t = [Profit per Active Customer Target] RETURN SWITCH ( TRUE (), ISBLANK ( t ), "#5B6B7F", v >= t, "#1E7F4B", v >= t * 0.95, "#A15F00", "#C0392B" )
 		displayFolder: 4 KPI
-		lineageTag: 502af394-8a4d-4f32-9bb5-0f8b0334b4ff
+		lineageTag: de743567-72e9-4f84-b2e6-84bf2d8f7322
 
 	/// Share of active customers with 2+ revenue orders in the period.
-	measure 'Repeat Purchase Rate %' = DIVIDE ( COUNTROWS ( FILTER ( VALUES ( Order_Items[customer_id] ), CALCULATE ( DISTINCTCOUNT ( Order_Items[order_id] ), Order_Items[Is Revenue Order] = TRUE () ) >= 2 ) ), [Active Customers] )
+	measure 'Repeat Purchase Rate %' = DIVIDE ( COUNTROWS ( FILTER ( VALUES ( Order_Items[Customer ID] ), CALCULATE ( DISTINCTCOUNT ( Order_Items[Order ID] ), Order_Items[Is Revenue Order] = TRUE () ) >= 2 ) ), [Active Customers] )
 		formatString: 0.0%
 		displayFolder: 4 KPI
-		lineageTag: b5da8441-9750-43f2-ab26-c26fcd119553
+		lineageTag: d383a718-1711-49d7-9e6d-82195cdeac34
 
+	/// Orders per active customer, same period last year.
 	measure 'Orders per Active Customer PY' = CALCULATE ( [Orders per Active Customer], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
 		formatString: 0.00
 		displayFolder: 4 KPI
-		lineageTag: 3c7809ee-933e-4497-a5e2-a3e2f2ade85b
+		lineageTag: 3eb3fe2f-f8ba-4fc5-a3f6-4c4414828b4b
 
+	/// Average order value, same period last year.
 	measure 'Avg Order Value PY' = CALCULATE ( [Avg Order Value], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
 		formatString: ₹#,##0
 		displayFolder: 4 KPI
-		lineageTag: 16a605ee-28f6-4ef5-a304-3b89c4f37ec8
+		lineageTag: 29987e45-8d1b-44f9-b2fc-daa5df2ee925
 
+	/// Gross margin for the same period last year.
 	measure 'Gross Margin % PY' = CALCULATE ( [Gross Margin %], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
 		formatString: 0.0%
-		displayFolder: 4 KPI
-		lineageTag: 218cdd62-c6b7-4ca4-a5ac-187219a0b9ae
+		displayFolder: 1 Sales & Profit
+		lineageTag: 5f654715-caec-4cd0-8382-38242020e3fc
 
+	/// Active customers, same period last year.
 	measure 'Active Customers PY' = CALCULATE ( [Active Customers], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
 		formatString: #,##0
 		displayFolder: 4 KPI
-		lineageTag: 84e2780a-adc8-4292-a4b8-d71c4ef999e3
+		lineageTag: 3e576ddd-2d7a-4f29-923f-c782105b4fa1
 
-	/// Actual value (history rows of the Forecast table)
-	measure 'Fcst Actual' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) VAR mt = SELECTEDVALUE ( Forecast[metric], "Gross profit" ) RETURN CALCULATE ( SUM ( Forecast[actual] ), TREATAS ( { sc }, Scenario[Scenario] ), TREATAS ( { mt }, Forecast[metric] ) )
-		formatString: #,##0
+	/// History for the forecast chart: ₹ L for profit and sales, counts otherwise (defaults: scenario A, Gross profit).
+	measure 'Fcst Actual' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) VAR mt = SELECTEDVALUE ( Forecast[Metric], "Gross profit" ) RETURN DIVIDE ( CALCULATE ( SUM ( Forecast[Actual] ), TREATAS ( { sc }, Scenario[Scenario] ), TREATAS ( { mt }, Forecast[Metric] ) ), IF ( mt IN { "Gross profit", "Net sales" }, 100000, 1 ) )
+		formatString: #,##0.0
 		displayFolder: 5 Forecast
-		lineageTag: 13e4394a-2b9e-4ee0-958d-4a0610e344bc
+		lineageTag: 83f2d6c6-cb43-4159-856f-2d58771b98c6
 
-	/// Forecast median
-	measure 'Fcst P50' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) VAR mt = SELECTEDVALUE ( Forecast[metric], "Gross profit" ) RETURN CALCULATE ( SUM ( Forecast[p50] ), TREATAS ( { sc }, Scenario[Scenario] ), TREATAS ( { mt }, Forecast[metric] ) )
-		formatString: #,##0
+	/// Forecast median, in chart units.
+	measure 'Fcst P50' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) VAR mt = SELECTEDVALUE ( Forecast[Metric], "Gross profit" ) VAR v = CALCULATE ( SUM ( Forecast[P50] ), TREATAS ( { sc }, Scenario[Scenario] ), TREATAS ( { mt }, Forecast[Metric] ) ) VAR lastA = CALCULATE ( MAX ( Forecast[Month] ), REMOVEFILTERS ( Forecast[Month] ), NOT ISBLANK ( Forecast[Actual] ), TREATAS ( { sc }, Scenario[Scenario] ), TREATAS ( { mt }, Forecast[Metric] ) ) RETURN DIVIDE ( IF ( ISBLANK ( v ) && MAX ( Forecast[Month] ) = lastA, CALCULATE ( SUM ( Forecast[Actual] ), TREATAS ( { sc }, Scenario[Scenario] ), TREATAS ( { mt }, Forecast[Metric] ) ), v ), IF ( mt IN { "Gross profit", "Net sales" }, 100000, 1 ) )
+		formatString: #,##0.0
 		displayFolder: 5 Forecast
-		lineageTag: e1171f90-753d-4b92-a03a-21b5b2a9b928
+		lineageTag: fcaefc53-c52b-4ac8-ace9-a814dde26d32
 
-	/// Forecast 10th percentile (low case)
-	measure 'Fcst P10' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) VAR mt = SELECTEDVALUE ( Forecast[metric], "Gross profit" ) RETURN CALCULATE ( SUM ( Forecast[p10] ), TREATAS ( { sc }, Scenario[Scenario] ), TREATAS ( { mt }, Forecast[metric] ) )
-		formatString: #,##0
+	/// Forecast low case (P10), in chart units.
+	measure 'Fcst P10' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) VAR mt = SELECTEDVALUE ( Forecast[Metric], "Gross profit" ) VAR v = CALCULATE ( SUM ( Forecast[P10] ), TREATAS ( { sc }, Scenario[Scenario] ), TREATAS ( { mt }, Forecast[Metric] ) ) VAR lastA = CALCULATE ( MAX ( Forecast[Month] ), REMOVEFILTERS ( Forecast[Month] ), NOT ISBLANK ( Forecast[Actual] ), TREATAS ( { sc }, Scenario[Scenario] ), TREATAS ( { mt }, Forecast[Metric] ) ) RETURN DIVIDE ( IF ( ISBLANK ( v ) && MAX ( Forecast[Month] ) = lastA, CALCULATE ( SUM ( Forecast[Actual] ), TREATAS ( { sc }, Scenario[Scenario] ), TREATAS ( { mt }, Forecast[Metric] ) ), v ), IF ( mt IN { "Gross profit", "Net sales" }, 100000, 1 ) )
+		formatString: #,##0.0
 		displayFolder: 5 Forecast
-		lineageTag: 56e548fa-a1be-445a-8d08-f09f0db3df78
+		lineageTag: 3de6d224-a591-4f9d-b098-1d4eda59ea69
 
-	/// Forecast 90th percentile (high case)
-	measure 'Fcst P90' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) VAR mt = SELECTEDVALUE ( Forecast[metric], "Gross profit" ) RETURN CALCULATE ( SUM ( Forecast[p90] ), TREATAS ( { sc }, Scenario[Scenario] ), TREATAS ( { mt }, Forecast[metric] ) )
-		formatString: #,##0
+	/// Forecast high case (P90), in chart units.
+	measure 'Fcst P90' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) VAR mt = SELECTEDVALUE ( Forecast[Metric], "Gross profit" ) VAR v = CALCULATE ( SUM ( Forecast[P90] ), TREATAS ( { sc }, Scenario[Scenario] ), TREATAS ( { mt }, Forecast[Metric] ) ) VAR lastA = CALCULATE ( MAX ( Forecast[Month] ), REMOVEFILTERS ( Forecast[Month] ), NOT ISBLANK ( Forecast[Actual] ), TREATAS ( { sc }, Scenario[Scenario] ), TREATAS ( { mt }, Forecast[Metric] ) ) RETURN DIVIDE ( IF ( ISBLANK ( v ) && MAX ( Forecast[Month] ) = lastA, CALCULATE ( SUM ( Forecast[Actual] ), TREATAS ( { sc }, Scenario[Scenario] ), TREATAS ( { mt }, Forecast[Metric] ) ), v ), IF ( mt IN { "Gross profit", "Net sales" }, 100000, 1 ) )
+		formatString: #,##0.0
 		displayFolder: 5 Forecast
-		lineageTag: 77ac35e6-3d91-4592-9b67-31f8c0ba7aee
+		lineageTag: ccc89b89-4658-42e4-9166-546afa11f17d
 
-	/// 2026 gross profit, median, selected scenario
-	measure 'F26 Gross Profit' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) RETURN CALCULATE ( SUM ( 'Forecast 2026'[p50] ), 'Forecast 2026'[metric] = "Gross profit", TREATAS ( { sc }, Scenario[Scenario] ) )
+	/// 2026 gross profit, simulation median.
+	measure 'F26 Gross Profit' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) RETURN CALCULATE ( SUM ( 'Forecast 2026'[P50] ), 'Forecast 2026'[Metric] = "Gross profit", TREATAS ( { sc }, Scenario[Scenario] ) )
 		formatString: ₹#,##0
 		displayFolder: 5 Forecast
-		lineageTag: 619a999e-788c-432a-b030-e44d81dddfed
+		lineageTag: c1aa1b73-b401-483c-a1a3-5082413ce1eb
 
-	/// 2026 gross profit 80% range (P10 to P90)
-	measure 'F26 Gross Profit Range' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) VAR lo = CALCULATE ( SUM ( 'Forecast 2026'[p10] ), 'Forecast 2026'[metric] = "Gross profit", TREATAS ( { sc }, Scenario[Scenario] ) ) VAR hi = CALCULATE ( SUM ( 'Forecast 2026'[p90] ), 'Forecast 2026'[metric] = "Gross profit", TREATAS ( { sc }, Scenario[Scenario] ) ) RETURN "₹" & FORMAT ( lo / 100000, "0" ) & "–" & FORMAT ( hi / 100000, "0" ) & " L"
-		displayFolder: 5 Forecast
-		lineageTag: 844416b8-0169-4df4-a270-cc4ed4fd1b78
-
-	/// 2026 revenue orders, median
-	measure 'F26 Revenue Orders' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) RETURN CALCULATE ( SUM ( 'Forecast 2026'[p50] ), 'Forecast 2026'[metric] = "Revenue orders", TREATAS ( { sc }, Scenario[Scenario] ) )
+	/// 2026 revenue orders, median.
+	measure 'F26 Revenue Orders' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) RETURN CALCULATE ( SUM ( 'Forecast 2026'[P50] ), 'Forecast 2026'[Metric] = "Revenue orders", TREATAS ( { sc }, Scenario[Scenario] ) )
 		formatString: #,##0
 		displayFolder: 5 Forecast
-		lineageTag: a414e41e-d12c-4403-a217-262510a87475
+		lineageTag: 1a479238-8c6f-4798-a6aa-056607a0dfb7
 
-	/// 2026 new buyers, median
-	measure 'F26 New Buyers' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) RETURN CALCULATE ( SUM ( 'Forecast 2026'[p50] ), 'Forecast 2026'[metric] = "New buyers", TREATAS ( { sc }, Scenario[Scenario] ) )
+	/// 2026 first-time buyers, median.
+	measure 'F26 New Buyers' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) RETURN CALCULATE ( SUM ( 'Forecast 2026'[P50] ), 'Forecast 2026'[Metric] = "New buyers", TREATAS ( { sc }, Scenario[Scenario] ) )
 		formatString: #,##0
 		displayFolder: 5 Forecast
-		lineageTag: c537846e-f107-4b13-b5a8-c40776e1b0b2
+		lineageTag: 4dd50c1d-d362-4f3a-8a7a-a660eea4f48e
 
-	/// 2026 profit per active customer, median
-	measure 'F26 PPAC' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) RETURN CALCULATE ( SUM ( 'Forecast 2026'[p50] ), 'Forecast 2026'[metric] = "PPAC", TREATAS ( { sc }, Scenario[Scenario] ) )
+	/// 2026 profit per active customer, median.
+	measure 'F26 PPAC' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) RETURN CALCULATE ( SUM ( 'Forecast 2026'[P50] ), 'Forecast 2026'[Metric] = "PPAC", TREATAS ( { sc }, Scenario[Scenario] ) )
 		formatString: ₹#,##0
 		displayFolder: 5 Forecast
-		lineageTag: a485334b-1592-4596-b1e0-92c4bb6cecc3
+		lineageTag: 54fb9bfd-6b3a-44aa-800c-fc6f1af04a9f
 
-	/// 2026 PPAC target: expected 2025 full-year PPAC + 5%
-	measure 'F26 PPAC Target' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) RETURN CALCULATE ( SUM ( 'Forecast 2026'[p50] ), 'Forecast 2026'[metric] = "PPAC target", TREATAS ( { sc }, Scenario[Scenario] ) )
+	/// 2026 PPAC target (2025 run-rate + 5%).
+	measure 'F26 PPAC Target' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) RETURN CALCULATE ( SUM ( 'Forecast 2026'[P50] ), 'Forecast 2026'[Metric] = "PPAC target", TREATAS ( { sc }, Scenario[Scenario] ) )
 		formatString: ₹#,##0
 		displayFolder: 5 Forecast
-		lineageTag: e7afc7d2-37cf-45df-9d7b-e10fd0802c1b
+		lineageTag: d7950efb-4145-4098-8655-096a5de842dc
 
-	/// Share of simulations where 2026 PPAC reaches the target
-	measure 'F26 P(PPAC hits target)' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) RETURN CALCULATE ( SUM ( 'Forecast 2026'[p50] ), 'Forecast 2026'[metric] = "P(PPAC hits target)", TREATAS ( { sc }, Scenario[Scenario] ) )
+	/// Share of simulated runs in which 2026 PPAC reaches its target.
+	measure 'F26 P(PPAC hits target)' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) RETURN CALCULATE ( SUM ( 'Forecast 2026'[P50] ), 'Forecast 2026'[Metric] = "P(PPAC hits target)", TREATAS ( { sc }, Scenario[Scenario] ) )
 		formatString: 0%
 		displayFolder: 5 Forecast
-		lineageTag: 640a5749-16db-4bf2-ade7-01e49e729740
+		lineageTag: 3d416d4c-b910-4201-a87c-bd3d4bf4c227
 
-	/// Mid estimate of 2026 gross-profit uplift
-	measure 'Lever Uplift' = SUM ( Levers[uplift_mid] )
+	/// Mid estimate of extra 2026 gross profit.
+	measure 'Lever Uplift' = SUM ( Levers[Uplift Mid] )
 		formatString: ₹#,##0
 		displayFolder: 5 Forecast
-		lineageTag: 09c5edfa-595b-4cd5-a529-d0cbfded0c94
+		lineageTag: 65315df8-755f-479b-8a59-30cc8033ab3f
 
-	measure 'Lever Uplift Low' = SUM ( Levers[uplift_low] )
+	/// Low estimate of extra 2026 gross profit.
+	measure 'Lever Uplift Low' = SUM ( Levers[Uplift Low] )
 		formatString: ₹#,##0
 		displayFolder: 5 Forecast
-		lineageTag: c6e9db65-b70d-4ba5-bdbc-9630eee9f733
+		lineageTag: d7896f6b-2632-4787-9af4-7bee5d4bcdab
 
-	measure 'Lever Uplift High' = SUM ( Levers[uplift_high] )
+	/// High estimate of extra 2026 gross profit.
+	measure 'Lever Uplift High' = SUM ( Levers[Uplift High] )
 		formatString: ₹#,##0
 		displayFolder: 5 Forecast
-		lineageTag: 9aeb0583-df53-423e-833c-1e694a5a6b09
+		lineageTag: 18f8246c-52b6-4299-82f6-78668c06b8d3
 
-	/// 2026 gross profit median, in lakh, selected scenario
-	measure 'F26 Gross Profit (L)' = "₹" & FORMAT ( [F26 Gross Profit] / 100000, "0.0" ) & " L"
+	/// Orders placed, any status.
+	measure 'Total Orders' = DISTINCTCOUNTNOBLANK ( Order_Items[Order ID] )
+		formatString: #,##0
+		displayFolder: 1 Sales & Profit
+		lineageTag: 5c589e5d-89a4-4aed-9931-9c3403cda1e2
+
+	/// Net Sales for the same period last year.
+	measure 'Net Sales PY' = CALCULATE ( [Net Sales], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+		formatString: ₹#,##0
+		displayFolder: 1 Sales & Profit
+		lineageTag: 4f9958fd-dff0-412e-9f92-8b3007844db1
+
+	/// Discount rate for the same period last year.
+	measure 'Discount Rate % PY' = CALCULATE ( [Discount Rate %], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+		formatString: 0.0%
+		displayFolder: 1 Sales & Profit
+		lineageTag: 46240881-11fe-4f76-b342-16eaca05e46a
+
+	/// Gross profit in 2024, the last full year (benchmark for the 2026 forecast).
+	measure 'Gross Profit 2024' = CALCULATE ( [Gross Profit], REMOVEFILTERS ( 'Date' ), 'Date'[Year] = 2024 )
+		formatString: ₹#,##0
+		displayFolder: 1 Sales & Profit
+		lineageTag: c8739cf4-f8d1-4d68-a4a5-d89089bd8bcc
+
+	/// Subcategory with the highest Gross Profit in the current selection.
+	measure 'Top Subcategory' = CONCATENATEX ( TOPN ( 1, FILTER ( VALUES ( Products[Subcategory] ), NOT ISBLANK ( [Gross Profit] ) ), [Gross Profit], DESC ), Products[Subcategory], ", " )
+		displayFolder: 2 Category
+		lineageTag: a1249ad7-7b75-4b9f-9ea6-819d6f743cd4
+
+	/// Category in the current filter context (drill-through title).
+	measure 'Selected Category' = SELECTEDVALUE ( Products[Category], "All categories" )
+		displayFolder: 2 Category
+		lineageTag: 5c8f373e-2178-424c-8cda-d82b9376097b
+
+	/// Customers who have placed at least one order.
+	measure 'Purchasing Customers' = CALCULATE ( COUNTROWS ( Customers ), Customers[Customer Type] <> "No Purchase" )
+		formatString: #,##0
+		displayFolder: 3 Customers
+		lineageTag: 6b0aa5e7-4db3-4494-9ed8-d04a29bd9404
+
+	/// Customers with exactly one lifetime order.
+	measure 'One-Time Customers' = CALCULATE ( COUNTROWS ( Customers ), Customers[Customer Type] = "One-Time" )
+		formatString: #,##0
+		displayFolder: 3 Customers
+		lineageTag: be077296-646b-4f0d-bf45-39cb1746011a
+
+	/// Customers with two or more lifetime orders.
+	measure 'Recurring Customers' = CALCULATE ( COUNTROWS ( Customers ), Customers[Customer Type] = "Recurring" )
+		formatString: #,##0
+		displayFolder: 3 Customers
+		lineageTag: 3649acf6-7e54-4632-8fca-f586578961e4
+
+	/// Repeat rate: recurring customers / buying customers.
+	measure 'Recurring Customer %' = DIVIDE ( [Recurring Customers], [Purchasing Customers] )
+		formatString: 0.0%
+		displayFolder: 3 Customers
+		lineageTag: 9b467f38-a7dc-4938-ba52-4c39fb991528
+
+	/// One-time customers / buying customers.
+	measure 'One-Time Customer %' = DIVIDE ( [One-Time Customers], [Purchasing Customers] )
+		formatString: 0.0%
+		displayFolder: 3 Customers
+		lineageTag: 6553a3f4-6fa1-4957-b213-34baf1054212
+
+	/// Share of buying customers with three or more lifetime orders.
+	measure 'Buyers With 3+ Orders %' = DIVIDE ( CALCULATE ( [Purchasing Customers], Customers[Lifetime Orders] >= 3 ), [Purchasing Customers] )
+		formatString: 0.0%
+		displayFolder: 3 Customers
+		lineageTag: 5d7b381c-d2f3-4c51-87a6-735e4cd70351
+
+	/// Customers whose first order falls in the period.
+	measure 'New Buyers' = CALCULATE ( COUNTROWS ( Customers ), TREATAS ( VALUES ( 'Date'[Date] ), Customers[First Order Date] ) )
+		formatString: #,##0
+		displayFolder: 3 Customers
+		lineageTag: 4bbdb964-23f0-42dd-af87-66d0866290f4
+
+	/// New buyers in 2024, the last full year.
+	measure 'New Buyers 2024' = CALCULATE ( [New Buyers], REMOVEFILTERS ( 'Date' ), 'Date'[Year] = 2024 )
+		formatString: #,##0
+		displayFolder: 3 Customers
+		lineageTag: 63487b4a-c137-48e9-ba09-7e028a5b9a4c
+
+	/// Most recent registration date in the selection.
+	measure 'Last Sign-up Date' = MAX ( Customers[Join Date] )
+		formatString: dd mmm yyyy
+		displayFolder: 3 Customers
+		lineageTag: e1198cb6-b4a6-457f-aea0-b388ea4bd03c
+
+	/// 2026 gross profit, low case (P10).
+	measure 'F26 Gross Profit Low' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) RETURN CALCULATE ( SUM ( 'Forecast 2026'[P10] ), 'Forecast 2026'[Metric] = "Gross profit", TREATAS ( { sc }, Scenario[Scenario] ) )
+		formatString: ₹#,##0
 		displayFolder: 5 Forecast
-		lineageTag: e2ebe4c2-98b4-4e9c-aed5-5540d2a5ab9c
+		lineageTag: 74cb33d1-9d6a-4970-8741-70750781cb7a
+
+	/// 2026 gross profit, high case (P90).
+	measure 'F26 Gross Profit High' = VAR sc = SELECTEDVALUE ( Scenario[Scenario], "A · No new sign-ups" ) RETURN CALCULATE ( SUM ( 'Forecast 2026'[P90] ), 'Forecast 2026'[Metric] = "Gross profit", TREATAS ( { sc }, Scenario[Scenario] ) )
+		formatString: ₹#,##0
+		displayFolder: 5 Forecast
+		lineageTag: 6772a385-e75c-4dee-b8c0-9290ca9bae9c
+
+	/// Mid lever uplift in lakh, for the lever chart.
+	measure 'Lever Uplift ₹ L' = DIVIDE ( [Lever Uplift], 100000 )
+		formatString: ₹#,##0.0 \L
+		displayFolder: 5 Forecast
+		lineageTag: 84d12f03-1101-46d9-be01-5747b1fb740e
+
+	/// Low lever uplift in lakh (tooltip).
+	measure 'Lever Uplift Low ₹ L' = DIVIDE ( [Lever Uplift Low], 100000 )
+		formatString: ₹#,##0.0 \L
+		displayFolder: 5 Forecast
+		lineageTag: 8fd7dfa4-58f2-4d86-b404-fe305e4764d6
+
+	/// High lever uplift in lakh (tooltip).
+	measure 'Lever Uplift High ₹ L' = DIVIDE ( [Lever Uplift High], 100000 )
+		formatString: ₹#,##0.0 \L
+		displayFolder: 5 Forecast
+		lineageTag: 4eac29a3-465c-4ae2-be3e-6fdec0af1c80
+
+	/// Gross profit in lakh (₹1 L = ₹1,00,000), for charts and tables.
+	measure 'Gross Profit ₹ L' = DIVIDE ( [Gross Profit], 100000 )
+		formatString: ₹#,##0.0 \L
+		displayFolder: 6 Display
+		lineageTag: d3f4399a-f334-4ffe-a55f-d6cb420134e2
+
+	/// Net sales in lakh, for tables.
+	measure 'Net Sales ₹ L' = DIVIDE ( [Net Sales], 100000 )
+		formatString: ₹#,##0.0 \L
+		displayFolder: 6 Display
+		lineageTag: 51b0c5bc-33ba-440c-9f1b-5f960d566b10
+
+	/// COGS in lakh, for tables.
+	measure 'COGS ₹ L' = DIVIDE ( [COGS], 100000 )
+		formatString: ₹#,##0.0 \L
+		displayFolder: 6 Display
+		lineageTag: 57b3ab5a-b6da-4b98-94e2-5ff4422183d5
+
+	/// Gross profit per active customer, in lakh.
+	measure 'Profit per Customer ₹ L' = DIVIDE ( [Profit per Active Customer], 100000 )
+		formatString: ₹#,##0.00 \L
+		displayFolder: 6 Display
+		lineageTag: a773c788-34a5-4570-be0d-fdde61a060c6
+
+	/// Gross profit for cards, in Indian units (₹ L / ₹ Cr).
+	measure 'Card Gross Profit' = ( VAR _v = [Gross Profit] RETURN SWITCH ( TRUE (), ISBLANK ( _v ), BLANK (), ABS ( _v ) >= 10000000, FORMAT ( DIVIDE ( _v, 10000000 ), "₹#,##0.00", "en-US" ) & " Cr", ABS ( _v ) >= 1000000, FORMAT ( DIVIDE ( _v, 100000 ), "₹#,##0.0", "en-US" ) & " L", ABS ( _v ) >= 100000, FORMAT ( DIVIDE ( _v, 100000 ), "₹#,##0.00", "en-US" ) & " L", FORMAT ( _v, "₹#,##0", "en-US" ) ) )
+		displayFolder: 6 Display
+		lineageTag: 5862cb69-348f-42b3-b412-333a30004a11
+
+	/// Net sales for cards, in Indian units.
+	measure 'Card Net Sales' = ( VAR _v = [Net Sales] RETURN SWITCH ( TRUE (), ISBLANK ( _v ), BLANK (), ABS ( _v ) >= 10000000, FORMAT ( DIVIDE ( _v, 10000000 ), "₹#,##0.00", "en-US" ) & " Cr", ABS ( _v ) >= 1000000, FORMAT ( DIVIDE ( _v, 100000 ), "₹#,##0.0", "en-US" ) & " L", ABS ( _v ) >= 100000, FORMAT ( DIVIDE ( _v, 100000 ), "₹#,##0.00", "en-US" ) & " L", FORMAT ( _v, "₹#,##0", "en-US" ) ) )
+		displayFolder: 6 Display
+		lineageTag: 072eca02-27b2-4e3b-a4b7-c84c5277d809
+
+	/// Gross margin for cards.
+	measure 'Card Gross Margin' = FORMAT ( [Gross Margin %], "0.0%" )
+		displayFolder: 6 Display
+		lineageTag: b4741c16-0dda-4f3d-8179-32b5ea9724f1
+
+	/// Discount rate for cards.
+	measure 'Card Discount Rate' = FORMAT ( [Discount Rate %], "0.0%" )
+		displayFolder: 6 Display
+		lineageTag: 7f4fcaa1-494d-4c00-9cfd-d0351aec45bf
+
+	/// PPAC for cards.
+	measure 'Card PPAC' = ( VAR _v = [Profit per Active Customer] RETURN SWITCH ( TRUE (), ISBLANK ( _v ), BLANK (), ABS ( _v ) >= 10000000, FORMAT ( DIVIDE ( _v, 10000000 ), "₹#,##0.00", "en-US" ) & " Cr", ABS ( _v ) >= 1000000, FORMAT ( DIVIDE ( _v, 100000 ), "₹#,##0.0", "en-US" ) & " L", ABS ( _v ) >= 100000, FORMAT ( DIVIDE ( _v, 100000 ), "₹#,##0.00", "en-US" ) & " L", FORMAT ( _v, "₹#,##0", "en-US" ) ) )
+		displayFolder: 6 Display
+		lineageTag: 79a22267-38cc-4f3c-9037-56f79ed72b66
+
+	/// PPAC target for cards.
+	measure 'Card PPAC Target' = ( VAR _v = [Profit per Active Customer Target] RETURN SWITCH ( TRUE (), ISBLANK ( _v ), BLANK (), ABS ( _v ) >= 10000000, FORMAT ( DIVIDE ( _v, 10000000 ), "₹#,##0.00", "en-US" ) & " Cr", ABS ( _v ) >= 1000000, FORMAT ( DIVIDE ( _v, 100000 ), "₹#,##0.0", "en-US" ) & " L", ABS ( _v ) >= 100000, FORMAT ( DIVIDE ( _v, 100000 ), "₹#,##0.00", "en-US" ) & " L", FORMAT ( _v, "₹#,##0", "en-US" ) ) )
+		displayFolder: 6 Display
+		lineageTag: 4234199a-f5e6-467c-bf7e-39e5304b0546
+
+	/// Average order value for cards.
+	measure 'Card AOV' = ( VAR _v = [Avg Order Value] RETURN SWITCH ( TRUE (), ISBLANK ( _v ), BLANK (), ABS ( _v ) >= 10000000, FORMAT ( DIVIDE ( _v, 10000000 ), "₹#,##0.00", "en-US" ) & " Cr", ABS ( _v ) >= 1000000, FORMAT ( DIVIDE ( _v, 100000 ), "₹#,##0.0", "en-US" ) & " L", ABS ( _v ) >= 100000, FORMAT ( DIVIDE ( _v, 100000 ), "₹#,##0.00", "en-US" ) & " L", FORMAT ( _v, "₹#,##0", "en-US" ) ) )
+		displayFolder: 6 Display
+		lineageTag: 91b310fc-26ea-4796-a7cd-6949adc556a3
+
+	/// Orders per active customer for cards.
+	measure 'Card Orders per Customer' = FORMAT ( [Orders per Active Customer], "0.00" )
+		displayFolder: 6 Display
+		lineageTag: 709f5596-0a2f-4c75-a582-9b2b62517f80
+
+	/// Active customers for cards.
+	measure 'Card Active Customers' = FORMAT ( [Active Customers], "#,##0", "en-US" )
+		displayFolder: 6 Display
+		lineageTag: 31907e55-62df-45bc-8bf6-5ac9d77265c7
+
+	/// Buying customers for cards.
+	measure 'Card Buyers' = FORMAT ( [Purchasing Customers], "#,##0", "en-US" )
+		displayFolder: 6 Display
+		lineageTag: 536c749d-0606-4b5c-8a76-fe4bc95f56bc
+
+	/// Repeat rate for cards.
+	measure 'Card Repeat Rate' = FORMAT ( [Recurring Customer %], "0.0%" )
+		displayFolder: 6 Display
+		lineageTag: bd552a41-2caa-41bc-9341-3c039593edc1
+
+	/// Recurring customers' share of gross profit, for cards.
+	measure 'Card Recurring Profit Share' = FORMAT ( [Recurring Profit Share %], "0.0%" )
+		displayFolder: 6 Display
+		lineageTag: 92a46912-e133-41ff-a63c-9a4791620689
+
+	/// Recurring vs one-time profit per customer, for cards.
+	measure 'Card Value Multiplier' = FORMAT ( [Recurring Value Multiplier], "0.0" ) & "x"
+		displayFolder: 6 Display
+		lineageTag: 91708683-deab-44bc-82f4-a117ac297efa
+
+	/// Lifetime orders per buying customer, for cards.
+	measure 'Card Avg Orders' = FORMAT ( [Avg Orders per Customer], "0.00" )
+		displayFolder: 6 Display
+		lineageTag: deed0a2e-47b6-4ffe-9fc0-42f74ed7f0f7
+
+	/// Registered customers who never ordered, for cards.
+	measure 'Card Never Ordered' = FORMAT ( [Never-Purchased Customers], "#,##0" )
+		displayFolder: 6 Display
+		lineageTag: 4a58def9-0164-4a7a-9741-85d2e7aecfdd
+
+	/// Profit per recurring customer, in Indian units.
+	measure 'Card Profit per Recurring' = ( VAR _v = [Profit per Recurring Customer] RETURN SWITCH ( TRUE (), ISBLANK ( _v ), BLANK (), ABS ( _v ) >= 10000000, FORMAT ( DIVIDE ( _v, 10000000 ), "₹#,##0.00", "en-US" ) & " Cr", ABS ( _v ) >= 1000000, FORMAT ( DIVIDE ( _v, 100000 ), "₹#,##0.0", "en-US" ) & " L", ABS ( _v ) >= 100000, FORMAT ( DIVIDE ( _v, 100000 ), "₹#,##0.00", "en-US" ) & " L", FORMAT ( _v, "₹#,##0", "en-US" ) ) )
+		displayFolder: 6 Display
+		lineageTag: 0d5e1178-ed20-4f49-843b-606c71b57c07
+
+	/// Profit per one-time customer, in Indian units.
+	measure 'Card Profit per One-Time' = ( VAR _v = [Profit per One-Time Customer] RETURN SWITCH ( TRUE (), ISBLANK ( _v ), BLANK (), ABS ( _v ) >= 10000000, FORMAT ( DIVIDE ( _v, 10000000 ), "₹#,##0.00", "en-US" ) & " Cr", ABS ( _v ) >= 1000000, FORMAT ( DIVIDE ( _v, 100000 ), "₹#,##0.0", "en-US" ) & " L", ABS ( _v ) >= 100000, FORMAT ( DIVIDE ( _v, 100000 ), "₹#,##0.00", "en-US" ) & " L", FORMAT ( _v, "₹#,##0", "en-US" ) ) )
+		displayFolder: 6 Display
+		lineageTag: 7e3ad6d6-57c3-4f07-a270-386ca272a0e0
+
+	/// Gross profit from recurring customers, in Indian units.
+	measure 'Card Recurring Profit' = ( VAR _v = [Recurring Customer Profit] RETURN SWITCH ( TRUE (), ISBLANK ( _v ), BLANK (), ABS ( _v ) >= 10000000, FORMAT ( DIVIDE ( _v, 10000000 ), "₹#,##0.00", "en-US" ) & " Cr", ABS ( _v ) >= 1000000, FORMAT ( DIVIDE ( _v, 100000 ), "₹#,##0.0", "en-US" ) & " L", ABS ( _v ) >= 100000, FORMAT ( DIVIDE ( _v, 100000 ), "₹#,##0.00", "en-US" ) & " L", FORMAT ( _v, "₹#,##0", "en-US" ) ) )
+		displayFolder: 6 Display
+		lineageTag: 17eef458-1076-47e6-bf1c-d39d20f8d597
+
+	/// Share of all gross profit, for cards.
+	measure 'Card Category Share' = FORMAT ( [Category Profit Share %], "0%" )
+		displayFolder: 6 Display
+		lineageTag: 40490779-69bd-4edb-9c0a-dbe636ec82ce
+
+	/// Lines sold below cost, for cards.
+	measure 'Card Loss Lines' = IF ( ISBLANK ( [Loss-Making Lines] ), "0", FORMAT ( [Loss-Making Lines], "#,##0" ) )
+		displayFolder: 6 Display
+		lineageTag: a9a8e6c3-da2e-404c-afc3-9435d4123853
+
+	/// 2026 gross profit forecast in lakh, for cards (same unit as its range).
+	measure 'Card F26 Gross Profit' = FORMAT ( DIVIDE ( [F26 Gross Profit], 100000 ), "₹#,##0.0", "en-US" ) & " L"
+		displayFolder: 6 Display
+		lineageTag: fbaa45f9-4ba1-443b-8796-0dbbb160fd97
+
+	/// 80% range of 2026 gross profit, in lakh.
+	measure 'Card F26 Range' = "₹" & FORMAT ( DIVIDE ( [F26 Gross Profit Low], 100000 ), "0" ) & "–" & FORMAT ( DIVIDE ( [F26 Gross Profit High], 100000 ), "0" ) & " L"
+		displayFolder: 6 Display
+		lineageTag: 7a683549-ad1a-48f3-975a-afbcac5ba788
+
+	/// 2026 revenue orders forecast, for cards.
+	measure 'Card F26 Orders' = FORMAT ( [F26 Revenue Orders], "#,##0" )
+		displayFolder: 6 Display
+		lineageTag: 56d12a1b-fdcb-4273-898f-045e3af2af72
+
+	/// 2026 new buyers forecast, for cards.
+	measure 'Card F26 New Buyers' = FORMAT ( [F26 New Buyers], "#,##0" )
+		displayFolder: 6 Display
+		lineageTag: 2dd32980-0c8a-48df-93ab-35d69d7b0d6d
+
+	/// 2026 PPAC forecast, for cards.
+	measure 'Card F26 PPAC' = ( VAR _v = [F26 PPAC] RETURN SWITCH ( TRUE (), ISBLANK ( _v ), BLANK (), ABS ( _v ) >= 10000000, FORMAT ( DIVIDE ( _v, 10000000 ), "₹#,##0.00", "en-US" ) & " Cr", ABS ( _v ) >= 1000000, FORMAT ( DIVIDE ( _v, 100000 ), "₹#,##0.0", "en-US" ) & " L", ABS ( _v ) >= 100000, FORMAT ( DIVIDE ( _v, 100000 ), "₹#,##0.00", "en-US" ) & " L", FORMAT ( _v, "₹#,##0", "en-US" ) ) )
+		displayFolder: 6 Display
+		lineageTag: 18523415-b43e-4ed2-9793-60f2a8b9bdaa
+
+	/// Chance that 2026 PPAC reaches its target, for cards.
+	measure 'Card F26 Hit Chance' = FORMAT ( [F26 P(PPAC hits target)], "0%" )
+		displayFolder: 6 Display
+		lineageTag: 1e698ff7-b109-40cf-ad5d-f34acc81c846
+
+	/// Card line: buyers out of registered customers.
+	measure 'Δ Buyers' = "of " & FORMAT ( [Registered Customers], "#,##0" ) & " registered (" & FORMAT ( [Customer Activation Rate %], "0%" ) & ")"
+		displayFolder: 6 Display
+		lineageTag: ada86a8b-28f2-474e-be12-5b2a2fbcd873
+
+	/// Card line: recurring and one-time customer counts.
+	measure 'Δ Repeat Rate' = FORMAT ( [Recurring Customers], "#,##0" ) & " vs " & FORMAT ( [One-Time Customers], "#,##0" ) & " one-time"
+		displayFolder: 6 Display
+		lineageTag: 855a77ed-76b6-4fcf-90e8-f700b9a50a35
+
+	/// Card line: recurring profit out of the total.
+	measure 'Δ Recurring Profit Share' = [Card Recurring Profit] & " of " & [Card Gross Profit]
+		displayFolder: 6 Display
+		lineageTag: 578e8863-d0cd-4b2a-b002-5e9cd982ad3d
+
+	/// Card line: profit per customer by type.
+	measure 'Δ Value Multiplier' = FORMAT ( DIVIDE ( [Profit per Recurring Customer], 100000 ), "₹#,##0.00", "en-US" ) & " L" & " vs " & FORMAT ( DIVIDE ( [Profit per One-Time Customer], 100000 ), "₹#,##0.00", "en-US" ) & " L"
+		displayFolder: 6 Display
+		lineageTag: 4469e827-9ad1-40ac-97d5-6eee51415406
+
+	/// Card line: share of buyers with 3+ orders.
+	measure 'Δ Avg Orders' = FORMAT ( [Buyers With 3+ Orders %], "0%" ) & " ordered 3+ times"
+		displayFolder: 6 Display
+		lineageTag: a63d06c2-935c-4230-8e11-90b94a54b3e2
+
+	/// Card line: never-ordered customers as a share of registered.
+	measure 'Δ Never Ordered' = FORMAT ( DIVIDE ( [Never-Purchased Customers], [Registered Customers] ), "0%" ) & " of registered"
+		displayFolder: 6 Display
+		lineageTag: e10285dc-ea1d-4763-8459-ef60e114a491
+
+	/// Card change line for Gross Profit: arrow and change vs last year.
+	measure 'Δ Gross Profit' = VAR p = [Gross Profit PY] VAR d = DIVIDE ( [Gross Profit] - [Gross Profit PY], [Gross Profit PY] ) RETURN IF ( NOT HASONEVALUE ( 'Date'[Year] ), "Jan 2023 – Oct 2025", IF ( ISBLANK ( p ), "No prior year", IF ( d >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( d ), "0.0%" ) & " vs last year" ) )
+		displayFolder: 6 Display
+		lineageTag: e647c9ec-8831-43c9-a048-20e23be1766c
+
+	/// Colour of the Gross Profit change line: green up, red down, grey when not comparable.
+	measure 'Δ Gross Profit Color' = VAR p = [Gross Profit PY] RETURN IF ( NOT HASONEVALUE ( 'Date'[Year] ) || ISBLANK ( p ), "#5B6B7F", IF ( [Gross Profit] >= p, "#1E7F4B", "#C0392B" ) )
+		displayFolder: 6 Display
+		lineageTag: 9f338261-d3f6-4e97-951c-03c9ec2f0f97
+
+	/// Card change line for Net Sales: arrow and change vs last year.
+	measure 'Δ Net Sales' = VAR p = [Net Sales PY] VAR d = DIVIDE ( [Net Sales] - [Net Sales PY], [Net Sales PY] ) RETURN IF ( NOT HASONEVALUE ( 'Date'[Year] ), "Jan 2023 – Oct 2025", IF ( ISBLANK ( p ), "No prior year", IF ( d >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( d ), "0.0%" ) & " vs last year" ) )
+		displayFolder: 6 Display
+		lineageTag: de51b8cc-2327-4bfa-91bf-788505d7ecd8
+
+	/// Colour of the Net Sales change line: green up, red down, grey when not comparable.
+	measure 'Δ Net Sales Color' = VAR p = [Net Sales PY] RETURN IF ( NOT HASONEVALUE ( 'Date'[Year] ) || ISBLANK ( p ), "#5B6B7F", IF ( [Net Sales] >= p, "#1E7F4B", "#C0392B" ) )
+		displayFolder: 6 Display
+		lineageTag: 06cef8de-3e44-4470-951f-6fd8012f6894
+
+	/// Card change line for Gross Margin: arrow and change vs last year.
+	measure 'Δ Gross Margin' = VAR p = [Gross Margin % PY] VAR d = ( [Gross Margin %] - [Gross Margin % PY] ) * 100 RETURN IF ( NOT HASONEVALUE ( 'Date'[Year] ), "Jan 2023 – Oct 2025", IF ( ISBLANK ( p ), "No prior year", IF ( d >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( d ), "0.0" ) & " pp" & " vs last year" ) )
+		displayFolder: 6 Display
+		lineageTag: 50813e6f-9842-4e19-9764-0498ceba433b
+
+	/// Colour of the Gross Margin change line: green up, red down, grey when not comparable.
+	measure 'Δ Gross Margin Color' = VAR p = [Gross Margin % PY] RETURN IF ( NOT HASONEVALUE ( 'Date'[Year] ) || ISBLANK ( p ), "#5B6B7F", IF ( [Gross Margin %] >= p, "#1E7F4B", "#C0392B" ) )
+		displayFolder: 6 Display
+		lineageTag: 44ba556d-76a4-4aa4-972c-b3fbfdec9b0e
+
+	/// Card change line for Discount Rate: arrow and change vs last year.
+	measure 'Δ Discount Rate' = VAR p = [Discount Rate % PY] VAR d = ( [Discount Rate %] - [Discount Rate % PY] ) * 100 RETURN IF ( NOT HASONEVALUE ( 'Date'[Year] ), "Jan 2023 – Oct 2025", IF ( ISBLANK ( p ), "No prior year", IF ( d >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( d ), "0.0" ) & " pp" & " vs last year" ) )
+		displayFolder: 6 Display
+		lineageTag: 99f4d221-58be-4d45-9eaf-3dc25ea068e2
+
+	/// Colour of the Discount Rate change line: red up, green down, grey when not comparable.
+	measure 'Δ Discount Rate Color' = VAR p = [Discount Rate % PY] RETURN IF ( NOT HASONEVALUE ( 'Date'[Year] ) || ISBLANK ( p ), "#5B6B7F", IF ( [Discount Rate %] >= p, "#C0392B", "#1E7F4B" ) )
+		displayFolder: 6 Display
+		lineageTag: f953b643-7ed0-4342-bbd5-a19da0269ad8
+
+	/// Card change line for PPAC: arrow and change vs last year.
+	measure 'Δ PPAC' = VAR p = [Profit per Active Customer PY] VAR d = DIVIDE ( [Profit per Active Customer] - [Profit per Active Customer PY], [Profit per Active Customer PY] ) RETURN IF ( NOT HASONEVALUE ( 'Date'[Year] ), "Jan 2023 – Oct 2025", IF ( ISBLANK ( p ), "No prior year", IF ( d >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( d ), "0.0%" ) & " vs last year" ) )
+		displayFolder: 6 Display
+		lineageTag: 7279bf25-6271-4c2e-81a0-bd9909afcf3c
+
+	/// Colour of the PPAC change line: green up, red down, grey when not comparable.
+	measure 'Δ PPAC Color' = VAR p = [Profit per Active Customer PY] RETURN IF ( NOT HASONEVALUE ( 'Date'[Year] ) || ISBLANK ( p ), "#5B6B7F", IF ( [Profit per Active Customer] >= p, "#1E7F4B", "#C0392B" ) )
+		displayFolder: 6 Display
+		lineageTag: 1b413e32-186b-4734-bbf5-294f1447fec4
+
+	/// Card change line for Orders per Customer: arrow and change vs last year.
+	measure 'Δ Orders per Customer' = VAR p = [Orders per Active Customer PY] VAR d = DIVIDE ( [Orders per Active Customer] - [Orders per Active Customer PY], [Orders per Active Customer PY] ) RETURN IF ( NOT HASONEVALUE ( 'Date'[Year] ), "Jan 2023 – Oct 2025", IF ( ISBLANK ( p ), "No prior year", IF ( d >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( d ), "0.0%" ) & " vs last year" ) )
+		displayFolder: 6 Display
+		lineageTag: ce1a5fae-6392-4e75-a01c-d12f6a629840
+
+	/// Colour of the Orders per Customer change line: green up, red down, grey when not comparable.
+	measure 'Δ Orders per Customer Color' = VAR p = [Orders per Active Customer PY] RETURN IF ( NOT HASONEVALUE ( 'Date'[Year] ) || ISBLANK ( p ), "#5B6B7F", IF ( [Orders per Active Customer] >= p, "#1E7F4B", "#C0392B" ) )
+		displayFolder: 6 Display
+		lineageTag: 48a2e50f-a43c-4491-b6a6-0a41d92c7abc
+
+	/// Card change line for AOV: arrow and change vs last year.
+	measure 'Δ AOV' = VAR p = [Avg Order Value PY] VAR d = DIVIDE ( [Avg Order Value] - [Avg Order Value PY], [Avg Order Value PY] ) RETURN IF ( NOT HASONEVALUE ( 'Date'[Year] ), "Jan 2023 – Oct 2025", IF ( ISBLANK ( p ), "No prior year", IF ( d >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( d ), "0.0%" ) & " vs last year" ) )
+		displayFolder: 6 Display
+		lineageTag: ebc40685-2b84-4689-be15-0836744ec8da
+
+	/// Colour of the AOV change line: green up, red down, grey when not comparable.
+	measure 'Δ AOV Color' = VAR p = [Avg Order Value PY] RETURN IF ( NOT HASONEVALUE ( 'Date'[Year] ) || ISBLANK ( p ), "#5B6B7F", IF ( [Avg Order Value] >= p, "#1E7F4B", "#C0392B" ) )
+		displayFolder: 6 Display
+		lineageTag: 7228941a-5877-4470-b814-33a9a2d4add4
+
+	/// Card change line for Active Customers: arrow and change vs last year.
+	measure 'Δ Active Customers' = VAR p = [Active Customers PY] VAR d = DIVIDE ( [Active Customers] - [Active Customers PY], [Active Customers PY] ) RETURN IF ( NOT HASONEVALUE ( 'Date'[Year] ), "Jan 2023 – Oct 2025", IF ( ISBLANK ( p ), "No prior year", IF ( d >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( d ), "0.0%" ) & " vs last year" ) )
+		displayFolder: 6 Display
+		lineageTag: de7963f4-4a28-44f6-b1c6-6ca24399ab32
+
+	/// Colour of the Active Customers change line: green up, red down, grey when not comparable.
+	measure 'Δ Active Customers Color' = VAR p = [Active Customers PY] RETURN IF ( NOT HASONEVALUE ( 'Date'[Year] ) || ISBLANK ( p ), "#5B6B7F", IF ( [Active Customers] >= p, "#1E7F4B", "#C0392B" ) )
+		displayFolder: 6 Display
+		lineageTag: 998b3bea-f951-401a-a549-c2433bbaf4d5
+
+	/// Card line: gross profit and share of the top category.
+	measure 'Δ Top Category' = VAR c = [Top Profit Category] VAR gp = CALCULATE ( [Gross Profit], Products[Category] = c ) RETURN ( VAR _g = gp RETURN SWITCH ( TRUE (), ISBLANK ( _g ), BLANK (), ABS ( _g ) >= 10000000, FORMAT ( DIVIDE ( _g, 10000000 ), "₹#,##0.00", "en-US" ) & " Cr", ABS ( _g ) >= 1000000, FORMAT ( DIVIDE ( _g, 100000 ), "₹#,##0.0", "en-US" ) & " L", ABS ( _g ) >= 100000, FORMAT ( DIVIDE ( _g, 100000 ), "₹#,##0.00", "en-US" ) & " L", FORMAT ( _g, "₹#,##0", "en-US" ) ) ) & " · " & FORMAT ( DIVIDE ( gp, [Gross Profit] ), "0%" ) & " of profit"
+		displayFolder: 6 Display
+		lineageTag: d3acebbf-9756-40ba-a720-a9f119c707b1
+
+	/// Card line: gross profit and share of the lowest category.
+	measure 'Δ Lowest Category' = VAR c = [Lowest Profit Category] VAR gp = CALCULATE ( [Gross Profit], Products[Category] = c ) RETURN ( VAR _g = gp RETURN SWITCH ( TRUE (), ISBLANK ( _g ), BLANK (), ABS ( _g ) >= 10000000, FORMAT ( DIVIDE ( _g, 10000000 ), "₹#,##0.00", "en-US" ) & " Cr", ABS ( _g ) >= 1000000, FORMAT ( DIVIDE ( _g, 100000 ), "₹#,##0.0", "en-US" ) & " L", ABS ( _g ) >= 100000, FORMAT ( DIVIDE ( _g, 100000 ), "₹#,##0.00", "en-US" ) & " L", FORMAT ( _g, "₹#,##0", "en-US" ) ) ) & " · " & FORMAT ( DIVIDE ( gp, [Gross Profit] ), "0%" ) & " of profit"
+		displayFolder: 6 Display
+		lineageTag: 1d11076a-d312-438f-8633-c9849f7c8a96
+
+	/// Card line: PPAC distance from target (coloured by KPI Status Color).
+	measure 'Δ PPAC Target' = VAR v = [Profit per Active Customer] VAR t = [Profit per Active Customer Target] RETURN IF ( ISBLANK ( t ), "No target (first year)", FORMAT ( ABS ( DIVIDE ( v - t, t ) ), "0.0%" ) & IF ( v >= t, " ahead of target", " behind target" ) )
+		displayFolder: 6 Display
+		lineageTag: e81a2d5b-d6ad-44bf-b613-3f818a11d922
+
+	/// Card line: margin gap to all products.
+	measure 'Δ Category Margin' = FORMAT ( [Margin vs Avg (pp)], "+0.0;-0.0;0.0" ) & " pp vs all products"
+		displayFolder: 6 Display
+		lineageTag: 29d3c2e2-ba38-402c-9004-bffe0581771f
+
+	/// Card line: total gross profit.
+	measure 'Δ Category Share' = "of " & ( VAR _t = CALCULATE ( [Gross Profit], REMOVEFILTERS ( Products ) ) RETURN SWITCH ( TRUE (), ISBLANK ( _t ), BLANK (), ABS ( _t ) >= 10000000, FORMAT ( DIVIDE ( _t, 10000000 ), "₹#,##0.00", "en-US" ) & " Cr", ABS ( _t ) >= 1000000, FORMAT ( DIVIDE ( _t, 100000 ), "₹#,##0.0", "en-US" ) & " L", ABS ( _t ) >= 100000, FORMAT ( DIVIDE ( _t, 100000 ), "₹#,##0.00", "en-US" ) & " L", FORMAT ( _t, "₹#,##0", "en-US" ) ) ) & " total"
+		displayFolder: 6 Display
+		lineageTag: 48c8e449-9908-4a9f-b501-94bd313c5c48
+
+	/// Card line: profit lost on lines sold below cost.
+	measure 'Δ Loss Lines' = ( VAR _l = -[Profit Lost on Loss-Making Lines] RETURN SWITCH ( TRUE (), ISBLANK ( _l ), BLANK (), ABS ( _l ) >= 10000000, FORMAT ( DIVIDE ( _l, 10000000 ), "₹#,##0.00", "en-US" ) & " Cr", ABS ( _l ) >= 1000000, FORMAT ( DIVIDE ( _l, 100000 ), "₹#,##0.0", "en-US" ) & " L", ABS ( _l ) >= 100000, FORMAT ( DIVIDE ( _l, 100000 ), "₹#,##0.00", "en-US" ) & " L", FORMAT ( _l, "₹#,##0", "en-US" ) ) ) & " lost below cost"
+		displayFolder: 6 Display
+		lineageTag: de3dcdb0-f8e5-4dcd-8f08-c02d64edcc44
+
+	/// Card line: 2026 forecast vs 2024 actual gross profit.
+	measure 'Δ F26 Gross Profit' = VAR b = [Gross Profit 2024] VAR d = DIVIDE ( [F26 Gross Profit] - b, b ) RETURN IF ( d >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( d ), "0%" ) & " vs 2024 (" & ( VAR _b = b RETURN SWITCH ( TRUE (), ISBLANK ( _b ), BLANK (), ABS ( _b ) >= 10000000, FORMAT ( DIVIDE ( _b, 10000000 ), "₹#,##0.00", "en-US" ) & " Cr", ABS ( _b ) >= 1000000, FORMAT ( DIVIDE ( _b, 100000 ), "₹#,##0.0", "en-US" ) & " L", ABS ( _b ) >= 100000, FORMAT ( DIVIDE ( _b, 100000 ), "₹#,##0.00", "en-US" ) & " L", FORMAT ( _b, "₹#,##0", "en-US" ) ) ) & ")"
+		displayFolder: 6 Display
+		lineageTag: 5a60c09a-e0df-469c-bcf3-7088c61fa631
+
+	/// Colour of the 2026 profit line.
+	measure 'Δ F26 Gross Profit Color' = IF ( [F26 Gross Profit] >= [Gross Profit 2024], "#1E7F4B", "#C0392B" )
+		displayFolder: 6 Display
+		lineageTag: 23797e75-d45b-4a71-84c9-334e9fac1a98
+
+	/// Card line for the forecast range.
+	measure 'Δ F26 Range' = "80% of 2,000 runs"
+		displayFolder: 6 Display
+		lineageTag: acc2b7db-f30f-4f13-b011-9e9270c68d05
+
+	/// Card line: 2026 orders vs 2024.
+	measure 'Δ F26 Orders' = VAR b = CALCULATE ( [Revenue Orders], REMOVEFILTERS ( 'Date' ), 'Date'[Year] = 2024 ) VAR d = DIVIDE ( [F26 Revenue Orders] - b, b ) RETURN IF ( d >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( d ), "0%" ) & " vs 2024 (" & b & ")"
+		displayFolder: 6 Display
+		lineageTag: 9d0342d2-8afc-491e-a524-a9fdb23b7d0c
+
+	/// Colour of the 2026 orders line.
+	measure 'Δ F26 Orders Color' = IF ( [F26 Revenue Orders] >= CALCULATE ( [Revenue Orders], REMOVEFILTERS ( 'Date' ), 'Date'[Year] = 2024 ), "#1E7F4B", "#C0392B" )
+		displayFolder: 6 Display
+		lineageTag: 792c1542-b414-43dd-aa05-b48d1a469f74
+
+	/// Card line: 2026 new buyers vs 2024.
+	measure 'Δ F26 New Buyers' = VAR b = [New Buyers 2024] VAR d = DIVIDE ( [F26 New Buyers] - b, b ) RETURN IF ( d >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( d ), "0%" ) & " vs 2024 (" & b & ")"
+		displayFolder: 6 Display
+		lineageTag: 07663e7c-4674-42db-893a-0dc7a4da67e3
+
+	/// Colour of the 2026 new-buyer line.
+	measure 'Δ F26 New Buyers Color' = IF ( [F26 New Buyers] >= [New Buyers 2024], "#1E7F4B", "#C0392B" )
+		displayFolder: 6 Display
+		lineageTag: f3042667-a2e3-49a2-a814-e9d4408a46b4
+
+	/// Card line: 2026 PPAC vs its target.
+	measure 'Δ F26 PPAC' = VAR t = [F26 PPAC Target] VAR d = DIVIDE ( [F26 PPAC] - t, t ) RETURN FORMAT ( ABS ( d ), "0%" ) & IF ( d >= 0, " above ", " below " ) & ( VAR _t = t RETURN SWITCH ( TRUE (), ISBLANK ( _t ), BLANK (), ABS ( _t ) >= 10000000, FORMAT ( DIVIDE ( _t, 10000000 ), "₹#,##0.00", "en-US" ) & " Cr", ABS ( _t ) >= 1000000, FORMAT ( DIVIDE ( _t, 100000 ), "₹#,##0.0", "en-US" ) & " L", ABS ( _t ) >= 100000, FORMAT ( DIVIDE ( _t, 100000 ), "₹#,##0.00", "en-US" ) & " L", FORMAT ( _t, "₹#,##0", "en-US" ) ) ) & " target"
+		displayFolder: 6 Display
+		lineageTag: 8655feea-697e-402a-b5cb-8fd308d2b202
+
+	/// Colour of the 2026 PPAC line.
+	measure 'Δ F26 PPAC Color' = IF ( [F26 PPAC] >= [F26 PPAC Target], "#1E7F4B", "#C0392B" )
+		displayFolder: 6 Display
+		lineageTag: b38d2fad-af70-41a2-8fa3-b3bb69cd4806
+
+	/// Card line for the target probability.
+	measure 'Δ F26 Hit Chance' = "of runs reach target"
+		displayFolder: 6 Display
+		lineageTag: 57d8e9da-d6c6-4967-a492-43fa94be5db6
+
+	/// Grey for card lines that carry context, not a change.
+	measure 'Δ Neutral Color' = "#5B6B7F"
+		displayFolder: 6 Display
+		lineageTag: 89557b58-efe9-437c-8b0b-380de00b4b2f
+
+	/// Amber for card lines that flag an opportunity or risk.
+	measure 'Δ Warn Color' = "#A15F00"
+		displayFolder: 6 Display
+		lineageTag: a302e7c0-0703-4994-9aa1-dbab65ec6778
+
+	/// Footer: source, refresh date and the main caveats.
+	measure 'Footer Text' = "Source: Online Sales Data, Jan 2023 – Oct 2025  ·  Refreshed " & FORMAT ( MAX ( 'Refresh Info'[Refreshed] ), "d mmm yyyy" ) & "  ·  Profit excl. shipping and marketing  ·  Synthetic-looking data"
+		displayFolder: 6 Display
+		lineageTag: fe3eacce-54e6-4a7c-b959-ecae554e7112
+
+	/// Page 1 headline: repeat rate and recurring customers' share of gross profit.
+	measure 'Title Retention' = FORMAT ( [Recurring Customer %], "0%" ) & " of buyers came back, and they earn " & FORMAT ( [Recurring Profit Share %], "0%" ) & " of gross profit"
+		displayFolder: 7 Titles
+		lineageTag: 713de23d-a487-4a0a-b779-5b97ccaec71c
+
+	/// New-buyer chart title: last registration date and first-time buyers per year.
+	measure 'Title New Buyers' = VAR seq = CONCATENATEX ( FILTER ( VALUES ( 'Date'[Year] ), NOT ISBLANK ( [New Buyers] ) ), [New Buyers], "→", 'Date'[Year], ASC ) RETURN "Sign-ups stopped " & FORMAT ( [Last Sign-up Date], "d mmm yyyy" ) & "; new buyers " & seq
+		displayFolder: 7 Titles
+		lineageTag: b3adbcca-b8a3-43ca-8580-04aa0b14fba8
+
+	/// Order-frequency chart title.
+	measure 'Title Order Frequency' = FORMAT ( [One-Time Customer %], "0%" ) & " of buyers ordered once; " & FORMAT ( [Buyers With 3+ Orders %], "0%" ) & " ordered 3+ times"
+		displayFolder: 7 Titles
+		lineageTag: 72c12f2f-36ef-4f8b-aac3-bbb1d7e8ac83
+
+	/// Profit-per-customer chart title.
+	measure 'Title Value per Customer' = "Recurring buyers earn " & FORMAT ( [Recurring Value Multiplier], "0.0" ) & "x (" & FORMAT ( DIVIDE ( [Profit per Recurring Customer], 100000 ), "₹#,##0.00", "en-US" ) & " L" & " vs " & FORMAT ( DIVIDE ( [Profit per One-Time Customer], 100000 ), "₹#,##0.00", "en-US" ) & " L" & " each)"
+		displayFolder: 7 Titles
+		lineageTag: cfb86069-5efc-4dc9-b7c2-20c739c25b54
+
+	/// Profit-by-type chart title: recurring share of gross profit in the first and last year.
+	measure 'Title Profit by Type' = VAR ys = FILTER ( VALUES ( 'Date'[Year] ), NOT ISBLANK ( [Gross Profit] ) ) VAR y0 = MINX ( ys, 'Date'[Year] ) VAR y1 = MAXX ( ys, 'Date'[Year] ) RETURN "Repeat customers: " & FORMAT ( CALCULATE ( [Recurring Profit Share %], 'Date'[Year] = y0 ), "0%" ) & " of profit in " & y0 & ", " & FORMAT ( CALCULATE ( [Recurring Profit Share %], 'Date'[Year] = y1 ), "0%" ) & " in " & y1
+		displayFolder: 7 Titles
+		lineageTag: 15396491-0974-4211-8be4-15ea3f375ad7
+
+	/// Segment chart title: highest and lowest repeat rate by segment.
+	measure 'Title Segment' = VAR t = ADDCOLUMNS ( FILTER ( VALUES ( Customers[Segment] ), NOT ISBLANK ( [Purchasing Customers] ) ), "@r", [Recurring Customer %] ) VAR hi = MAXX ( TOPN ( 1, t, [@r], DESC ), Customers[Segment] ) VAR lo = MAXX ( TOPN ( 1, t, [@r], ASC ), Customers[Segment] ) RETURN IF ( COUNTROWS ( t ) = 1, "Repeat rate in " & hi & ": " & FORMAT ( MAXX ( t, [@r] ), "0%" ), "Repeat rate: " & FORMAT ( MAXX ( t, [@r] ), "0%" ) & " in " & hi & " vs " & FORMAT ( MINX ( t, [@r] ), "0%" ) & " in " & lo )
+		displayFolder: 7 Titles
+		lineageTag: 13b8875f-d318-46e8-a799-e6819ada986b
+
+	/// Page 2 headline: top category, its profit and share, and the margin range.
+	measure 'Title Category' = VAR tc = [Top Profit Category] VAR gp = CALCULATE ( [Gross Profit], Products[Category] = tc ) VAR mm = ADDCOLUMNS ( ALLSELECTED ( Products[Category] ), "@m", [Gross Margin %] ) RETURN tc & " leads with " & ( VAR _g = gp RETURN SWITCH ( TRUE (), ISBLANK ( _g ), BLANK (), ABS ( _g ) >= 10000000, FORMAT ( DIVIDE ( _g, 10000000 ), "₹#,##0.00", "en-US" ) & " Cr", ABS ( _g ) >= 1000000, FORMAT ( DIVIDE ( _g, 100000 ), "₹#,##0.0", "en-US" ) & " L", ABS ( _g ) >= 100000, FORMAT ( DIVIDE ( _g, 100000 ), "₹#,##0.00", "en-US" ) & " L", FORMAT ( _g, "₹#,##0", "en-US" ) ) ) & " (" & FORMAT ( DIVIDE ( gp, [Gross Profit] ), "0%" ) & " of profit); margins run " & FORMAT ( MINX ( mm, [@m] ), "0%" ) & "–" & FORMAT ( MAXX ( mm, [@m] ), "0%" )
+		displayFolder: 7 Titles
+		lineageTag: dcff17e1-4932-4a1c-85a2-04ed09999523
+
+	/// Gross-profit-by-category chart title.
+	measure 'Title GP by Category' = VAR lo = [Lowest Profit Category] RETURN [Top Profit Category] & " earns most; " & lo & " least (" & ( VAR _l = CALCULATE ( [Gross Profit], Products[Category] = lo ) RETURN SWITCH ( TRUE (), ISBLANK ( _l ), BLANK (), ABS ( _l ) >= 10000000, FORMAT ( DIVIDE ( _l, 10000000 ), "₹#,##0.00", "en-US" ) & " Cr", ABS ( _l ) >= 1000000, FORMAT ( DIVIDE ( _l, 100000 ), "₹#,##0.0", "en-US" ) & " L", ABS ( _l ) >= 100000, FORMAT ( DIVIDE ( _l, 100000 ), "₹#,##0.00", "en-US" ) & " L", FORMAT ( _l, "₹#,##0", "en-US" ) ) ) & ")"
+		displayFolder: 7 Titles
+		lineageTag: 5d7f8093-2e68-4aef-82a5-a62c5e5dcbd6
+
+	/// Margin-by-category chart title.
+	measure 'Title Margin by Category' = VAR mm = ADDCOLUMNS ( ALLSELECTED ( Products[Category] ), "@m", [Gross Margin %] ) VAR hi = MAXX ( TOPN ( 1, mm, [@m], DESC ), Products[Category] ) VAR lo = MAXX ( TOPN ( 1, mm, [@m], ASC ), Products[Category] ) RETURN "Margin is highest in " & hi & " (" & FORMAT ( MAXX ( mm, [@m] ), "0.0%" ) & ") and thinnest in " & lo & " (" & FORMAT ( MINX ( mm, [@m] ), "0.0%" ) & ")"
+		displayFolder: 7 Titles
+		lineageTag: c87a8358-50ae-463d-a541-cade11c375c3
+
+	/// Discount chart title: margin at the lowest and highest item discount.
+	measure 'Title Discount' = VAR b = FILTER ( VALUES ( Order_Items[Item Discount %] ), NOT ISBLANK ( [Net Sales] ) ) VAR b0 = MINX ( b, Order_Items[Item Discount %] ) VAR b1 = MAXX ( b, Order_Items[Item Discount %] ) VAR m0 = CALCULATE ( [Gross Margin %], Order_Items[Item Discount %] = b0 ) VAR m1 = CALCULATE ( [Gross Margin %], Order_Items[Item Discount %] = b1 ) RETURN "Margin " & IF ( m1 < m0, "falls", "rises" ) & " from " & FORMAT ( m0, "0%" ) & " at " & b0 & "% item discount to " & FORMAT ( m1, "0%" ) & " at " & b1 & "%"
+		displayFolder: 7 Titles
+		lineageTag: 575f0b49-4cb6-4955-b90b-fc4d2d24b0ec
+
+	/// Category P&L table title.
+	measure 'Title Subcategory' = VAR ts = [Top Subcategory] RETURN "Top subcategory: " & ts & " (" & ( VAR _s = CALCULATE ( [Gross Profit], Products[Subcategory] = ts ) RETURN SWITCH ( TRUE (), ISBLANK ( _s ), BLANK (), ABS ( _s ) >= 10000000, FORMAT ( DIVIDE ( _s, 10000000 ), "₹#,##0.00", "en-US" ) & " Cr", ABS ( _s ) >= 1000000, FORMAT ( DIVIDE ( _s, 100000 ), "₹#,##0.0", "en-US" ) & " L", ABS ( _s ) >= 100000, FORMAT ( DIVIDE ( _s, 100000 ), "₹#,##0.00", "en-US" ) & " L", FORMAT ( _s, "₹#,##0", "en-US" ) ) ) & " gross profit)"
+		displayFolder: 7 Titles
+		lineageTag: b5c4754c-ff80-46fe-903a-6f105f2d7088
+
+	/// Page 3 headline: PPAC in the latest year vs last year and target.
+	measure 'Title KPI' = VAR yr = CALCULATE ( MAX ( 'Date'[Year] ), REMOVEFILTERS ( 'Date' ) ) VAR v = CALCULATE ( [Profit per Active Customer], 'Date'[Year] = yr ) VAR yoy = CALCULATE ( [Profit per Active Customer YoY %], 'Date'[Year] = yr ) VAR vt = CALCULATE ( [KPI vs Target %], 'Date'[Year] = yr ) RETURN "PPAC is " & ( VAR _p = v RETURN SWITCH ( TRUE (), ISBLANK ( _p ), BLANK (), ABS ( _p ) >= 10000000, FORMAT ( DIVIDE ( _p, 10000000 ), "₹#,##0.00", "en-US" ) & " Cr", ABS ( _p ) >= 1000000, FORMAT ( DIVIDE ( _p, 100000 ), "₹#,##0.0", "en-US" ) & " L", ABS ( _p ) >= 100000, FORMAT ( DIVIDE ( _p, 100000 ), "₹#,##0.00", "en-US" ) & " L", FORMAT ( _p, "₹#,##0", "en-US" ) ) ) & " in " & yr & IF ( yr = YEAR ( CALCULATE ( MAX ( 'Date'[Date] ), REMOVEFILTERS ( 'Date' ) ) ) && MONTH ( CALCULATE ( MAX ( 'Date'[Date] ), REMOVEFILTERS ( 'Date' ) ) ) < 12, " YTD", "" ) & ": " & FORMAT ( ABS ( yoy ), "0.0%" ) & IF ( yoy >= 0, " above", " below" ) & " last year and " & FORMAT ( ABS ( vt ), "0.0%" ) & IF ( vt >= 0, " above", " below" ) & " target"
+		displayFolder: 7 Titles
+		lineageTag: 6ccf0993-2fe8-4131-9866-c7e6005cedd9
+
+	/// Quarterly PPAC chart title: quarters on target.
+	measure 'Title PPAC Quarter' = VAR q = FILTER ( VALUES ( 'Date'[Year Quarter] ), NOT ISBLANK ( [Profit per Active Customer Target] ) ) VAR hit = COUNTROWS ( FILTER ( q, [Profit per Active Customer] >= [Profit per Active Customer Target] ) ) RETURN "PPAC met its target in " & hit & " of " & COUNTROWS ( q ) & " quarters that have a prior year"
+		displayFolder: 7 Titles
+		lineageTag: 4c8f2434-5602-4250-a62c-3fb59c57ed97
+
+	/// Driver table title: change in each PPAC driver, latest year vs the same months last year.
+	measure 'Title Drivers' = VAR yr = CALCULATE ( MAX ( 'Date'[Year] ), REMOVEFILTERS ( 'Date' ) ) VAR o = CALCULATE ( DIVIDE ( [Orders per Active Customer] - [Orders per Active Customer PY], [Orders per Active Customer PY] ), 'Date'[Year] = yr ) VAR a = CALCULATE ( DIVIDE ( [Avg Order Value] - [Avg Order Value PY], [Avg Order Value PY] ), 'Date'[Year] = yr ) VAR m = CALCULATE ( ( [Gross Margin %] - [Gross Margin % PY] ) * 100, 'Date'[Year] = yr ) RETURN "In " & yr & ", orders per customer " & IF ( o >= 0, "rose ", "fell " ) & FORMAT ( ABS ( o ), "0.0%" ) & ", order value " & IF ( a >= 0, "rose ", "fell " ) & FORMAT ( ABS ( a ), "0.0%" ) & ", margin " & IF ( m >= 0, "rose ", "fell " ) & FORMAT ( ABS ( m ), "0.0" ) & " pp"
+		displayFolder: 7 Titles
+		lineageTag: 99bc00d0-e9d6-471e-944d-b2ff39940f05
+
+	/// PPAC-by-segment chart title, latest year.
+	measure 'Title PPAC Segment' = VAR yr = CALCULATE ( MAX ( 'Date'[Year] ), REMOVEFILTERS ( 'Date' ) ) VAR t = ADDCOLUMNS ( FILTER ( VALUES ( Customers[Segment] ), NOT ISBLANK ( CALCULATE ( [Active Customers], 'Date'[Year] = yr ) ) ), "@p", CALCULATE ( [Profit per Active Customer], 'Date'[Year] = yr ) ) RETURN "PPAC in " & yr & IF ( yr = YEAR ( CALCULATE ( MAX ( 'Date'[Date] ), REMOVEFILTERS ( 'Date' ) ) ) && MONTH ( CALCULATE ( MAX ( 'Date'[Date] ), REMOVEFILTERS ( 'Date' ) ) ) < 12, " YTD", "" ) & ": " & CONCATENATEX ( t, Customers[Segment] & " " & ( VAR _p = [@p] RETURN SWITCH ( TRUE (), ISBLANK ( _p ), BLANK (), ABS ( _p ) >= 10000000, FORMAT ( DIVIDE ( _p, 10000000 ), "₹#,##0.00", "en-US" ) & " Cr", ABS ( _p ) >= 1000000, FORMAT ( DIVIDE ( _p, 100000 ), "₹#,##0.0", "en-US" ) & " L", ABS ( _p ) >= 100000, FORMAT ( DIVIDE ( _p, 100000 ), "₹#,##0.00", "en-US" ) & " L", FORMAT ( _p, "₹#,##0", "en-US" ) ) ), " vs ", [@p], DESC )
+		displayFolder: 7 Titles
+		lineageTag: b5491036-5f6b-4b9d-8c56-43ac4ab32e88
+
+	/// Page 5 headline: 2026 gross profit forecast and its range for the selected scenario.
+	measure 'Title Forecast' = "2026 gross profit: about " & [Card F26 Gross Profit] & " (80% range " & [Card F26 Range] & ") under scenario " & LEFT ( SELECTEDVALUE ( Scenario[Scenario], "A" ), 1 )
+		displayFolder: 7 Titles
+		lineageTag: 7f424dec-309d-48b9-a826-2c01ec762685
+
+	/// Lever chart title: range of the lever sizes.
+	measure 'Title Levers' = "Four levers, each worth ₹" & FORMAT ( DIVIDE ( MINX ( Levers, Levers[Uplift Low] ), 100000 ), "0.0" ) & "–" & FORMAT ( DIVIDE ( MAXX ( Levers, Levers[Uplift High] ), 100000 ), "0.0" ) & " L of 2026 gross profit"
+		displayFolder: 7 Titles
+		lineageTag: 7c4b5b4d-be3e-49a9-9930-5f4fe89ec185
+
+	/// Drill-through headline for one category.
+	measure 'Title Category Detail' = [Selected Category] & ": " & [Card Gross Profit] & " gross profit (" & FORMAT ( [Category Profit Share %], "0%" ) & " of total), margin " & FORMAT ( [Gross Margin %], "0.0%" ) & "; top subcategory " & [Top Subcategory]
+		displayFolder: 7 Titles
+		lineageTag: 8037c77b-ddf8-46dc-a295-3f3184558277
 
 	column Hidden
 		isHidden
-		lineageTag: 9f674c7d-0931-4ef7-923f-f97cf7a15890
+		isAvailableInMdx: false
+		lineageTag: 20229623-b95e-4d17-a52e-f7a67c74ae1d
+		summarizeBy: none
 		isNameInferred
 		sourceColumn: [Hidden]
 
+		annotation SummarizationSetBy = User
+
 	partition _Measures = calculated
 		mode: import
-		source = ROW("Hidden", BLANK())
+		source = ROW ( "Hidden", BLANK () )
+
+	annotation BestPracticeAnalyzer_IgnoreRules = {"RuleIDs":["ENSURE_TABLES_HAVE_RELATIONSHIPS","REMOVE_UNNECESSARY_COLUMNS"]}
 

@@ -3,11 +3,11 @@
   "name": "bar_value_per_cust",
   "position": {
     "x": 856,
-    "y": 184,
-    "z": 11000,
-    "height": 262,
+    "y": 178,
+    "z": 18000,
+    "height": 240,
     "width": 408,
-    "tabOrder": 11000
+    "tabOrder": 18000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -42,11 +42,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Profit per Active Customer"
+                  "Property": "Profit per Customer ₹ L"
                 }
               },
-              "queryRef": "_Measures.Profit per Active Customer",
-              "nativeQueryRef": "Profit per Active Customer",
+              "queryRef": "_Measures.Profit per Customer ₹ L",
+              "nativeQueryRef": "Profit per Customer ₹ L",
               "displayName": "Gross profit per customer"
             }
           ]
@@ -62,7 +62,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Profit per Active Customer"
+                "Property": "Profit per Customer ₹ L"
               }
             },
             "direction": "Descending"
@@ -166,7 +166,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#CD83FF'"
+                      "Value": "'#62748E'"
                     }
                   }
                 }
@@ -215,8 +215,13 @@
             },
             "text": {
               "expr": {
-                "Literal": {
-                  "Value": "'Recurring customers are worth ~2.8x more'"
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Title Value per Customer"
                 }
               }
             },
@@ -261,7 +266,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Lifetime gross profit per customer'"
+                  "Value": "'Lifetime gross profit per customer, ₹ L'"
                 }
               }
             },
@@ -280,6 +285,19 @@
                       "Value": "'#62748E'"
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Bar chart of lifetime gross profit per customer: recurring customers in violet, one-time in grey.'"
                 }
               }
             }

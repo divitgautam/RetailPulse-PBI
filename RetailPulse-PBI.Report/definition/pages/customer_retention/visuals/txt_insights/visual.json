@@ -3,11 +3,11 @@
   "name": "txt_insights",
   "position": {
     "x": 856,
-    "y": 458,
-    "z": 14000,
-    "height": 246,
+    "y": 430,
+    "z": 21000,
+    "height": 252,
     "width": 408,
-    "tabOrder": 14000
+    "tabOrder": 21000
   },
   "visual": {
     "visualType": "textbox",
@@ -20,7 +20,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "What this tells us",
+                    "value": "What this tells us (all customers)",
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontSize": "12pt",
@@ -33,17 +33,17 @@
               {
                 "textRuns": [
                   {
-                    "value": "52.7% ",
+                    "value": "Retention carries profit: ",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "10pt",
+                      "fontSize": "9pt",
                       "color": "#682EFF"
                     }
                   },
                   {
-                    "value": "of buyers came back (116 recurring vs 104 one-time).",
+                    "value": "recurring customers are 53% of buyers but earn 76% of gross profit.",
                     "textStyle": {
-                      "fontSize": "10pt",
+                      "fontSize": "9pt",
                       "color": "#020618"
                     }
                   }
@@ -52,17 +52,17 @@
               {
                 "textRuns": [
                   {
-                    "value": "76% ",
+                    "value": "Second orders are slow: ",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "10pt",
+                      "fontSize": "9pt",
                       "color": "#682EFF"
                     }
                   },
                   {
-                    "value": "of gross profit comes from recurring customers.",
+                    "value": "the median gap is 254 days, and 54% return within 2 years. Silence is not churn.",
                     "textStyle": {
-                      "fontSize": "10pt",
+                      "fontSize": "9pt",
                       "color": "#020618"
                     }
                   }
@@ -71,36 +71,17 @@
               {
                 "textRuns": [
                   {
-                    "value": "2.8x: ",
+                    "value": "The funnel is empty: ",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "10pt",
+                      "fontSize": "9pt",
                       "color": "#682EFF"
                     }
                   },
                   {
-                    "value": "a recurring customer brings ₹1.88 L profit vs ₹0.68 L for a one-time buyer.",
+                    "value": "no sign-ups since 25 Sep 2024, and 80 registered customers never ordered.",
                     "textStyle": {
-                      "fontSize": "10pt",
-                      "color": "#020618"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "80 customers ",
-                    "textStyle": {
-                      "fontWeight": "bold",
-                      "fontSize": "10pt",
-                      "color": "#682EFF"
-                    }
-                  },
-                  {
-                    "value": "(27% of the base) registered but never ordered, an easy activation target.",
-                    "textStyle": {
-                      "fontSize": "10pt",
+                      "fontSize": "9pt",
                       "color": "#020618"
                     }
                   }
@@ -112,14 +93,14 @@
                     "value": "Action: ",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "10pt",
+                      "fontSize": "9pt",
                       "color": "#682EFF"
                     }
                   },
                   {
-                    "value": "a second-order nudge for one-time buyers is the biggest profit lever.",
+                    "value": "a second-order nudge for one-time buyers and a first-order offer for the 80.",
                     "textStyle": {
-                      "fontSize": "10pt",
+                      "fontSize": "9pt",
                       "color": "#020618"
                     }
                   }
@@ -152,6 +133,19 @@
               "expr": {
                 "Literal": {
                   "Value": "14D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'What this tells us (all customers)'"
                 }
               }
             }

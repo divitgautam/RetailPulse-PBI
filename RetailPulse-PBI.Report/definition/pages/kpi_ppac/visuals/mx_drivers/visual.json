@@ -3,11 +3,11 @@
   "name": "mx_drivers",
   "position": {
     "x": 16,
-    "y": 458,
-    "z": 10000,
-    "height": 246,
-    "width": 700,
-    "tabOrder": 10000
+    "y": 430,
+    "z": 17000,
+    "height": 252,
+    "width": 766,
+    "tabOrder": 17000
   },
   "visual": {
     "visualType": "pivotTable",
@@ -47,7 +47,7 @@
               },
               "queryRef": "_Measures.Active Customers",
               "nativeQueryRef": "Active Customers",
-              "displayName": "Active Cust."
+              "displayName": "Active customers"
             },
             {
               "field": {
@@ -62,7 +62,7 @@
               },
               "queryRef": "_Measures.Orders per Active Customer",
               "nativeQueryRef": "Orders per Active Customer",
-              "displayName": "Orders / Cust."
+              "displayName": "Orders / customer"
             },
             {
               "field": {
@@ -77,7 +77,7 @@
               },
               "queryRef": "_Measures.Avg Order Value",
               "nativeQueryRef": "Avg Order Value",
-              "displayName": "Avg Order Value"
+              "displayName": "Order value ₹"
             },
             {
               "field": {
@@ -92,7 +92,7 @@
               },
               "queryRef": "_Measures.Gross Margin %",
               "nativeQueryRef": "Gross Margin %",
-              "displayName": "Margin %"
+              "displayName": "Margin"
             },
             {
               "field": {
@@ -107,7 +107,7 @@
               },
               "queryRef": "_Measures.Profit per Active Customer",
               "nativeQueryRef": "Profit per Active Customer",
-              "displayName": "PPAC"
+              "displayName": "PPAC ₹"
             },
             {
               "field": {
@@ -122,7 +122,7 @@
               },
               "queryRef": "_Measures.Profit per Active Customer YoY %",
               "nativeQueryRef": "Profit per Active Customer YoY %",
-              "displayName": "PPAC YoY"
+              "displayName": "PPAC vs LY"
             }
           ]
         }
@@ -145,6 +145,26 @@
         ]
       }
     },
+    "objects": {
+      "subTotals": [
+        {
+          "properties": {
+            "rowSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {}
+        }
+      ]
+    },
     "visualContainerObjects": {
       "title": [
         {
@@ -158,8 +178,13 @@
             },
             "text": {
               "expr": {
-                "Literal": {
-                  "Value": "'What drives PPAC'"
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Title Drivers"
                 }
               }
             },
@@ -204,7 +229,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'PPAC = Orders per customer x Avg order value x Margin %'"
+                  "Value": "'Jan to Oct of each year (like-for-like)  |  PPAC = orders per customer x order value x margin'"
                 }
               }
             },
@@ -228,8 +253,142 @@
             }
           }
         }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Table of PPAC and its three drivers for January to October of each year.'"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "jan_oct",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Date"
+              }
+            },
+            "Property": "Month No"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "s",
+              "Entity": "Date",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "s"
+                          }
+                        },
+                        "Property": "Month No"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "1L"
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "Literal": {
+                          "Value": "2L"
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "Literal": {
+                          "Value": "3L"
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "Literal": {
+                          "Value": "4L"
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "Literal": {
+                          "Value": "5L"
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "Literal": {
+                          "Value": "6L"
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "Literal": {
+                          "Value": "7L"
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "Literal": {
+                          "Value": "8L"
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "Literal": {
+                          "Value": "9L"
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "Literal": {
+                          "Value": "10L"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ]
   }
 }

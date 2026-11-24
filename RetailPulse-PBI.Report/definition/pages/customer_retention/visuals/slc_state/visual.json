@@ -4,10 +4,10 @@
   "position": {
     "x": 1086,
     "y": 8,
-    "z": 2000,
+    "z": 3000,
     "height": 56,
     "width": 178,
-    "tabOrder": 2000
+    "tabOrder": 3000
   },
   "visual": {
     "visualType": "slicer",
@@ -24,11 +24,11 @@
                       "Entity": "Customers"
                     }
                   },
-                  "Property": "state"
+                  "Property": "State"
                 }
               },
-              "queryRef": "Customers.state",
-              "nativeQueryRef": "state",
+              "queryRef": "Customers.State",
+              "nativeQueryRef": "State",
               "active": true
             }
           ]
@@ -203,6 +203,19 @@
               "expr": {
                 "Literal": {
                   "Value": "8D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'State filter'"
                 }
               }
             }

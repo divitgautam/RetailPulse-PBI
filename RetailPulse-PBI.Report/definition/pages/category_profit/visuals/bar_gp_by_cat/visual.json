@@ -3,11 +3,11 @@
   "name": "bar_gp_by_cat",
   "position": {
     "x": 16,
-    "y": 184,
-    "z": 9000,
-    "height": 262,
-    "width": 519,
-    "tabOrder": 9000
+    "y": 178,
+    "z": 16000,
+    "height": 206,
+    "width": 618,
+    "tabOrder": 16000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -23,11 +23,11 @@
                       "Entity": "Products"
                     }
                   },
-                  "Property": "category"
+                  "Property": "Category"
                 }
               },
-              "queryRef": "Products.category",
-              "nativeQueryRef": "category",
+              "queryRef": "Products.Category",
+              "nativeQueryRef": "Category",
               "active": true
             }
           ]
@@ -42,12 +42,12 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Gross Profit"
+                  "Property": "Gross Profit ₹ L"
                 }
               },
-              "queryRef": "_Measures.Gross Profit",
-              "nativeQueryRef": "Gross Profit",
-              "displayName": "Gross Profit"
+              "queryRef": "_Measures.Gross Profit ₹ L",
+              "nativeQueryRef": "Gross Profit ₹ L",
+              "displayName": "Gross profit"
             }
           ]
         }
@@ -62,7 +62,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Gross Profit"
+                "Property": "Gross Profit ₹ L"
               }
             },
             "direction": "Descending"
@@ -148,8 +148,13 @@
             },
             "text": {
               "expr": {
-                "Literal": {
-                  "Value": "'Gross profit by category'"
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Title GP by Category"
                 }
               }
             },
@@ -194,7 +199,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Ranked highest to lowest'"
+                  "Value": "'Gross profit, ₹ L, highest to lowest  |  Hover for detail, right-click to drill through'"
                 }
               }
             },
@@ -213,6 +218,53 @@
                       "Value": "'#62748E'"
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Bar chart of gross profit by category in lakh rupees, sorted from highest to lowest.'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualTooltip": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "type": {
+              "expr": {
+                "Literal": {
+                  "Value": "'ReportPage'"
+                }
+              }
+            },
+            "section": {
+              "expr": {
+                "Literal": {
+                  "Value": "'category_tip'"
+                }
+              }
+            },
+            "showChartSpecificTooltips": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }

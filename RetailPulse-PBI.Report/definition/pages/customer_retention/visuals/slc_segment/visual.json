@@ -4,10 +4,10 @@
   "position": {
     "x": 900,
     "y": 8,
-    "z": 1000,
+    "z": 2000,
     "height": 56,
     "width": 170,
-    "tabOrder": 1000
+    "tabOrder": 2000
   },
   "visual": {
     "visualType": "slicer",
@@ -24,11 +24,11 @@
                       "Entity": "Customers"
                     }
                   },
-                  "Property": "segment"
+                  "Property": "Segment"
                 }
               },
-              "queryRef": "Customers.segment",
-              "nativeQueryRef": "segment",
+              "queryRef": "Customers.Segment",
+              "nativeQueryRef": "Segment",
               "active": true
             }
           ]
@@ -208,7 +208,25 @@
             }
           }
         }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segment filter'"
+                }
+              }
+            }
+          }
+        }
       ]
+    },
+    "syncGroup": {
+      "groupName": "Segment",
+      "fieldChanges": true,
+      "filterChanges": true
     }
   }
 }

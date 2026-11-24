@@ -1,0 +1,191 @@
+[
+  {
+    "id": "AVOID_FLOATING_POINT_DATA_TYPES",
+    "severity": 2,
+    "category": "Performance",
+    "rule": "Do not use floating point data types (use fixed decimal)",
+    "violations": []
+  },
+  {
+    "id": "ISAVAILABLEINMDX_FALSE_NONATTRIBUTE_COLUMNS",
+    "severity": 2,
+    "category": "Performance",
+    "rule": "Set IsAvailableInMdx to false on hidden, non-attribute columns",
+    "violations": []
+  },
+  {
+    "id": "REMOVE_AUTO-DATE_TABLE",
+    "severity": 2,
+    "category": "Performance",
+    "rule": "Remove auto-date tables",
+    "violations": []
+  },
+  {
+    "id": "AVOID_BI-DIRECTIONAL_RELATIONSHIPS_AGAINST_HIGH-CARDINALITY_COLUMNS",
+    "severity": 2,
+    "category": "Performance",
+    "rule": "Avoid bi-directional relationships",
+    "violations": []
+  },
+  {
+    "id": "MANY-TO-MANY_RELATIONSHIPS_SHOULD_BE_SINGLE-DIRECTION",
+    "severity": 2,
+    "category": "Performance",
+    "rule": "Avoid many-to-many relationships",
+    "violations": []
+  },
+  {
+    "id": "REDUCE_USAGE_OF_CALCULATED_COLUMNS_THAT_USE_THE_RELATED_FUNCTION",
+    "severity": 2,
+    "category": "Performance",
+    "rule": "Avoid calculated columns that use RELATED",
+    "violations": []
+  },
+  {
+    "id": "AVOID_CONVERTING_BLANKS",
+    "severity": 2,
+    "category": "Performance",
+    "rule": "Avoid converting BLANK to 0 (+ 0, COALESCE(x, 0), IF(ISBLANK(x), 0))",
+    "violations": []
+  },
+  {
+    "id": "MODEL_SHOULD_HAVE_A_DATE_TABLE",
+    "severity": 2,
+    "category": "Performance",
+    "rule": "Model should have a marked date table",
+    "violations": []
+  },
+  {
+    "id": "USE_THE_DIVIDE_FUNCTION_FOR_DIVISION",
+    "severity": 2,
+    "category": "DAX Expressions",
+    "rule": "Use DIVIDE instead of /",
+    "violations": []
+  },
+  {
+    "id": "AVOID_USING_THE_IFERROR_FUNCTION",
+    "severity": 2,
+    "category": "DAX Expressions",
+    "rule": "Avoid IFERROR",
+    "violations": []
+  },
+  {
+    "id": "AVOID_USING_'1-(X/Y)'_SYNTAX",
+    "severity": 2,
+    "category": "DAX Expressions",
+    "rule": "Avoid 1-(x/y) and DIVIDE(x,y)-1; use DIVIDE(x-y, y)",
+    "violations": []
+  },
+  {
+    "id": "MEASURES_SHOULD_NOT_BE_DIRECT_REFERENCES_OF_OTHER_MEASURES",
+    "severity": 2,
+    "category": "DAX Expressions",
+    "rule": "Measure is only a reference to another measure",
+    "violations": []
+  },
+  {
+    "id": "UNQUALIFIED_COLUMN_REFERENCES",
+    "severity": 2,
+    "category": "DAX Expressions",
+    "rule": "Column references should be fully qualified",
+    "violations": []
+  },
+  {
+    "id": "FILTER_COLUMN_VALUES",
+    "severity": 2,
+    "category": "DAX Expressions",
+    "rule": "Filter column values with a boolean, not FILTER(table, col = value)",
+    "violations": []
+  },
+  {
+    "id": "PROVIDE_FORMAT_STRING_FOR_MEASURES",
+    "severity": 2,
+    "category": "Formatting",
+    "rule": "Visible numeric measures need a format string",
+    "violations": []
+  },
+  {
+    "id": "HIDE_FOREIGN_KEYS",
+    "severity": 2,
+    "category": "Formatting",
+    "rule": "Hide foreign-key columns",
+    "violations": []
+  },
+  {
+    "id": "MARK_PRIMARY_KEYS",
+    "severity": 2,
+    "category": "Formatting",
+    "rule": "Mark the key column of each dimension (isKey)",
+    "violations": []
+  },
+  {
+    "id": "ADD_DATA_CATEGORY_FOR_COLUMNS",
+    "severity": 1,
+    "category": "Formatting",
+    "rule": "Add a data category to geographic columns",
+    "violations": []
+  },
+  {
+    "id": "DO_NOT_SUMMARIZE_NUMERIC_COLUMNS",
+    "severity": 1,
+    "category": "Formatting",
+    "rule": "Numeric columns should not be summarized by default",
+    "violations": []
+  },
+  {
+    "id": "MONTH_(AS_A_STRING)_MUST_BE_SORTED",
+    "severity": 2,
+    "category": "Formatting",
+    "rule": "Month name columns need a sort-by column",
+    "violations": []
+  },
+  {
+    "id": "FIRST_LETTER_OF_OBJECTS_MUST_BE_CAPITALIZED",
+    "severity": 1,
+    "category": "Naming Conventions",
+    "rule": "Visible names start with a capital letter",
+    "violations": []
+  },
+  {
+    "id": "OBJECT_NAMES_MUST_NOT_CONTAIN_SPECIAL_CHARACTERS",
+    "severity": 2,
+    "category": "Naming Conventions",
+    "rule": "No tabs, line breaks or leading/trailing spaces in names",
+    "violations": []
+  },
+  {
+    "id": "PARTITION_NAME_SHOULD_MATCH_TABLE_NAME_FOR_SINGLE_PARTITION_TABLES",
+    "severity": 1,
+    "category": "Naming Conventions",
+    "rule": "Single partition named after its table",
+    "violations": []
+  },
+  {
+    "id": "VISIBLE_OBJECTS_WITH_NO_DESCRIPTION",
+    "severity": 1,
+    "category": "Maintenance",
+    "rule": "Visible tables, columns and measures should have a description",
+    "violations": []
+  },
+  {
+    "id": "REMOVE_UNNECESSARY_COLUMNS",
+    "severity": 2,
+    "category": "Maintenance",
+    "rule": "Hidden columns that nothing references",
+    "violations": []
+  },
+  {
+    "id": "ENSURE_TABLES_HAVE_RELATIONSHIPS",
+    "severity": 1,
+    "category": "Maintenance",
+    "rule": "Tables should be related",
+    "violations": []
+  },
+  {
+    "id": "PERSPECTIVES_WITH_NO_OBJECTS",
+    "severity": 1,
+    "category": "Maintenance",
+    "rule": "Perspectives with no objects",
+    "violations": []
+  }
+]

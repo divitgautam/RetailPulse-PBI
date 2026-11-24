@@ -1,93 +1,62 @@
+/// Product dimension. SKU prefixes don't match categories, so SKU is not loaded.
 table Products
-	lineageTag: 62369c34-fa65-4274-be46-b994a1006974
+	lineageTag: 41935c72-1d39-4072-ae58-593c119ab02a
 
-	column product_id
+	/// Product category (5).
+	column Category
 		dataType: string
-		lineageTag: c9f0fca7-7210-4953-823c-c0679abd58e9
+		lineageTag: 04263271-fb5b-491f-beab-3188193764f8
 		summarizeBy: none
-		sourceColumn: product_id
+		sourceColumn: Category
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
-	column sku
+	/// Product subcategory.
+	column Subcategory
 		dataType: string
-		lineageTag: 6a456373-8135-49f7-91f6-d746eaed72fb
+		lineageTag: f8668a59-db69-470b-b666-bb42cfa87dcc
 		summarizeBy: none
-		sourceColumn: sku
+		sourceColumn: Subcategory
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
-	column product_name
+	/// Supplier name.
+	column Supplier
 		dataType: string
-		lineageTag: 5e90cf0a-bb1b-4a3c-a67e-ecbf7090af92
+		lineageTag: e92603c5-ec27-4bde-9d89-8e60d96218e3
 		summarizeBy: none
-		sourceColumn: product_name
+		sourceColumn: Supplier
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
-	column category
+	/// Product identifier (key).
+	column 'Product ID'
 		dataType: string
-		lineageTag: ffe5fc9b-4614-4e90-b6cb-8d00f5b4d1bf
+		isKey
+		lineageTag: 68ca9f3b-d733-4725-aa1e-183dd5c054d3
 		summarizeBy: none
-		sourceColumn: category
+		sourceColumn: Product ID
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
-	column subcategory
+	/// Product name.
+	column 'Product Name'
 		dataType: string
-		lineageTag: 50424301-8563-4fe8-891e-6ffbd07ffc56
+		lineageTag: fab27326-3ad3-4c71-9391-07739a09ec94
 		summarizeBy: none
-		sourceColumn: subcategory
+		sourceColumn: Product Name
 
-		annotation SummarizationSetBy = Automatic
-
-	column unit_price
-		dataType: double
-		lineageTag: 65bbb0d2-d22e-42fc-8671-4ded552cd27d
-		summarizeBy: none
-		sourceColumn: unit_price
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	column cost_price
-		dataType: double
-		lineageTag: a41b0031-cc16-462c-8ce7-cda0d621985b
-		summarizeBy: none
-		sourceColumn: cost_price
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	column supplier
-		dataType: string
-		lineageTag: f2d24248-8d74-439c-a729-9d133c7aa56a
-		summarizeBy: none
-		sourceColumn: supplier
-
-		annotation SummarizationSetBy = Automatic
-
-	column stock_quantity
-		dataType: int64
-		formatString: 0
-		lineageTag: b013bd6d-92b3-41d6-99e1-80c8fc02e478
-		summarizeBy: none
-		sourceColumn: stock_quantity
-
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	partition Products = m
 		mode: import
 		source =
 				let
-				  Source = Excel.Workbook(File.Contents(SourceWorkbook), null, true),
-				  #"Navigation 1" = Source{[Item = "Products", Kind = "Sheet"]}[Data],
-				  #"Promoted headers" = Table.PromoteHeaders(#"Navigation 1", [PromoteAllScalars = true]),
-				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"product_id", type text}, {"sku", type text}, {"product_name", type text}, {"category", type text}, {"subcategory", type text}, {"unit_price", type number}, {"cost_price", type number}, {"supplier", type text}, {"stock_quantity", Int64.Type}}, "en-US")
+				    Source = ProductsRef,
+				    Kept = Table.SelectColumns(Source, {"product_id", "product_name", "category", "subcategory", "supplier"}),
+				    Renamed = Table.RenameColumns(Kept, {{"product_id", "Product ID"}, {"product_name", "Product Name"}, {"category", "Category"}, {"subcategory", "Subcategory"}, {"supplier", "Supplier"}})
 				in
-				  #"Changed column type"
+				    Renamed
 
 	annotation PBI_ResultType = Table
 

@@ -3,11 +3,11 @@
   "name": "stack_profit_by_year",
   "position": {
     "x": 16,
-    "y": 458,
-    "z": 12000,
-    "height": 246,
+    "y": 430,
+    "z": 19000,
+    "height": 252,
     "width": 408,
-    "tabOrder": 12000
+    "tabOrder": 19000
   },
   "visual": {
     "visualType": "columnChart",
@@ -61,12 +61,12 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Gross Profit"
+                  "Property": "Gross Profit ₹ L"
                 }
               },
-              "queryRef": "_Measures.Gross Profit",
-              "nativeQueryRef": "Gross Profit",
-              "displayName": "Gross Profit"
+              "queryRef": "_Measures.Gross Profit ₹ L",
+              "nativeQueryRef": "Gross Profit ₹ L",
+              "displayName": "Gross profit"
             }
           ]
         }
@@ -150,6 +150,26 @@
           }
         }
       ],
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ],
       "dataPoint": [
         {
           "properties": {
@@ -199,7 +219,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#CD83FF'"
+                      "Value": "'#62748E'"
                     }
                   }
                 }
@@ -248,8 +268,13 @@
             },
             "text": {
               "expr": {
-                "Literal": {
-                  "Value": "'Profit by customer type'"
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Title Profit by Type"
                 }
               }
             },
@@ -294,7 +319,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Recurring customers drive ~76% of gross profit'"
+                  "Value": "'Gross profit by year, ₹ L  |  2025 = Jan to Oct'"
                 }
               }
             },
@@ -313,6 +338,19 @@
                       "Value": "'#62748E'"
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Stacked columns of gross profit by year, split into recurring (violet) and one-time (grey) customers.'"
                 }
               }
             }

@@ -1,220 +1,169 @@
+/// Customer dimension: 300 customers after removing duplicate and stub rows.
 table Customers
-	lineageTag: 5ee2e538-482a-43cf-935b-880d62306357
+	lineageTag: d6471d88-86ac-4b80-9703-655dedaf8921
 
-	measure 'One-Time Customers' =
-			
-			COALESCE (
-			    COUNTROWS (
-			        FILTER (
-			            VALUES ( Customers[customer_id] ),
-			            NOT ISBLANK ( Customers[customer_id] )
-			                && [Total Orders] = 1
-			        )
-			    ),
-			    0
-			)
-		formatString: #,##0
-		displayFolder: 3 Customers
-		lineageTag: d2bf6d5b-c7c6-4d3f-bbab-75e41b26742b
-
-	measure 'Recurring Customers' =
-			
-			COALESCE (
-			    COUNTROWS (
-			        FILTER (
-			            VALUES ( Customers[customer_id] ),
-			            NOT ISBLANK ( Customers[customer_id] )
-			                && [Total Orders] >= 2
-			        )
-			    ),
-			    0
-			)
-		formatString: #,##0
-		displayFolder: 3 Customers
-		lineageTag: 835103d4-d406-4594-ba7d-22b022ea8f20
-
-	measure 'Purchasing Customers' =
-			
-			[One-Time Customers] + [Recurring Customers]
-		formatString: #,##0
-		displayFolder: 3 Customers
-		lineageTag: bcf1eac0-13c6-4149-ab49-d935fa337c9b
-
-	measure 'Recurring Customer %' =
-			
-			DIVIDE (
-			    [Recurring Customers],
-			    [Purchasing Customers],
-			    0
-			)
-		formatString: 0.0%
-		displayFolder: 3 Customers
-		lineageTag: c8b7e187-b15a-492d-9d03-118bbfaa2405
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	measure 'One-Time Customer %' =
-			
-			DIVIDE (
-			    [One-Time Customers],
-			    [Purchasing Customers],
-			    0
-			)
-		formatString: 0.0%
-		displayFolder: 3 Customers
-		lineageTag: f15e617b-ca97-4c12-b0fc-0885d3062ac3
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	column customer_id
+	/// Customer city.
+	column City
 		dataType: string
-		lineageTag: ae9ad84a-e85d-486b-b45c-0ae3fb180b1e
+		lineageTag: 4bed9f97-496e-4b6f-873d-3c4009eba2a9
+		dataCategory: City
 		summarizeBy: none
-		sourceColumn: customer_id
+		sourceColumn: City
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
-	column first_name
+	/// Customer state.
+	column State
 		dataType: string
-		lineageTag: 5a305539-7328-4c79-98c0-305084584895
+		lineageTag: f7e06ac2-e471-452d-925c-58cfc8b3c08e
+		dataCategory: StateOrProvince
 		summarizeBy: none
-		sourceColumn: first_name
+		sourceColumn: State
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
-	column last_name
+	/// Customer country (all India).
+	column Country
 		dataType: string
-		lineageTag: 2f3e45e0-78d0-44b2-bed4-2dbbe6b075c4
+		lineageTag: 425c4d0d-5947-4e29-80a6-6d5a12394279
+		dataCategory: Country
 		summarizeBy: none
-		sourceColumn: last_name
+		sourceColumn: Country
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
-	column email
+	/// Retail or Wholesale.
+	column Segment
 		dataType: string
-		lineageTag: e202a548-0047-4363-b513-6fb729a2d900
+		lineageTag: 513a574b-720b-4440-8c68-1af69adfee89
 		summarizeBy: none
-		sourceColumn: email
+		sourceColumn: Segment
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
-	column phone
-		dataType: int64
-		formatString: 0
-		lineageTag: 7adb7841-d2c1-4e0e-a96d-9b90b03ab3c2
-		summarizeBy: sum
-		sourceColumn: phone
-
-		annotation SummarizationSetBy = Automatic
-
-	column join_date
-		dataType: dateTime
-		formatString: Long Date
-		lineageTag: 2268aa5a-7b2d-4204-b500-a29d78512cbd
-		summarizeBy: none
-		sourceColumn: join_date
-
-		variation Variation
-			isDefault
-			relationship: 0e88e18f-aadd-4fec-b823-d01502d44ce4
-			defaultHierarchy: LocalDateTable_2d8e2f19-8b65-481a-a868-aba2d4b5981c.'Date Hierarchy'
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation UnderlyingDateTimeDataType = Date
-
-	column city
+	/// Gender as recorded.
+	column Gender
 		dataType: string
-		lineageTag: 26d0bd82-0b36-4a44-9766-45dc5e183349
+		lineageTag: a07efa77-0d02-4748-a5e1-dad2fa6defb2
 		summarizeBy: none
-		sourceColumn: city
+		sourceColumn: Gender
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
-	column state
-		dataType: string
-		lineageTag: a4f30343-5471-4671-9f03-e7ed0685273c
-		summarizeBy: none
-		sourceColumn: state
-
-		annotation SummarizationSetBy = Automatic
-
-	column country
-		dataType: string
-		lineageTag: e63adfdc-e084-4dfa-a8ae-e026e75c817e
-		summarizeBy: none
-		sourceColumn: country
-
-		annotation SummarizationSetBy = Automatic
-
-	column segment
-		dataType: string
-		lineageTag: 2b156c8e-4cd5-4c80-9239-e8cd2c5f1af7
-		summarizeBy: none
-		sourceColumn: segment
-
-		annotation SummarizationSetBy = Automatic
-
-	column gender
-		dataType: string
-		lineageTag: 14059f23-fdde-45cd-918c-be65055cd712
-		summarizeBy: none
-		sourceColumn: gender
-
-		annotation SummarizationSetBy = Automatic
-
-	column birth_date
-		dataType: dateTime
-		formatString: Long Date
-		lineageTag: 93402712-9a9e-45eb-9f21-47bbf3882dd7
-		summarizeBy: none
-		sourceColumn: birth_date
-
-		variation Variation
-			isDefault
-			relationship: 2af692ea-aa54-4913-85e4-449b3267d7cb
-			defaultHierarchy: LocalDateTable_954601de-fa31-464c-9a36-32d2e869b837.'Date Hierarchy'
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation UnderlyingDateTimeDataType = Date
-
-	column 'Lifetime Orders' = CALCULATE ( DISTINCTCOUNT ( Order_Items[order_id] ) ) + 0
+	/// Orders ever placed, any status (0 = registered but never ordered).
+	column 'Lifetime Orders' = CALCULATE ( DISTINCTCOUNT ( Order_Items[Order ID] ) ) + 0
 		dataType: int64
 		formatString: 0
 		displayFolder: Customer Behaviour
-		lineageTag: 1ee98db2-2eaf-479c-8a5a-68955acd64c0
+		lineageTag: 1d979801-cea7-4651-9a0e-8bd86f96e0c8
+		summarizeBy: none
 
+		annotation SummarizationSetBy = User
+
+	/// No Purchase (0 orders), One-Time (1) or Recurring (2+), over the customer's lifetime.
 	column 'Customer Type' = SWITCH ( TRUE (), Customers[Lifetime Orders] = 0, "No Purchase", Customers[Lifetime Orders] = 1, "One-Time", "Recurring" )
 		dataType: string
 		displayFolder: Customer Behaviour
-		lineageTag: 5503c7e9-9ee8-46fc-9873-50b4b59d57be
+		lineageTag: c56cd694-dbdd-429c-8939-e3800bf30769
+		summarizeBy: none
 
+		annotation SummarizationSetBy = User
+
+	/// Lifetime order count as a band: 0, 1, 2, 3 or 4+ orders.
 	column 'Order Frequency' = SWITCH ( TRUE (), Customers[Lifetime Orders] = 0, "0 orders", Customers[Lifetime Orders] = 1, "1 order", Customers[Lifetime Orders] = 2, "2 orders", Customers[Lifetime Orders] = 3, "3 orders", "4+ orders" )
 		dataType: string
 		displayFolder: Customer Behaviour
-		lineageTag: 58769e79-879f-44ed-b9da-e76c567d2d4b
+		lineageTag: 4a1ad97a-47c3-4784-8566-66f0f848c68b
+		summarizeBy: none
 
+		annotation SummarizationSetBy = User
+
+	/// Gross profit from the customer's revenue orders.
 	column 'Lifetime Gross Profit' = CALCULATE ( SUM ( Order_Items[Gross Profit] ), Order_Items[Is Revenue Order] = TRUE () )
-		dataType: double
-		formatString: #,##0
+		dataType: decimal
+		formatString: ₹#,##0
 		displayFolder: Customer Behaviour
-		lineageTag: 18b1b404-d0b0-4e88-b3e9-7831cdbb666f
+		lineageTag: 42ee3b3d-be52-44f4-a20d-34b957de4a03
+		summarizeBy: none
 
-	column 'Last Order Date' = CALCULATE ( MAX ( Order_Items[order_date] ) )
+		annotation SummarizationSetBy = User
+
+	/// Date of the customer's latest order (any status).
+	column 'Last Order Date' = CALCULATE ( MAX ( Order_Items[Order Date] ) )
 		dataType: dateTime
 		formatString: dd-mmm-yyyy
 		displayFolder: Customer Behaviour
-		lineageTag: d38f5ee4-937d-4807-aedc-b1f4cf20bf4f
+		lineageTag: 53706b63-81af-4b9d-93a3-366496ae7f26
+		summarizeBy: none
 
-	column 'Age Group' = VAR a = IF ( ISBLANK ( Customers[birth_date] ), BLANK (), DATEDIFF ( Customers[birth_date], DATE ( 2025, 10, 31 ), YEAR ) ) RETURN SWITCH ( TRUE (), ISBLANK ( a ), "Unknown", a < 25, "18-24", a < 35, "25-34", a < 45, "35-44", a < 55, "45-54", "55+" )
+		annotation SummarizationSetBy = User
+
+	/// Age band on 31 Oct 2025 (the last order date).
+	column 'Age Group' = VAR a = DATEDIFF ( Customers[Birth Date], DATE ( 2025, 10, 31 ), YEAR ) RETURN SWITCH ( TRUE (), ISBLANK ( Customers[Birth Date] ), "Unknown", a < 25, "18-24", a < 35, "25-34", a < 45, "35-44", a < 55, "45-54", "55+" )
 		dataType: string
 		displayFolder: Customer Behaviour
-		lineageTag: 195803d8-17cc-44a6-8e62-5dde3718f4d4
+		lineageTag: f764918c-2cc1-46c5-b4da-3a1c509e95eb
+		summarizeBy: none
 
-	partition 'Customers Deduped' = m
+		annotation SummarizationSetBy = User
+
+	/// Customer identifier (key). Duplicates in the source are collapsed to the most complete row.
+	column 'Customer ID'
+		dataType: string
+		isKey
+		lineageTag: 294ff35d-5519-4011-a264-67cebd7bd65b
+		summarizeBy: none
+		sourceColumn: Customer ID
+
+		annotation SummarizationSetBy = User
+
+	/// Date the customer registered. The last sign-up is 25 Sep 2024.
+	column 'Join Date'
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 91ea5757-f385-4a0d-8de9-f63f8591c3d7
+		summarizeBy: none
+		sourceColumn: Join Date
+
+		annotation SummarizationSetBy = User
+
+	/// Date of birth (feeds Age Group).
+	column 'Birth Date'
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 703daf4d-fca4-4d40-b852-1c060b205319
+		summarizeBy: none
+		sourceColumn: Birth Date
+
+		annotation SummarizationSetBy = User
+
+	/// Date of the customer's first order (any status).
+	column 'First Order Date' = CALCULATE ( MIN ( Order_Items[Order Date] ) )
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		displayFolder: Customer Behaviour
+		lineageTag: bf37191a-2345-4064-b283-b980e9e12942
+		summarizeBy: none
+
+		annotation SummarizationSetBy = User
+
+	partition Customers = m
 		mode: import
-		source = let Source = Excel.Workbook(File.Contents(SourceWorkbook), null, true), #"Navigation 1" = Source{[Item = "Customers", Kind = "Sheet"]}[Data], #"Promoted headers" = Table.PromoteHeaders(#"Navigation 1", [PromoteAllScalars = true]), #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"customer_id", type text}, {"first_name", type text}, {"last_name", type text}, {"email", type text}, {"phone", Int64.Type}, {"join_date", type date}, {"city", type text}, {"state", type text}, {"country", type text}, {"segment", type text}, {"gender", type text}, {"birth_date", type date}}, "en-US"), #"Removed blank IDs" = Table.SelectRows(#"Changed column type", each [customer_id] <> null and [customer_id] <> ""), #"Added completeness" = Table.AddColumn(#"Removed blank IDs", "__filled", each List.NonNullCount(Record.FieldValues(_)), Int64.Type), #"Sorted by completeness" = Table.Buffer(Table.Sort(#"Added completeness", {{"customer_id", Order.Ascending}, {"__filled", Order.Descending}})), #"Kept most complete row" = Table.Distinct(#"Sorted by completeness", {"customer_id"}), #"Removed helper" = Table.RemoveColumns(#"Kept most complete row", {"__filled"}), #"Removed stub rows" = Table.SelectRows(#"Removed helper", each not ([email] = null and [join_date] = null and [segment] = null)) in #"Removed stub rows"
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents(SourceWorkbook), null, true),
+				    Sheet = Source{[Item = "Customers", Kind = "Sheet"]}[Data],
+				    Promoted = Table.PromoteHeaders(Sheet, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"customer_id", type text}, {"first_name", type text}, {"last_name", type text}, {"email", type text}, {"phone", Int64.Type}, {"join_date", type date}, {"city", type text}, {"state", type text}, {"country", type text}, {"segment", type text}, {"gender", type text}, {"birth_date", type date}}, "en-US"),
+				    NoBlankIds = Table.SelectRows(Typed, each [customer_id] <> null and [customer_id] <> ""),
+				    Completeness = Table.AddColumn(NoBlankIds, "__filled", each List.NonNullCount(Record.FieldValues(_)), Int64.Type),
+				    Sorted = Table.Buffer(Table.Sort(Completeness, {{"customer_id", Order.Ascending}, {"__filled", Order.Descending}})),
+				    MostComplete = Table.Distinct(Sorted, {"customer_id"}),
+				    NoStubs = Table.SelectRows(MostComplete, each not ([email] = null and [join_date] = null and [segment] = null)),
+				    NoPersonalData = Table.RemoveColumns(NoStubs, {"__filled", "first_name", "last_name", "email", "phone"}),
+				    Renamed = Table.RenameColumns(NoPersonalData, {{"customer_id", "Customer ID"}, {"join_date", "Join Date"}, {"city", "City"}, {"state", "State"}, {"country", "Country"}, {"segment", "Segment"}, {"gender", "Gender"}, {"birth_date", "Birth Date"}})
+				in
+				    Renamed
 
 	annotation PBI_ResultType = Table
 

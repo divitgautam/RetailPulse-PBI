@@ -5,7 +5,9 @@
     "category_profit",
     "kpi_ppac",
     "insights",
-    "forecast"
+    "forecast",
+    "category_detail",
+    "category_tip"
   ],
   "activePageName": "customer_retention"
 }

@@ -20,10 +20,10 @@
               {
                 "textRuns": [
                   {
-                    "value": "Key Insights and Data Notes",
+                    "value": "Eight findings, ranked by business impact",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "18pt",
+                      "fontSize": "16pt",
                       "color": "#FFFFFF",
                       "fontFamily": "'Instrument Sans', 'Segoe UI Semibold', sans-serif"
                     }
@@ -33,7 +33,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Findings from the Jan 2023 to Oct 2025 order data, ranked by business impact",
+                    "value": "Findings from the Jan 2023 to Oct 2025 order data (all customers, all years)  |  Data and model notes on the right",
                     "textStyle": {
                       "fontSize": "10pt",
                       "color": "#C8C3F5"
@@ -105,6 +105,19 @@
               "expr": {
                 "Literal": {
                   "Value": "16D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Page title: Eight findings, ranked by business impact'"
                 }
               }
             }

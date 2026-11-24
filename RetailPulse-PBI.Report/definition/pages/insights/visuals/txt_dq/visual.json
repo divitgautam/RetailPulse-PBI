@@ -5,7 +5,7 @@
     "x": 646,
     "y": 80,
     "z": 2000,
-    "height": 624,
+    "height": 602,
     "width": 618,
     "tabOrder": 2000
   },
@@ -41,7 +41,7 @@
                     }
                   },
                   {
-                    "value": "The Customers sheet had 307 rows for 302 IDs (CUST0001 x4, CUST0300 x3, one blank ID). The query keeps the most complete row per ID and drops one stub row (CUST0301, first name only): 300 customers.",
+                    "value": "307 rows for 302 IDs: the query keeps the most complete row per ID and drops one stub row, leaving 300 customers. Names, emails and phone numbers are then dropped.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#020618"
@@ -70,7 +70,7 @@
                     }
                   },
                   {
-                    "value": "23 cancelled lines had no order_date; each is filled from the other lines of the same order.",
+                    "value": "23 cancelled lines had no order date; each is filled from the other lines of the same order.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#020618"
@@ -91,7 +91,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Relationship fixed. ",
+                    "value": "Order totals not loaded. ",
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontSize": "11pt",
@@ -99,36 +99,7 @@
                     }
                   },
                   {
-                    "value": "Customers to Order_Items was many-to-many and bi-directional. It is now one-to-many, single direction.",
-                    "textStyle": {
-                      "fontSize": "11pt",
-                      "color": "#020618"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "",
-                    "textStyle": {
-                      "fontSize": "6pt"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "Do not sum items_total or total_amount. ",
-                    "textStyle": {
-                      "fontWeight": "bold",
-                      "fontSize": "11pt",
-                      "color": "#F05100"
-                    }
-                  },
-                  {
-                    "value": "They are order-level values repeated on every line; summing them overstates sales about 4.6x. Use the Net Sales and Gross Profit measures.",
+                    "value": "items_total and total_amount repeat on every line (summing them overstates sales about 4.6x). Use Net Sales and Gross Profit.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#020618"
@@ -157,7 +128,7 @@
                     }
                   },
                   {
-                    "value": "Net sales = unit price x qty x (1 - item discount) x (1 - order discount), excluding tax and shipping. COGS = cost price x qty. Cancelled and returned orders are excluded.",
+                    "value": "Net sales = unit price x qty x (1 - item discount) x (1 - order discount), excl. tax and shipping. COGS = cost price x qty. Cancelled and returned orders excluded.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#020618"
@@ -178,7 +149,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "SKU prefixes do not match categories ",
+                    "value": "Calculations in Power Query. ",
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontSize": "11pt",
@@ -186,7 +157,7 @@
                     }
                   },
                   {
-                    "value": "(for example Fashion products with BE- SKUs). Do not use SKU to infer category.",
+                    "value": "Line amounts are computed at load; one marked Date table (auto date/time off) ends on 31 Oct 2025, so 2025 compares like-for-like.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#020618"
@@ -207,7 +178,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Date table added ",
+                    "value": "SKU prefixes don't match categories, ",
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontSize": "11pt",
@@ -215,7 +186,7 @@
                     }
                   },
                   {
-                    "value": "and marked; it ends on the last order date (31 Oct 2025), so 2025 vs 2024 comparisons are like-for-like.",
+                    "value": "so SKU is not used.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#020618"
@@ -236,7 +207,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "No cost data for shipping or marketing, ",
+                    "value": "Synthetic-looking data. ",
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontSize": "11pt",
@@ -244,7 +215,7 @@
                     }
                   },
                   {
-                    "value": "so profit here is gross profit, not net profit.",
+                    "value": "Every email is on example.com and buyers behave identically, so the methods transfer but the amounts are illustrative.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#020618"
@@ -289,6 +260,19 @@
               "expr": {
                 "Literal": {
                   "Value": "14D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Data and model notes'"
                 }
               }
             }

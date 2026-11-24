@@ -1,47 +1,54 @@
-/// Exported from analysis notebooks (03_forecast / 04_customer_models). Refresh after re-running them.
+/// 2026 totals by scenario: orders, sales, profit, new buyers, PPAC and the chance of hitting the PPAC target. From analysis/output/pbi_forecast_2026.csv: re-run the notebooks, then refresh.
 table 'Forecast 2026'
-	lineageTag: 70fa9dc8-84c6-421e-8487-d4173cadd11f
+	lineageTag: fb40f75f-e4bc-4027-8217-28628be9bf55
 
-	column scenario
+	/// Acquisition scenario (relates to Scenario).
+	column Scenario
 		dataType: string
-		lineageTag: f3bd6bab-5625-4469-a7f6-da533c120179
+		isHidden
+		isAvailableInMdx: false
+		lineageTag: 42d19fa1-a6f1-485e-b18d-ccaec80db229
 		summarizeBy: none
-		sourceColumn: scenario
+		sourceColumn: Scenario
 
 		annotation SummarizationSetBy = User
 
-	column metric
+	/// 2026 total being forecast.
+	column Metric
 		dataType: string
-		lineageTag: 268553c1-403e-449d-ad3d-b417cb12b659
+		lineageTag: 978aa426-1656-4e3e-905e-150da4b4ee5a
 		summarizeBy: none
-		sourceColumn: metric
+		sourceColumn: Metric
 
 		annotation SummarizationSetBy = User
 
-	column p10
-		dataType: double
+	/// Low case (10th percentile).
+	column P10
+		dataType: decimal
 		formatString: #,##0.##
-		lineageTag: 3cfebe97-c970-40a7-9a84-1085af7d9eb6
+		lineageTag: 45b39de2-cb36-48dd-9dee-b6b023901c74
 		summarizeBy: none
-		sourceColumn: p10
+		sourceColumn: P10
 
 		annotation SummarizationSetBy = User
 
-	column p50
-		dataType: double
+	/// Median.
+	column P50
+		dataType: decimal
 		formatString: #,##0.##
-		lineageTag: f358d960-72e8-46e6-bb95-e5c0b65a31da
+		lineageTag: 076926ce-07bf-41f8-befd-f38c640c648a
 		summarizeBy: none
-		sourceColumn: p50
+		sourceColumn: P50
 
 		annotation SummarizationSetBy = User
 
-	column p90
-		dataType: double
+	/// High case (90th percentile).
+	column P90
+		dataType: decimal
 		formatString: #,##0.##
-		lineageTag: 869a448f-234e-49c6-849a-05aeee9e7500
+		lineageTag: 1af44233-115d-42e2-90e2-1185f26d3bd5
 		summarizeBy: none
-		sourceColumn: p90
+		sourceColumn: P90
 
 		annotation SummarizationSetBy = User
 
@@ -49,12 +56,13 @@ table 'Forecast 2026'
 		mode: import
 		source =
 				let
-				  Source = Csv.Document(File.Contents(ProjectFolder & "\analysis\output\pbi_forecast_2026.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
-				  #"Promoted headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
-				  #"Blanks to null" = #"Promoted headers",
-				  #"Changed column type" = Table.TransformColumnTypes(#"Blanks to null", {{"scenario", type text}, {"metric", type text}, {"p10", type number}, {"p50", type number}, {"p90", type number}}, "en-US")
+				    Source = Csv.Document(File.Contents(ProjectFolder & "\analysis\output\pbi_forecast_2026.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Blanks = Promoted,
+				    Typed = Table.TransformColumnTypes(Blanks, {{"scenario", type text}, {"metric", type text}, {"p10", Currency.Type}, {"p50", Currency.Type}, {"p90", Currency.Type}}, "en-US"),
+				    Renamed = Table.RenameColumns(Typed, {{"scenario", "Scenario"}, {"metric", "Metric"}, {"p10", "P10"}, {"p50", "P50"}, {"p90", "P90"}})
 				in
-				  #"Changed column type"
+				    Renamed
 
 	annotation PBI_ResultType = Table
 

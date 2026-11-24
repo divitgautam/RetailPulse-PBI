@@ -3,11 +3,11 @@
   "name": "card_ns",
   "position": {
     "x": 226,
-    "y": 84,
-    "z": 4000,
+    "y": 80,
+    "z": 6000,
     "height": 88,
     "width": 198,
-    "tabOrder": 4000
+    "tabOrder": 6000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -24,12 +24,12 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Net Sales"
+                  "Property": "Card Net Sales"
                 }
               },
-              "queryRef": "_Measures.Net Sales",
-              "nativeQueryRef": "Net Sales",
-              "displayName": "Net Sales"
+              "queryRef": "_Measures.Card Net Sales",
+              "nativeQueryRef": "Card Net Sales",
+              "displayName": "Net sales"
             }
           ]
         }
@@ -63,6 +63,22 @@
           }
         }
       ],
+      "outline": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
       "label": [
         {
           "properties": {
@@ -85,13 +101,28 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "24D"
+                  "Value": "22D"
                 }
               }
             }
           },
           "selector": {
             "id": "default"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Net sales card'"
+                }
+              }
+            }
           }
         }
       ]

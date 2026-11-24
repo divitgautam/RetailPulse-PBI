@@ -3,11 +3,11 @@
   "name": "bar_segment_mix",
   "position": {
     "x": 436,
-    "y": 458,
-    "z": 13000,
-    "height": 246,
+    "y": 430,
+    "z": 20000,
+    "height": 252,
     "width": 408,
-    "tabOrder": 13000
+    "tabOrder": 20000
   },
   "visual": {
     "visualType": "hundredPercentStackedBarChart",
@@ -24,11 +24,11 @@
                       "Entity": "Customers"
                     }
                   },
-                  "Property": "segment"
+                  "Property": "Segment"
                 }
               },
-              "queryRef": "Customers.segment",
-              "nativeQueryRef": "segment",
+              "queryRef": "Customers.Segment",
+              "nativeQueryRef": "Segment",
               "active": true
             }
           ]
@@ -143,6 +143,13 @@
                   "Value": "9D"
                 }
               }
+            },
+            "labelPrecision": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
             }
           }
         }
@@ -196,7 +203,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#CD83FF'"
+                      "Value": "'#62748E'"
                     }
                   }
                 }
@@ -245,8 +252,13 @@
             },
             "text": {
               "expr": {
-                "Literal": {
-                  "Value": "'Retention by segment'"
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Title Segment"
                 }
               }
             },
@@ -291,7 +303,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Share of purchasing customers'"
+                  "Value": "'Share of buying customers by type'"
                 }
               }
             },
@@ -310,6 +322,19 @@
                       "Value": "'#62748E'"
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'100% stacked bars of recurring and one-time buyers in each segment.'"
                 }
               }
             }

@@ -11,7 +11,7 @@
         {
           "location": {
             "x": 377.40120809609778,
-            "y": 332.76169594827519
+            "y": 342.01169594827519
           },
           "nodeIndex": "Customers",
           "nodeLineageTag": "5ee2e538-482a-43cf-935b-880d62306357",
@@ -24,7 +24,7 @@
         {
           "location": {
             "x": 0,
-            "y": 67.831452022186468
+            "y": 77.081452022186468
           },
           "nodeIndex": "Order_Items",
           "nodeLineageTag": "74b08876-8bcd-48c1-b4a3-1e67f74f4ba0",
@@ -37,7 +37,7 @@
         {
           "location": {
             "x": 370.654438144212,
-            "y": 18.5
+            "y": 27.75
           },
           "nodeIndex": "Products",
           "nodeLineageTag": "62369c34-fa65-4274-be46-b994a1006974",
@@ -50,7 +50,7 @@
         {
           "location": {
             "x": 661.40120809609778,
-            "y": 189.63084797413762
+            "y": 198.88084797413762
           },
           "nodeIndex": "Date",
           "size": {
@@ -62,7 +62,7 @@
         {
           "location": {
             "x": 945.40120809609778,
-            "y": 225.63084797413762
+            "y": 234.88084797413762
           },
           "nodeIndex": "_Measures",
           "size": {
@@ -74,7 +74,7 @@
         {
           "location": {
             "x": 1847.7842581107916,
-            "y": 133.63084797413762
+            "y": 142.88084797413762
           },
           "nodeIndex": "Forecast",
           "nodeLineageTag": "f8fa2211-2907-4c36-92d8-d6defc514dae",
@@ -87,7 +87,7 @@
         {
           "location": {
             "x": 1279.4012080960979,
-            "y": 199.61595875373592
+            "y": 208.86595875373592
           },
           "nodeIndex": "Forecast 2026",
           "nodeLineageTag": "70fa9dc8-84c6-421e-8487-d4173cadd11f",
@@ -100,7 +100,7 @@
         {
           "location": {
             "x": 2081.7842581107916,
-            "y": 195.63084797413762
+            "y": 204.88084797413762
           },
           "nodeIndex": "Levers",
           "nodeLineageTag": "80442f83-7b1a-4da3-bdd9-92588f7f89c5",
@@ -113,10 +113,23 @@
         {
           "location": {
             "x": 1563.6027692892831,
-            "y": 202.47554593398289
+            "y": 211.72554593398289
           },
           "nodeIndex": "Scenario",
           "nodeLineageTag": "d9b9a77a-2974-434c-b6de-dce400d16d51",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2365.7842581107916,
+            "y": 216.38084797413762
+          },
+          "nodeIndex": "Refresh Info",
+          "nodeLineageTag": "4dc0ba21-505b-45c7-a67d-b99d65ac2a3c",
           "size": {
             "height": 200,
             "width": 234

@@ -3,11 +3,11 @@
   "name": "card_f_range",
   "position": {
     "x": 226,
-    "y": 84,
-    "z": 4000,
+    "y": 80,
+    "z": 6000,
     "height": 88,
     "width": 198,
-    "tabOrder": 4000
+    "tabOrder": 6000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -24,12 +24,12 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "F26 Gross Profit Range"
+                  "Property": "Card F26 Range"
                 }
               },
-              "queryRef": "_Measures.F26 Gross Profit Range",
-              "nativeQueryRef": "F26 Gross Profit Range",
-              "displayName": "80% Range"
+              "queryRef": "_Measures.Card F26 Range",
+              "nativeQueryRef": "Card F26 Range",
+              "displayName": "80% range"
             }
           ]
         }
@@ -63,6 +63,22 @@
           }
         }
       ],
+      "outline": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
       "label": [
         {
           "properties": {
@@ -85,13 +101,28 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "14D"
+                  "Value": "22D"
                 }
               }
             }
           },
           "selector": {
             "id": "default"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'80% range card'"
+                }
+              }
+            }
           }
         }
       ]

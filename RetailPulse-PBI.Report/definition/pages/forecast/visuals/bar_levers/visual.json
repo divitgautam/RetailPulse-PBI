@@ -3,11 +3,11 @@
   "name": "bar_levers",
   "position": {
     "x": 16,
-    "y": 458,
-    "z": 10000,
-    "height": 246,
+    "y": 430,
+    "z": 17000,
+    "height": 252,
     "width": 680,
-    "tabOrder": 10000
+    "tabOrder": 17000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -23,11 +23,11 @@
                       "Entity": "Levers"
                     }
                   },
-                  "Property": "lever"
+                  "Property": "Lever"
                 }
               },
-              "queryRef": "Levers.lever",
-              "nativeQueryRef": "lever",
+              "queryRef": "Levers.Lever",
+              "nativeQueryRef": "Lever",
               "active": true
             }
           ]
@@ -42,11 +42,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Lever Uplift Low"
+                  "Property": "Lever Uplift Low ₹ L"
                 }
               },
-              "queryRef": "_Measures.Lever Uplift Low",
-              "nativeQueryRef": "Lever Uplift Low",
+              "queryRef": "_Measures.Lever Uplift Low ₹ L",
+              "nativeQueryRef": "Lever Uplift Low ₹ L",
               "displayName": "Low"
             },
             {
@@ -57,11 +57,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Lever Uplift High"
+                  "Property": "Lever Uplift High ₹ L"
                 }
               },
-              "queryRef": "_Measures.Lever Uplift High",
-              "nativeQueryRef": "Lever Uplift High",
+              "queryRef": "_Measures.Lever Uplift High ₹ L",
+              "nativeQueryRef": "Lever Uplift High ₹ L",
               "displayName": "High"
             }
           ]
@@ -76,11 +76,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Lever Uplift"
+                  "Property": "Lever Uplift ₹ L"
                 }
               },
-              "queryRef": "_Measures.Lever Uplift",
-              "nativeQueryRef": "Lever Uplift",
+              "queryRef": "_Measures.Lever Uplift ₹ L",
+              "nativeQueryRef": "Lever Uplift ₹ L",
               "displayName": "2026 profit uplift (mid)"
             }
           ]
@@ -96,7 +96,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Lever Uplift"
+                "Property": "Lever Uplift ₹ L"
               }
             },
             "direction": "Descending"
@@ -159,7 +159,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#CD83FF'"
+                      "Value": "'#682EFF'"
                     }
                   }
                 }
@@ -182,8 +182,13 @@
             },
             "text": {
               "expr": {
-                "Literal": {
-                  "Value": "'Profit levers for 2026'"
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Title Levers"
                 }
               }
             },
@@ -228,7 +233,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Mid estimate of extra gross profit; hover for low and high'"
+                  "Value": "'Mid estimate of extra 2026 gross profit, ₹ L  |  Confidence and cost in the plan  |  Hover for low and high'"
                 }
               }
             },
@@ -247,6 +252,19 @@
                       "Value": "'#62748E'"
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Bar chart of four 2026 profit levers with their mid uplift in lakh rupees, confidence and cost.'"
                 }
               }
             }

@@ -1,0 +1,176 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "txt_plan",
+  "position": {
+    "x": 708,
+    "y": 430,
+    "z": 18000,
+    "height": 252,
+    "width": 556,
+    "tabOrder": 18000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Recommended plan: start with the two cheap levers (₹20–28 L)",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "12pt",
+                      "color": "#020618",
+                      "fontFamily": "'Instrument Sans', 'Segoe UI Semibold', sans-serif"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "1. Pricing: ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "9pt",
+                      "color": "#682EFF"
+                    }
+                  },
+                  {
+                    "value": "cap item discounts at 10% and stop stacking (+₹8.8–12.2 L, high confidence, no cost).",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "2. CRM: ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "9pt",
+                      "color": "#682EFF"
+                    }
+                  },
+                  {
+                    "value": "first-order offer to the 80 never-ordered (+₹10.8–16.0 L, medium, low cost).",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "3. CRM: ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "9pt",
+                      "color": "#682EFF"
+                    }
+                  },
+                  {
+                    "value": "second-order nudge, repeat rate 53% to 60% (+₹11.7 L; lowers PPAC).",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "4. Marketing: ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "9pt",
+                      "color": "#682EFF"
+                    }
+                  },
+                  {
+                    "value": "find out why sign-ups stopped before spending on them (+₹10.9 L at the 2024 pace).",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Size: ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "9pt",
+                      "color": "#682EFF"
+                    }
+                  },
+                  {
+                    "value": "levers 1+2 add 20%–29% to the ₹96.9 L baseline (scenario A). Levers overlap, so don't add all four.",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#020618"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Recommended plan: start with the two cheap levers (₹20–28 L)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

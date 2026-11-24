@@ -20,10 +20,10 @@
               {
                 "textRuns": [
                   {
-                    "value": "Category Profitability",
+                    "value": " ",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "18pt",
+                      "fontSize": "16pt",
                       "color": "#FFFFFF",
                       "fontFamily": "'Instrument Sans', 'Segoe UI Semibold', sans-serif"
                     }
@@ -33,7 +33,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Gross profit = net sales (after item and order discounts, excl. tax and shipping) minus cost  |  Cancelled and returned orders excluded",
+                    "value": "Gross profit = net sales after discounts (excl. tax, shipping) minus cost  |  Cancelled and returned orders excluded  |  Right-click a category for detail",
                     "textStyle": {
                       "fontSize": "10pt",
                       "color": "#C8C3F5"
@@ -105,6 +105,19 @@
               "expr": {
                 "Literal": {
                   "Value": "16D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Page title: Beauty leads with ₹76.5 L (27% of profit); margins run 25–27%'"
                 }
               }
             }

@@ -20,10 +20,10 @@
               {
                 "textRuns": [
                   {
-                    "value": "Customer Retention: One-Time vs Recurring",
+                    "value": " ",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "18pt",
+                      "fontSize": "16pt",
                       "color": "#FFFFFF",
                       "fontFamily": "'Instrument Sans', 'Segoe UI Semibold', sans-serif"
                     }
@@ -33,7 +33,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "One-time = exactly 1 order placed  |  Recurring = 2+ orders  |  Orders Jan 2023 to Oct 2025",
+                    "value": "One-time = exactly 1 order  |  Recurring = 2+ orders  |  Lifetime, Jan 2023 to Oct 2025  |  Titles follow the Segment and State filters",
                     "textStyle": {
                       "fontSize": "10pt",
                       "color": "#C8C3F5"
@@ -105,6 +105,19 @@
               "expr": {
                 "Literal": {
                   "Value": "16D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Page title: 53% of buyers came back, and they earn 76% of gross profit'"
                 }
               }
             }

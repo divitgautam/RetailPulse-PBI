@@ -20,10 +20,10 @@
               {
                 "textRuns": [
                   {
-                    "value": "KPI: Profit per Active Customer (PPAC)",
+                    "value": " ",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "18pt",
+                      "fontSize": "16pt",
                       "color": "#FFFFFF",
                       "fontFamily": "'Instrument Sans', 'Segoe UI Semibold', sans-serif"
                     }
@@ -33,7 +33,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Gross profit / customers with a revenue order  |  Target = same period last year + 5%  |  Cards show 2025 YTD (Jan to Oct) vs Jan to Oct 2024",
+                    "value": "PPAC = gross profit / active customers = orders per customer x order value x margin  |  Target = last year + 5%  |  Cards: Jan–Oct 2025 vs Jan–Oct 2024",
                     "textStyle": {
                       "fontSize": "10pt",
                       "color": "#C8C3F5"
@@ -105,6 +105,19 @@
               "expr": {
                 "Literal": {
                   "Value": "16D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Page title: PPAC is ₹92,868 in 2025 YTD: 1.3% below last year and 6.0% below target'"
                 }
               }
             }

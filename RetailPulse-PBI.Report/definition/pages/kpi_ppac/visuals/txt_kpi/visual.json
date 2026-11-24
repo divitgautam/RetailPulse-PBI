@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "txt_kpi",
   "position": {
-    "x": 728,
-    "y": 458,
-    "z": 11000,
-    "height": 246,
-    "width": 536,
-    "tabOrder": 11000
+    "x": 794,
+    "y": 430,
+    "z": 18000,
+    "height": 252,
+    "width": 470,
+    "tabOrder": 18000
   },
   "visual": {
     "visualType": "textbox",
@@ -33,9 +33,9 @@
               {
                 "textRuns": [
                   {
-                    "value": "It joins customer behaviour (how often people buy) with profitability (what each order earns) in one number.",
+                    "value": "It joins how often customers buy with what each order earns, in one number that has an owner for each driver.",
                     "textStyle": {
-                      "fontSize": "10pt",
+                      "fontSize": "9pt",
                       "color": "#020618"
                     }
                   }
@@ -44,17 +44,17 @@
               {
                 "textRuns": [
                   {
-                    "value": "2025 YTD: ",
+                    "value": "Frequency (CRM): ",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "10pt",
+                      "fontSize": "9pt",
                       "color": "#682EFF"
                     }
                   },
                   {
-                    "value": "₹92,868 per customer, 1.3% below last year and 6% below target.",
+                    "value": "repeat-purchase programmes.",
                     "textStyle": {
-                      "fontSize": "10pt",
+                      "fontSize": "9pt",
                       "color": "#020618"
                     }
                   }
@@ -63,17 +63,17 @@
               {
                 "textRuns": [
                   {
-                    "value": "Driver: ",
+                    "value": "Order value (merchandising): ",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "10pt",
+                      "fontSize": "9pt",
                       "color": "#682EFF"
                     }
                   },
                   {
-                    "value": "vs Jan to Oct 2024, orders per customer fell 1.32 to 1.27 and avg order value fell ₹2.86 L to ₹2.73 L. Margin improved 24.9% to 26.8% but could not offset it.",
+                    "value": "bundles and cross-sell.",
                     "textStyle": {
-                      "fontSize": "10pt",
+                      "fontSize": "9pt",
                       "color": "#020618"
                     }
                   }
@@ -82,17 +82,17 @@
               {
                 "textRuns": [
                   {
-                    "value": "Levers: ",
+                    "value": "Margin (pricing): ",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "10pt",
+                      "fontSize": "9pt",
                       "color": "#682EFF"
                     }
                   },
                   {
-                    "value": "repeat-purchase programmes (frequency), bundles (order value), discount guardrails (margin).",
+                    "value": "discount guardrails.",
                     "textStyle": {
-                      "fontSize": "10pt",
+                      "fontSize": "9pt",
                       "color": "#020618"
                     }
                   }
@@ -101,9 +101,9 @@
               {
                 "textRuns": [
                   {
-                    "value": "Edit the measure [KPI Target Growth %] to change the target.",
+                    "value": "Read PPAC with total profit: winning back one-time buyers adds profit but can lower PPAC.",
                     "textStyle": {
-                      "fontSize": "10pt",
+                      "fontSize": "9pt",
                       "color": "#020618"
                     }
                   }
@@ -136,6 +136,19 @@
               "expr": {
                 "Literal": {
                   "Value": "14D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Why this KPI'"
                 }
               }
             }

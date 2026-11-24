@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "col_discount_margin",
   "position": {
-    "x": 697,
-    "y": 458,
-    "z": 12000,
-    "height": 246,
-    "width": 567,
-    "tabOrder": 12000
+    "x": 668,
+    "y": 396,
+    "z": 19000,
+    "height": 286,
+    "width": 596,
+    "tabOrder": 19000
   },
   "visual": {
     "visualType": "clusteredColumnChart",
@@ -47,7 +47,7 @@
               },
               "queryRef": "_Measures.Gross Margin %",
               "nativeQueryRef": "Gross Margin %",
-              "displayName": "Gross Margin %"
+              "displayName": "Gross margin"
             }
           ]
         }
@@ -87,17 +87,10 @@
       "valueAxis": [
         {
           "properties": {
-            "showAxisTitle": {
+            "show": {
               "expr": {
                 "Literal": {
                   "Value": "false"
-                }
-              }
-            },
-            "gridlineShow": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
                 }
               }
             }
@@ -155,8 +148,13 @@
             },
             "text": {
               "expr": {
-                "Literal": {
-                  "Value": "'Deeper discounts erode margin'"
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Title Discount"
                 }
               }
             },
@@ -220,6 +218,19 @@
                       "Value": "'#62748E'"
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Column chart of gross margin by item discount: margin falls as the discount deepens.'"
                 }
               }
             }
